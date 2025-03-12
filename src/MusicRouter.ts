@@ -1,6 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { Router, RouteConfig, PathRouteConfig } from '@lit-labs/router';
+import { Router, RouteConfig } from '@lit-labs/router';
 import type { SongDetails } from './models';
 
 // Define interfaces for album data structure
@@ -22,7 +22,7 @@ interface AlbumCollection {
 // Extended song details that includes albumId
 interface ExtendedSongDetails extends SongDetails {
   albumId?: string;
-  id?: number;
+  id?: string;
 }
 
 // Player interface
@@ -89,24 +89,26 @@ export class MusicRouter extends LitElement {
     if (changedProps.has('routes') && this.routes.length > 0) {
       this.initializeRouter();
     }
-    
+
     if (changedProps.has('currentPage')) {
-      this.dispatchEvent(new CustomEvent('currentPageChanged', {
-        detail: { page: this.currentPage },
-        bubbles: true,
-        composed: true
-      }));
+      this.dispatchEvent(
+        new CustomEvent('currentPageChanged', {
+          detail: { page: this.currentPage },
+          bubbles: true,
+          composed: true,
+        })
+      );
     }
   }
 
   private initializeRouter() {
     if (!this.routes || this.routes.length === 0) return;
 
-    const routerConfig: RouteConfig[] = this.routes.map(routeConfig => ({
+    const routerConfig: RouteConfig[] = this.routes.map((routeConfig) => ({
       path: routeConfig.path,
       render: (params: { [key: string]: string | undefined }) => {
         this.currentPage = routeConfig.name;
-        
+
         let component;
         if (typeof routeConfig.component === 'function') {
           component = routeConfig.component();
@@ -115,18 +117,20 @@ export class MusicRouter extends LitElement {
         }
 
         if (routeConfig.path.includes(':')) {
-          this.dispatchEvent(new CustomEvent('route-params-changed', {
-            detail: { 
-              params: params as Record<string, string>, 
-              routeName: routeConfig.name 
-            },
-            bubbles: true,
-            composed: true
-          }));
+          this.dispatchEvent(
+            new CustomEvent('route-params-changed', {
+              detail: {
+                params: params as Record<string, string>,
+                routeName: routeConfig.name,
+              },
+              bubbles: true,
+              composed: true,
+            })
+          );
         }
 
         return component;
-      }
+      },
     }));
 
     this.router = new Router(this, routerConfig);
