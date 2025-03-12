@@ -104,7 +104,7 @@ export class MusicPlaylist extends LitElement {
         <div class="top">
           <div class="buttons">
             <muza-button content="x"></muza-button>
-            <muza-button content="&#xf065;"></muza-button>
+            <muza-button content=" "></muza-button>
           </div>
           <small-album-details
             imageSrc=${this.getImageSrc()}
