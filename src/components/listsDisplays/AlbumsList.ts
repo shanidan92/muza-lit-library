@@ -51,7 +51,7 @@ export class MusicSection extends LitElement {
       overflow-x: auto;
     }
 
-    .content-items > music-album:first-child {
+    .content-items > album-cover:first-child {
       margin-left: 0;
     }
 
@@ -112,11 +112,11 @@ export class MusicSection extends LitElement {
   private renderAlbums() {
     return this.albums.map(
       (album) => html`
-        <music-album
+        <album-cover
           image-src=${album.imageSrc}
           title=${album.title}
           sub-title=${album.subTitle}
-        ></music-album>
+        ></album-cover>
       `
     );
   }

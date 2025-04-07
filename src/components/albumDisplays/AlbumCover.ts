@@ -1,8 +1,8 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 
-@customElement('music-album')
-export class MusicAlbum extends LitElement {
+@customElement('album-cover')
+export class AlbumCover extends LitElement {
   static styles = css`
     :host {
       --primary-text-color: var(--muza-primary-text-color, #333333);

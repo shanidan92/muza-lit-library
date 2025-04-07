@@ -10,10 +10,11 @@
     {
       "title": "Library",
       "items": [
-        { "icon": "list", "text": "Playlists" },
-        { "icon": "heart", "text": "Albums" },
-        { "icon": "music", "text": "Artists" },
-        { "icon": "headphones", "text": "Songs" }
+        { "svg": "playlist", "text": "Playlists" },
+        { "svg": "albums", "text": "Albums" },
+        { "svg": "artists", "text": "Artists" },
+        { "svg": "songs", "text": "Songs" },
+        { "icon": "headphones", "text": "headphones example" }
       ]
     }
   ]
