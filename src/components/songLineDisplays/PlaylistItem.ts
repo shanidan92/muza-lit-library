@@ -1,7 +1,7 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import type { SongDetails } from './models';
-import { formatSongNumber } from './utils';
+import type { SongDetails } from '../../appData/models';
+import { formatSongNumber } from '../../appData/utils';
 
 @customElement('playlist-item')
 export class SongDetailsView extends LitElement {

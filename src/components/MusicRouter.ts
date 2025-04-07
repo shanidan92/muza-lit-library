@@ -1,7 +1,7 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { Router, RouteConfig } from '@lit-labs/router';
-import type { SongDetails } from './models';
+import type { SongDetails } from '../appData/models';
 
 // Define interfaces for album data structure
 interface Album {
