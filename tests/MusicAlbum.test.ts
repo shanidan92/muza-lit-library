@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { fixture, html } from '@open-wc/testing';
-import { MusicAlbum } from '../src/MusicAlbum';
+import { MusicAlbum } from '../src/components/albumDisplays/MusicAlbum';
 
 describe('MusicAlbum', () => {
   it('is defined', () => {

@@ -1,6 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
-import { SongLine } from './SongLine';
+import { SongLine } from '../songLineDisplays/SongLine';
 
 interface PlayerDetails {
   src: string;

@@ -1,6 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import type { SongDetails } from './models';
+import type { SongDetails } from '../../appData/models';
 
 @customElement('song-details')
 export class SongDetailsView extends LitElement {

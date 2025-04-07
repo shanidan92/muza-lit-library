@@ -80,22 +80,22 @@
   </div>
   
   <script type="module">
-    import "./src/MusicAlbum.ts";
-    import "./src/MusicSection.ts";
-    import "./src/MusicSidebar.ts";
-    import "./src/SongDetails.ts";
-    import "./src/MusicTopbar.ts";
-    export { AlbumDetails } from './src/AlbumDetails';
-    import "./src/SongLine.ts"
-    import "./src/MusicPlayer.ts";
-    import "./src/MusicRouter.ts";
-    import "./src/AlbumDetails.ts"
-    import "./src/MusicPlaylist.ts";
-    import "./src/PlaylistItem.ts";
-    import "./src/SmallAlbumDetails.ts";
-    import "./src/MuzaButton.ts";
-    import "./src/MusicSuggestionsList.ts";
-    import "./src/SuggestionsListItem.ts";
+    import "./src/components/albumDisplays/MusicAlbum.ts";
+    import "./src/components/listsDisplays/AlbumsList.ts";
+    import "./src/components/sections/MusicSidebar.ts";
+    import "./src/components/songLineDisplays/SongDetails.ts";
+    import "./src/components/sections/MusicTopbar.ts";
+    export { AlbumDetails } from './src/components/albumDisplays/AlbumDetails';
+    import "./src/components/songLineDisplays/SongLine.ts"
+    import "./src/components/sections/MusicPlayer.ts";
+    import "./src/components/MusicRouter.ts";
+    import "./src/components/albumDisplays/AlbumDetails.ts"
+    import "./src/components/listsDisplays/MusicPlaylist.ts";
+    import "./src/components/songLineDisplays/PlaylistItem.ts";
+    import "./src/components/albumDisplays/SmallAlbumDetails.ts";
+    import "./src/controls/MuzaButton.ts";
+    import "./src/components/listsDisplays/MusicSuggestionsList.ts";
+    import "./src/components/listsDisplays/SuggestionsListItem.ts";
 
     const sidebar = document.getElementById('sidebar');
     const content = document.getElementById('content');

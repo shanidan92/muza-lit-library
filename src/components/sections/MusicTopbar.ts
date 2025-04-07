@@ -1,7 +1,7 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
 
-import './VolumeControl';
+import '../../controls/VolumeControl';
 
 @customElement('music-topbar')
 export class MusicTopbar extends LitElement {

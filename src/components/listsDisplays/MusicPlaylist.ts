@@ -1,7 +1,7 @@
 /* eslint-disable lit/attribute-value-entities */
 import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import type { SongDetails } from './models';
+import type { SongDetails } from '../../appData/models';
 
 @customElement('music-playlist')
 export class MusicPlaylist extends LitElement {
