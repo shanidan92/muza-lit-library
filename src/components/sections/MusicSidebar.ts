@@ -2,7 +2,8 @@ import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 
 interface MenuItem {
-  icon: string;
+  svg?: string;
+  icon?: string;
   text: string;
   action?: () => void;
 }
@@ -58,17 +59,16 @@ export class MusicSidebar extends LitElement {
       border-bottom: 1px solid #eee;
       cursor: pointer;
       font-size: 14px;
+      i {
+        margin-right: 10px;
+        width: 20px;
+        text-align: center;
+        color: #666;
+      }
     }
 
     .menu-item:hover {
       background: #eee;
-    }
-
-    .menu-item i {
-      margin-right: 10px;
-      width: 20px;
-      text-align: center;
-      color: #666;
     }
   `;
 
@@ -104,9 +104,16 @@ export class MusicSidebar extends LitElement {
   }
 
   private renderMenuItem(item: MenuItem) {
+    const icon = item.svg
+      ? html`<muza-icon
+          iconName="${item.svg}"
+          style="margin-right: 10px;width: 20px;fill: #666;"
+        ></muza-icon>`
+      : html`<i class="fa-solid fa-${item.icon}"></i>`;
+
     return html`
       <a class="menu-item" @click=${() => this.handleMenuItemClick(item)}>
-        <i class="fa-solid fa-${item.icon}"></i>
+        ${icon}
         <span>${item.text}</span>
       </a>
     `;

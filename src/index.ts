@@ -1,4 +1,4 @@
-export { MusicAlbum } from './components/albumDisplays/MusicAlbum';
+export { AlbumCover } from './components/albumDisplays/AlbumCover';
 export { MusicSection } from './components/listsDisplays/AlbumsList';
 export { MusicSidebar } from './components/sections/MusicSidebar';
 export { MusicTopbar } from './components/sections/MusicTopbar';

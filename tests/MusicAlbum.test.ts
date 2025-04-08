@@ -1,15 +1,15 @@
 import { describe, it, expect } from 'vitest';
 import { fixture, html } from '@open-wc/testing';
-import { MusicAlbum } from '../src/components/albumDisplays/MusicAlbum';
+import { AlbumCover } from '../src/components/albumDisplays/AlbumCover';
 
-describe('MusicAlbum', () => {
+describe('AlbumCover', () => {
   it('is defined', () => {
-    const el = document.createElement('music-album');
-    expect(el).toBeInstanceOf(MusicAlbum);
+    const el = document.createElement('album-cover');
+    expect(el).toBeInstanceOf(AlbumCover);
   });
 
   it('renders with default properties', async () => {
-    const el = await fixture<MusicAlbum>(html`<music-album></music-album>`);
+    const el = await fixture<AlbumCover>(html`<album-cover></album-cover>`);
 
     expect(el.imageSrc).toBe('');
     expect(el.title).toBe('');
@@ -25,12 +25,12 @@ describe('MusicAlbum', () => {
   });
 
   it('renders with provided properties', async () => {
-    const el = await fixture<MusicAlbum>(html`
-      <music-album
+    const el = await fixture<AlbumCover>(html`
+      <album-cover
         image-src="test.jpg"
         title="Test Album"
         sub-title="Test Artist"
-      ></music-album>
+      ></album-cover>
     `);
 
     expect(el.imageSrc).toBe('test.jpg');
@@ -47,12 +47,12 @@ describe('MusicAlbum', () => {
   });
 
   it('dispatches album-selected event on click', async () => {
-    const el = await fixture<MusicAlbum>(html`
-      <music-album
+    const el = await fixture<AlbumCover>(html`
+      <album-cover
         image-src="test.jpg"
         title="Test Album"
         sub-title="Test Artist"
-      ></music-album>
+      ></album-cover>
     `);
 
     let eventDetail: unknown;
