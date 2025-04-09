@@ -32,7 +32,7 @@ export class MuzaInputField extends LitElement {
     state: 'default',
     size: 'medium',
     leadingIcon: '',
-    trailingIcon: ''
+    trailingIcon: '',
   };
 
   static styles = css`
@@ -164,19 +164,19 @@ export class MuzaInputField extends LitElement {
   }
 
   render() {
-    const { 
-      label, 
-      required, 
-      name, 
-      leadingIcon, 
-      type, 
-      value, 
-      placeholder, 
-      disabled, 
-      state, 
-      size, 
-      trailingIcon, 
-      helperText 
+    const {
+      label,
+      required,
+      name,
+      leadingIcon,
+      type,
+      value,
+      placeholder,
+      disabled,
+      state,
+      size,
+      trailingIcon,
+      helperText,
     } = this.config;
 
     return html`
@@ -184,9 +184,7 @@ export class MuzaInputField extends LitElement {
         ${label
           ? html`<label for="input-${name}"
               >${label}
-              ${required
-                ? html`<span class="required">*</span>`
-                : ''}</label
+              ${required ? html`<span class="required">*</span>` : ''}</label
             >`
           : ''}
         <div class="input-container">
@@ -215,9 +213,7 @@ export class MuzaInputField extends LitElement {
             : ''}
         </div>
         ${helperText
-          ? html`<div class="helper-text ${state}">
-              ${helperText}
-            </div>`
+          ? html`<div class="helper-text ${state}">${helperText}</div>`
           : ''}
       </div>
     `;
