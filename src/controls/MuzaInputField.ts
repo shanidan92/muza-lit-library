@@ -5,7 +5,7 @@ import { customElement, property } from 'lit/decorators.js';
 export class MuzaInputField extends LitElement {
   // Generic props object that accepts any properties
   @property({ type: Object })
-  props: Record<string, any> = {};
+  props: Record<string, unknown> = {};
 
   static styles = css`
     :host {
@@ -126,7 +126,7 @@ export class MuzaInputField extends LitElement {
   private _handleInput(e: Event) {
     const input = e.target as HTMLInputElement;
     this.props = { ...this.props, value: input.value };
-    
+
     this.dispatchEvent(
       new CustomEvent('input-change', {
         detail: { value: input.value, name: this.props.name },
