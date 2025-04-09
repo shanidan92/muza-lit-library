@@ -104,8 +104,8 @@ export class MusicListSection extends LitElement {
     songsCount?: number;
   }[] = [];
 
-  // eslint-disable-next-line prettier/prettier
-  @property({ type: 'album' | 'playlist' })
+  // 'album' | 'playlist'
+  @property({ type: String })
   type = 'album';
 
   private handleShowAll() {
