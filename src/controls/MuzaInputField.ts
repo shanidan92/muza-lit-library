@@ -1,39 +1,11 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 
-// Define the configuration interface
-export interface InputFieldConfig {
-  label?: string;
-  placeholder?: string;
-  value?: string;
-  name?: string;
-  type?: string;
-  helperText?: string;
-  required?: boolean;
-  disabled?: boolean;
-  state?: 'default' | 'success' | 'error';
-  size?: 'small' | 'medium' | 'large';
-  leadingIcon?: string;
-  trailingIcon?: string;
-}
-
 @customElement('muza-input-field')
 export class MuzaInputField extends LitElement {
+  // Generic props object that accepts any properties
   @property({ type: Object })
-  config: InputFieldConfig = {
-    label: '',
-    placeholder: '',
-    value: '',
-    name: '',
-    type: 'text',
-    helperText: '',
-    required: false,
-    disabled: false,
-    state: 'default',
-    size: 'medium',
-    leadingIcon: '',
-    trailingIcon: '',
-  };
+  props: Record<string, any> = {};
 
   static styles = css`
     :host {
@@ -153,10 +125,11 @@ export class MuzaInputField extends LitElement {
 
   private _handleInput(e: Event) {
     const input = e.target as HTMLInputElement;
-    this.config.value = input.value;
+    this.props = { ...this.props, value: input.value };
+    
     this.dispatchEvent(
       new CustomEvent('input-change', {
-        detail: { value: this.config.value, name: this.config.name },
+        detail: { value: input.value, name: this.props.name },
         bubbles: true,
         composed: true,
       })
@@ -164,20 +137,21 @@ export class MuzaInputField extends LitElement {
   }
 
   render() {
+    // Extract props with defaults
     const {
-      label,
-      required,
-      name,
-      leadingIcon,
-      type,
-      value,
-      placeholder,
-      disabled,
-      state,
-      size,
-      trailingIcon,
-      helperText,
-    } = this.config;
+      label = '',
+      required = false,
+      name = '',
+      leadingIcon = '',
+      type = 'text',
+      value = '',
+      placeholder = '',
+      disabled = false,
+      state = 'default',
+      size = 'medium',
+      trailingIcon = '',
+      helperText = '',
+    } = this.props;
 
     return html`
       <div class="input-wrapper">
