@@ -1,32 +1,51 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 
+// Define the configuration interface
+export interface InputFieldConfig {
+  label?: string;
+  placeholder?: string;
+  value?: string;
+  name?: string;
+  type?: string;
+  helperText?: string;
+  required?: boolean;
+  disabled?: boolean;
+  state?: 'default' | 'success' | 'error';
+  size?: 'small' | 'medium' | 'large';
+  leadingIcon?: string;
+  trailingIcon?: string;
+}
+
 @customElement('muza-input-field')
 export class MuzaInputField extends LitElement {
-  @property({ type: String }) label = '';
-  @property({ type: String }) placeholder = '';
-  @property({ type: String }) value = '';
-  @property({ type: String }) name = '';
-  @property({ type: String }) type = 'text';
-  @property({ type: String }) helperText = '';
-  @property({ type: Boolean }) required = false;
-  @property({ type: Boolean }) disabled = false;
-  @property({ type: String }) state = 'default'; // default, success, error
-  @property({ type: String }) size = 'medium'; // small, medium, large
-  @property({ type: String }) leadingIcon = ''; // FontAwesome icon name
-  @property({ type: String }) trailingIcon = ''; // FontAwesome icon name
+  @property({ type: Object })
+  config: InputFieldConfig = {
+    label: '',
+    placeholder: '',
+    value: '',
+    name: '',
+    type: 'text',
+    helperText: '',
+    required: false,
+    disabled: false,
+    state: 'default',
+    size: 'medium',
+    leadingIcon: '',
+    trailingIcon: ''
+  };
 
   static styles = css`
     :host {
       --input-color: var(--muza-primary-text-color, #333333);
-      --input-bg: #ffffff;
+      --input-bg: var(--muza-input-bg, #ffffff);
       --input-border: var(--muza-border-color, #a9a9a9);
       --input-border-radius: var(--muza-border-radius-sm, 4px);
       --input-placeholder: var(--muza-tertiary-text-color, #aaa);
       --input-focus-border: var(--muza-secondary-text-color, #5f5f5f);
-      --input-disabled-bg: #f3f4f6;
-      --input-error-border: #e53935;
-      --input-success-border: #4caf50;
+      --input-disabled-bg: var(--muza-input-disabled-bg, #f3f4f6);
+      --input-error-border: var(--muza-input-error-border, #e53935);
+      --input-success-border: var(--muza-input-success-border, #4caf50);
       --input-label-color: var(--muza-secondary-text-color, #5f5f5f);
       --input-helper-color: var(--muza-tertiary-text-color, #aaa);
 
@@ -134,10 +153,10 @@ export class MuzaInputField extends LitElement {
 
   private _handleInput(e: Event) {
     const input = e.target as HTMLInputElement;
-    this.value = input.value;
+    this.config.value = input.value;
     this.dispatchEvent(
       new CustomEvent('input-change', {
-        detail: { value: this.value, name: this.name },
+        detail: { value: this.config.value, name: this.config.name },
         bubbles: true,
         composed: true,
       })
@@ -145,44 +164,59 @@ export class MuzaInputField extends LitElement {
   }
 
   render() {
+    const { 
+      label, 
+      required, 
+      name, 
+      leadingIcon, 
+      type, 
+      value, 
+      placeholder, 
+      disabled, 
+      state, 
+      size, 
+      trailingIcon, 
+      helperText 
+    } = this.config;
+
     return html`
       <div class="input-wrapper">
-        ${this.label
-          ? html`<label for="input-${this.name}"
-              >${this.label}
-              ${this.required
+        ${label
+          ? html`<label for="input-${name}"
+              >${label}
+              ${required
                 ? html`<span class="required">*</span>`
                 : ''}</label
             >`
           : ''}
         <div class="input-container">
-          ${this.leadingIcon
+          ${leadingIcon
             ? html`<span class="leading-icon"
-                ><i class="fa-solid fa-${this.leadingIcon}"></i
+                ><i class="fa-solid fa-${leadingIcon}"></i
               ></span>`
             : ''}
           <input
-            id="input-${this.name}"
-            type="${this.type}"
-            .value="${this.value}"
-            name="${this.name}"
-            placeholder="${this.placeholder}"
-            ?required="${this.required}"
-            ?disabled="${this.disabled}"
-            class="${this.state} ${this.size} ${this.leadingIcon
+            id="input-${name}"
+            type="${type}"
+            .value="${value}"
+            name="${name}"
+            placeholder="${placeholder}"
+            ?required="${required}"
+            ?disabled="${disabled}"
+            class="${state} ${size} ${leadingIcon
               ? 'has-leading-icon'
-              : ''} ${this.trailingIcon ? 'has-trailing-icon' : ''}"
+              : ''} ${trailingIcon ? 'has-trailing-icon' : ''}"
             @input="${this._handleInput}"
           />
-          ${this.trailingIcon
+          ${trailingIcon
             ? html`<span class="trailing-icon"
-                ><i class="fa-solid fa-${this.trailingIcon}"></i
+                ><i class="fa-solid fa-${trailingIcon}"></i
               ></span>`
             : ''}
         </div>
-        ${this.helperText
-          ? html`<div class="helper-text ${this.state}">
-              ${this.helperText}
+        ${helperText
+          ? html`<div class="helper-text ${state}">
+              ${helperText}
             </div>`
           : ''}
       </div>
