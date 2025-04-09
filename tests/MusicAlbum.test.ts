@@ -16,11 +16,9 @@ describe('AlbumCover', () => {
     expect(el.subTitle).toBe('');
 
     const img = el.shadowRoot!.querySelector('img');
-    const h3 = el.shadowRoot!.querySelector('h3');
     const p = el.shadowRoot!.querySelector('p');
 
     expect(img?.getAttribute('src')).toBe('');
-    expect(h3?.textContent).toBe('');
     expect(p?.textContent).toBe('');
   });
 

@@ -37,7 +37,7 @@ export class PlaylistCover extends LitElement {
 
   render() {
     const title = `<icon-playlist></icon-playlist> ${this.title}`;
-    
+
     return html`
       <div @click=${this.handleTrackClick}>
         <album-cover
