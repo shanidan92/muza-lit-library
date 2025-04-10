@@ -1,5 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 
 @customElement('album-cover')
 export class AlbumCover extends LitElement {
@@ -88,6 +89,7 @@ export class AlbumCover extends LitElement {
       font-weight: var(--font-weight-normal);
       margin: 0 0 calc(var(--spacing-xs) * 0.75) 0;
       cursor: pointer;
+      display: flex;
     }
 
     p {
@@ -96,6 +98,10 @@ export class AlbumCover extends LitElement {
       font-weight: var(--font-weight-normal);
       margin: 0;
       cursor: pointer;
+    }
+    icon-playlist {
+      margin-right: 4px;
+      width: 17px;
     }
   `;
 
@@ -130,7 +136,7 @@ export class AlbumCover extends LitElement {
             <div class="play-button"></div>
           </div>
         </div>
-        <h3>${this.title}</h3>
+        <h3>${unsafeHTML(this.title)}</h3>
         <p>${this.subTitle}</p>
       </div>
     `;

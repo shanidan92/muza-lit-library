@@ -11,17 +11,14 @@ export class IconPlaylist extends LitElement {
   `;
 
   render() {
-    return svg`<svg id="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-    <defs>
-        <style>.cls-1{fill:none;}</style>
-    </defs>
-    <title>playlist</title>
-    <rect x="4" y="6" width="18" height="2" />
-    <rect x="4" y="12" width="18" height="2" />
-    <rect x="4" y="18" width="12" height="2" />
-    <polygon points="21 18 28 23 21 28 21 18" />
-    <rect id="_Transparent_Rectangle_" data-name="&lt;Transparent Rectangle&gt;" class="cls-1"
-        width="32" height="32" />
-</svg>`;
+    return svg`<svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="17" height="17" fill="white"/>
+<path d="M2 4L15 4" stroke="#374151"/>
+<path d="M2 7L15 7" stroke="#374151"/>
+<path d="M2 10L9 10" stroke="#374151"/>
+<path d="M2 13L9 13" stroke="#374151"/>
+<path d="M14 11L11 12.7321L11 9.26795L14 11Z" fill="#374151" stroke="#374151"/>
+</svg>
+`;
   }
 }

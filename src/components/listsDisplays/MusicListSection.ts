@@ -1,8 +1,8 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 
-@customElement('music-section')
-export class MusicSection extends LitElement {
+@customElement('music-list-section')
+export class MusicListSection extends LitElement {
   static styles = css`
     :host {
       flex: 1;
@@ -97,7 +97,16 @@ export class MusicSection extends LitElement {
   subTitle = '';
 
   @property({ type: Array })
-  albums: { imageSrc: string; title: string; subTitle: string }[] = [];
+  list: {
+    imageSrc: string;
+    title: string;
+    subTitle?: string;
+    songsCount?: number;
+  }[] = [];
+
+  // 'album' | 'playlist'
+  @property({ type: String })
+  type = 'album';
 
   private handleShowAll() {
     this.dispatchEvent(
@@ -110,7 +119,7 @@ export class MusicSection extends LitElement {
   }
 
   private renderAlbums() {
-    return this.albums.map(
+    return this.list.map(
       (album) => html`
         <album-cover
           image-src=${album.imageSrc}
@@ -121,6 +130,17 @@ export class MusicSection extends LitElement {
     );
   }
 
+  private renderPlaylists() {
+    return this.list.map(
+      (album) => html`
+        <playlist-cover
+          image-src=${album.imageSrc}
+          title=${album.title}
+          songs-count=${album.songsCount?.toString()}
+        ></album-cover>
+      `
+    );
+  }
   render() {
     return html`
       <div class="section-header">
@@ -131,7 +151,11 @@ export class MusicSection extends LitElement {
       </div>
       ${this.subTitle ? html`<p>${this.subTitle}</p>` : ''}
       <div class="section-content">
-        <div class="content-items">${this.renderAlbums()}</div>
+        <div class="content-items">
+          ${this.type === 'album'
+            ? this.renderAlbums()
+            : this.renderPlaylists()}
+        </div>
       </div>
     `;
   }

@@ -75,13 +75,14 @@
     </div>
   </div>
 
-    <music-playlist id="sidelist"></music-playlist>
-    <music-player id="player"></music-player>
+  <music-playlist id="sidelist"></music-playlist>
+  <music-player id="player"></music-player>
   </div>
-  
+
   <script type="module">
     import "./src/components/albumDisplays/AlbumCover.ts";
-    import "./src/components/listsDisplays/AlbumsList.ts";
+    import "./src/components/albumDisplays/PlaylistCover.ts";
+    import "./src/components/listsDisplays/MusicListSection.ts";
     import "./src/components/sections/MusicSidebar.ts";
     import "./src/components/songLineDisplays/SongDetails.ts";
     import "./src/components/sections/MusicTopbar.ts";
@@ -122,7 +123,7 @@
       // Fetch songs data
       const songsResponse = await fetch('data/songs.json');
       const songsData = await songsResponse.json();
-      
+
       // Set songs data for router
       sideList.songs = songsData.songs.slice(0, 3);
       sideList.suggestions = songsData.songs.slice(3, 7);
@@ -165,25 +166,26 @@
 
       // Create Featured Albums section
       if (albumsData.featured && albumsData.featured.length > 0) {
-        const featuredSection = document.createElement('music-section');
+        const featuredSection = document.createElement('music-list-section');
         featuredSection.title = "Featured Albums";
-        featuredSection.albums = albumsData.featured;
+        featuredSection.list = albumsData.featured;
         content.appendChild(featuredSection);
       }
 
       // New Releases section
       if (albumsData.newReleases && albumsData.newReleases.length > 0) {
-        const newReleasesSection = document.createElement('music-section');
+        const newReleasesSection = document.createElement('music-list-section');
         newReleasesSection.title = "New Releases";
-        newReleasesSection.albums = albumsData.newReleases;
+        newReleasesSection.list = albumsData.newReleases;
         content.appendChild(newReleasesSection);
       }
 
       // Recommended section
       if (albumsData.recommended && albumsData.recommended.length > 0) {
-        const recommendedSection = document.createElement('music-section');
+        const recommendedSection = document.createElement('music-list-section');
         recommendedSection.title = "Recommended";
-        recommendedSection.albums = albumsData.recommended;
+        recommendedSection.list = albumsData.recommended
+        recommendedSection.type = 'playlist';
         content.appendChild(recommendedSection);
       }
     };
