@@ -1,11 +1,21 @@
 import { LitElement, html, css } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { customElement, property, state } from 'lit/decorators.js';
+
+// Define validation rule types
+interface ValidationRule {
+  type: 'required' | 'minLength' | 'maxLength' | 'pattern' | 'email' | 'custom';
+  message: string;
+  value?: number | string | RegExp;
+  validator?: (value: string) => boolean;
+}
 
 @customElement('muza-input-field')
 export class MuzaInputField extends LitElement {
   // Generic props object that accepts any properties
   @property({ type: Object })
   props: Record<string, unknown> = {};
+
+  @state() private validationMessage: string = '';
 
   static styles = css`
     :host {
@@ -123,13 +133,84 @@ export class MuzaInputField extends LitElement {
     }
   `;
 
+  private _validateInput(value: string, validationRules?: ValidationRule[]): { isValid: boolean, message: string } {
+    if (!validationRules || validationRules.length === 0) {
+      return { isValid: true, message: '' };
+    }
+
+    for (const rule of validationRules) {
+      switch (rule.type) {
+        case 'required':
+          if (!value || value.trim() === '') {
+            return { isValid: false, message: rule.message };
+          }
+          break;
+        case 'minLength':
+          if (typeof rule.value === 'number' && value.length < rule.value) {
+            return { isValid: false, message: rule.message };
+          }
+          break;
+        case 'maxLength':
+          if (typeof rule.value === 'number' && value.length > rule.value) {
+            return { isValid: false, message: rule.message };
+          }
+          break;
+        case 'pattern':
+          if (rule.value instanceof RegExp && !rule.value.test(value)) {
+            return { isValid: false, message: rule.message };
+          }
+          break;
+        case 'email':
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (!emailRegex.test(value)) {
+            return { isValid: false, message: rule.message };
+          }
+          break;
+        case 'custom':
+          if (rule.validator && !rule.validator(value)) {
+            return { isValid: false, message: rule.message };
+          }
+          break;
+      }
+    }
+
+    return { isValid: true, message: '' };
+  }
+
   private _handleInput(e: Event) {
     const input = e.target as HTMLInputElement;
-    this.props = { ...this.props, value: input.value };
+    const newValue = input.value;
+    
+    // Store the new value in props
+    this.props = { ...this.props, value: newValue };
 
+    // Get validation rules from props
+    const validationRules = this.props.validationRules as ValidationRule[] | undefined;
+    
+    // Perform validation
+    const { isValid, message } = this._validateInput(newValue, validationRules);
+    
+    // Update validation state
+    this.validationMessage = message;
+    
+    // Update the state in props for visual styling
+    if (validationRules && validationRules.length > 0) {
+      this.props = { 
+        ...this.props, 
+        state: isValid ? (newValue ? 'success' : 'default') : 'error',
+        helperText: message || this.props.helperText
+      };
+    }
+
+    // Dispatch event with validation status
     this.dispatchEvent(
       new CustomEvent('input-change', {
-        detail: { value: input.value, name: this.props.name },
+        detail: { 
+          value: newValue, 
+          name: this.props.name,
+          isValid,
+          validationMessage: message
+        },
         bubbles: true,
         composed: true,
       })
@@ -151,6 +232,8 @@ export class MuzaInputField extends LitElement {
       size = 'medium',
       trailingIcon = '',
       helperText = '',
+      validationRules = [],
+      ...rest
     } = this.props;
 
     return html`
@@ -179,6 +262,15 @@ export class MuzaInputField extends LitElement {
               ? 'has-leading-icon'
               : ''} ${trailingIcon ? 'has-trailing-icon' : ''}"
             @input="${this._handleInput}"
+            ${Object.entries(rest).map(([key, value]) => {
+              if (typeof value === 'boolean') {
+                return value ? html`?${key}` : '';
+              } else if (typeof value === 'function' && key.startsWith('on')) {
+                return html`@${key.substring(2).toLowerCase()}="${value}"`;
+              } else {
+                return html`${key}="${value}"`;
+              }
+            })}
           />
           ${trailingIcon
             ? html`<span class="trailing-icon"
@@ -186,8 +278,8 @@ export class MuzaInputField extends LitElement {
               ></span>`
             : ''}
         </div>
-        ${helperText
-          ? html`<div class="helper-text ${state}">${helperText}</div>`
+        ${this.validationMessage || helperText
+          ? html`<div class="helper-text ${state}">${this.validationMessage || helperText}</div>`
           : ''}
       </div>
     `;
