@@ -133,7 +133,10 @@ export class MuzaInputField extends LitElement {
     }
   `;
 
-  private _validateInput(value: string, validationRules?: ValidationRule[]): { isValid: boolean, message: string } {
+  private _validateInput(
+    value: string,
+    validationRules?: ValidationRule[]
+  ): { isValid: boolean; message: string } {
     if (!validationRules || validationRules.length === 0) {
       return { isValid: true, message: '' };
     }
@@ -160,12 +163,14 @@ export class MuzaInputField extends LitElement {
             return { isValid: false, message: rule.message };
           }
           break;
-        case 'email':
+        case 'email': {
+          // Fixed: Added block scope with curly braces
           const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
           if (!emailRegex.test(value)) {
             return { isValid: false, message: rule.message };
           }
           break;
+        }
         case 'custom':
           if (rule.validator && !rule.validator(value)) {
             return { isValid: false, message: rule.message };
@@ -177,39 +182,62 @@ export class MuzaInputField extends LitElement {
     return { isValid: true, message: '' };
   }
 
+  private _spreadAttributes(attrs: Record<string, unknown>): string {
+    return Object.entries(attrs)
+      .map(([key, value]) => {
+        if (typeof value === 'boolean') {
+          // For boolean attributes
+          return value ? key : null;
+        } else if (typeof value === 'function' && key.startsWith('on')) {
+          // Convert onEvent to @event handlers
+          const eventName = key.substring(2).toLowerCase();
+          this.addEventListener(eventName, value as EventListener);
+          return null;
+        } else if (value != null) {
+          // For regular attributes
+          return `${key}="${value}"`;
+        }
+        return null;
+      })
+      .filter(Boolean)
+      .join(' ');
+  }
+
   private _handleInput(e: Event) {
     const input = e.target as HTMLInputElement;
     const newValue = input.value;
-    
+
     // Store the new value in props
     this.props = { ...this.props, value: newValue };
 
     // Get validation rules from props
-    const validationRules = this.props.validationRules as ValidationRule[] | undefined;
-    
+    const validationRules = this.props.validationRules as
+      | ValidationRule[]
+      | undefined;
+
     // Perform validation
     const { isValid, message } = this._validateInput(newValue, validationRules);
-    
+
     // Update validation state
     this.validationMessage = message;
-    
+
     // Update the state in props for visual styling
     if (validationRules && validationRules.length > 0) {
-      this.props = { 
-        ...this.props, 
+      this.props = {
+        ...this.props,
         state: isValid ? (newValue ? 'success' : 'default') : 'error',
-        helperText: message || this.props.helperText
+        helperText: message || this.props.helperText,
       };
     }
 
     // Dispatch event with validation status
     this.dispatchEvent(
       new CustomEvent('input-change', {
-        detail: { 
-          value: newValue, 
+        detail: {
+          value: newValue,
           name: this.props.name,
           isValid,
-          validationMessage: message
+          validationMessage: message,
         },
         bubbles: true,
         composed: true,
@@ -232,7 +260,7 @@ export class MuzaInputField extends LitElement {
       size = 'medium',
       trailingIcon = '',
       helperText = '',
-      validationRules = [],
+      // _validationRules = [],
       ...rest
     } = this.props;
 
@@ -262,15 +290,7 @@ export class MuzaInputField extends LitElement {
               ? 'has-leading-icon'
               : ''} ${trailingIcon ? 'has-trailing-icon' : ''}"
             @input="${this._handleInput}"
-            ${Object.entries(rest).map(([key, value]) => {
-              if (typeof value === 'boolean') {
-                return value ? html`?${key}` : '';
-              } else if (typeof value === 'function' && key.startsWith('on')) {
-                return html`@${key.substring(2).toLowerCase()}="${value}"`;
-              } else {
-                return html`${key}="${value}"`;
-              }
-            })}
+            ${this._spreadAttributes(rest)}
           />
           ${trailingIcon
             ? html`<span class="trailing-icon"
@@ -279,7 +299,9 @@ export class MuzaInputField extends LitElement {
             : ''}
         </div>
         ${this.validationMessage || helperText
-          ? html`<div class="helper-text ${state}">${this.validationMessage || helperText}</div>`
+          ? html`<div class="helper-text ${state}">
+              ${this.validationMessage || helperText}
+            </div>`
           : ''}
       </div>
     `;
