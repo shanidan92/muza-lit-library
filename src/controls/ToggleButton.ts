@@ -1,34 +1,33 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 
-
 @customElement('toggle-button')
 export class ToggleButton extends LitElement {
   static styles = css`
     :host {
       display: inline-block;
     }
-    
+
     .toggle-wrapper {
       position: relative;
       display: inline-flex;
       align-items: center;
       cursor: pointer;
     }
-    
+
     .toggle {
       position: relative;
       display: inline-block;
       width: 40px;
       height: 20px;
     }
-    
+
     .toggle input {
       opacity: 0;
       width: 0;
       height: 0;
     }
-    
+
     .slider {
       position: absolute;
       cursor: pointer;
@@ -40,10 +39,10 @@ export class ToggleButton extends LitElement {
       transition: var(--muza-transition-speed, 0.4s);
       border-radius: var(--muza-border-radius-lg, 34px);
     }
-    
+
     .slider:before {
       position: absolute;
-      content: "";
+      content: '';
       height: 16px;
       width: 16px;
       left: 2px;
@@ -52,19 +51,19 @@ export class ToggleButton extends LitElement {
       transition: var(--muza-transition-speed, 0.4s);
       border-radius: 50%;
     }
-    
+
     input:checked + .slider {
-      background-color: var(--muza-toggle-active-color, #3b82f6); 
+      background-color: var(--muza-toggle-active-color, #3b82f6);
     }
-    
+
     input:focus + .slider {
       box-shadow: 0 0 1px var(--muza-toggle-active-color, #3b82f6);
     }
-    
+
     input:checked + .slider:before {
       transform: translateX(20px);
     }
-    
+
     .label {
       margin-left: var(--muza-spacing-sm, 8px);
       font-size: var(--muza-secondary-font-size, 12px);
@@ -77,13 +76,13 @@ export class ToggleButton extends LitElement {
 
   @property({ type: String })
   label = '';
-  
+
   @property({ type: Boolean })
   disabled = false;
 
   private handleToggle() {
     if (this.disabled) return;
-    
+
     this.checked = !this.checked;
     this.dispatchToggleChange();
   }
@@ -101,12 +100,12 @@ export class ToggleButton extends LitElement {
     return html`
       <div class="toggle-wrapper" @click=${this.handleToggle}>
         <label class="toggle">
-          <input 
-            type="checkbox" 
-            .checked=${this.checked} 
+          <input
+            type="checkbox"
+            .checked=${this.checked}
             ?disabled=${this.disabled}
             @change=${this.handleToggle}
-          >
+          />
           <span class="slider"></span>
         </label>
         ${this.label ? html`<span class="label">${this.label}</span>` : ''}
