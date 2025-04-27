@@ -1,0 +1,30 @@
+.song-details-view {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 7px;
+  font-size: 14px;
+}
+
+.song-details-view img {
+  border-radius: 3px;
+  background-color: var(--muza-image-background-color-bg, #d9d9d9);
+}
+
+.song-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.song-title {
+  font-weight: bold;
+  font-size: 16px;
+  color: #5f5f5f;
+  line-height: 16px;
+}
+
+.song-artist {
+  color: #a9a9a9;
+  line-height: 17px;
+  font-size: 15px;
+}
