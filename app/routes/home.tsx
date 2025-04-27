@@ -1,5 +1,3 @@
-import { DarkThemeToggle } from "flowbite-react";
-import type { Route } from "./+types/home";
 import '../components/sections/MusicSidebar';
 import MusicSidebar from "~/components/sections/MusicSidebar";
 import { useEffect, useState } from "react";
