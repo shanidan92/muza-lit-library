@@ -8,7 +8,7 @@
     "start": "react-router-serve ./build/server/index.js",
     "format": "prettier . --write",
     "format:check": "prettier . --check",
-    "typecheck": "react-router typegen && tsc",
+    "test": "react-router typegen && tsc",
     "postinstall": "flowbite-react patch",
     "lint": "prettier --check ./app"
   },
