@@ -6,7 +6,7 @@ interface MuzaContainerProps {
 }
 
 const MuzaContainer: React.FC<MuzaContainerProps> = ({ children }) => {
-  return <div className="muza-popup" > { children } </div>;
+  return <div className="muza-container" > { children } </div>;
 };
 
 export default MuzaContainer;

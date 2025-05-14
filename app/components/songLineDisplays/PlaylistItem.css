@@ -24,7 +24,7 @@
   min-width: 20px;
   display: inline-block;
   font-size: var(--song-title-font-size);
-  .muza-popup{
+  .muza-container{
     position: relative;
     top: 30px;
     right: 10px;
