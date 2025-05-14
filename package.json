@@ -12,6 +12,7 @@
     "postinstall": "flowbite-react patch"
   },
   "dependencies": {
+    "@radix-ui/react-context-menu": "^2.2.14",
     "@react-router/node": "^7.5.0",
     "@react-router/serve": "^7.5.0",
     "class-variance-authority": "^0.7.1",
