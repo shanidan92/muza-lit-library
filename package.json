@@ -1,5 +1,5 @@
 {
-  "name": "muza-lit-librarynpm ",
+  "name": "muza-lit-library",
   "private": true,
   "type": "module",
   "scripts": {
@@ -8,10 +8,12 @@
     "start": "react-router-serve ./build/server/index.js",
     "format": "prettier . --write",
     "format:check": "prettier . --check",
-    "typecheck": "react-router typegen && tsc",
-    "postinstall": "flowbite-react patch"
+    "test": "react-router typegen && tsc",
+    "postinstall": "flowbite-react patch",
+    "lint": "prettier --check ./app"
   },
   "dependencies": {
+    "@radix-ui/react-context-menu": "^2.2.14",
     "@react-router/node": "^7.5.0",
     "@react-router/serve": "^7.5.0",
     "class-variance-authority": "^0.7.1",
@@ -31,6 +33,9 @@
     "@types/node": "^22.14.1",
     "@types/react": "^19.1.2",
     "@types/react-dom": "^19.1.2",
+    "eslint": "^9.26.0",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^5.2.0",
     "prettier": "^3.5.3",
     "prettier-plugin-tailwindcss": "^0.6.11",
     "react-router-devtools": "^1.1.10",
@@ -39,5 +44,8 @@
     "typescript": "^5.8.3",
     "vite": "^6.2.6",
     "vite-tsconfig-paths": "^5.1.4"
+  },
+  "optionalDependencies": {
+    "@rollup/rollup-linux-x64-gnu": "*"
   }
 }
