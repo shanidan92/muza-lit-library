@@ -69,54 +69,52 @@
   color: #9CA3AF;
 }
 
-/* Player Controls Section */
+/* Player Controls Section - remove horizontal padding */
 .player-controls-section {
   flex: 1;
   display: flex;
   flex-direction: column;
   min-width: 320px;
-  padding: 12px;
+  padding: 0 0 12px; /* Remove horizontal padding, keep bottom padding */
   background-color: rgba(255, 255, 255, 0.9);
   backdrop-filter: blur(24px);
 }
 
-/* Progress Bar */
+/* Progress container - full width with no margins */
 .progress-container {
   width: 100%;
+  margin: 0;
 }
 
+/* Make progress bar clickable and visible */
 .progress-bar {
   position: relative;
   width: 100%;
   height: 8px;
   background-color: #F3F4F6;
-  border-radius: 4px;
+  border-radius: 0; /* Remove border radius completely */
   cursor: pointer;
 }
 
+/* Adjust the progress fill */
 .progress-fill {
   position: absolute;
   height: 100%;
   background-color: #3B82F6;
-  border-radius: 4px;
+  border-radius: 0; /* Remove border radius */
+  transition: width 0.1s ease; /* Optional: add smooth transition when updating */
 }
 
+/* Remove the progress handle entirely */
 .progress-handle {
-  position: absolute;
-  width: 16px;
-  height: 16px;
-  background-color: #1F2937;
-  border-radius: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  z-index: 1;
+  display: none;
 }
 
+/* Keep time display with proper spacing */
 .time-display {
   display: flex;
   justify-content: space-between;
-  margin-top: 8px;
+  margin: 8px 12px 0; /* Keep horizontal margin for time display */
   font-size: 14px;
   color: #4B5563;
 }
@@ -201,6 +199,7 @@
 /* Volume Control */
 .volume-control-container {
   width: 100px;
+  margin-right: 8%;
 }
 
 /* Responsive adjustments */

@@ -172,20 +172,20 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({
         
         {/* Right section - Player Controls */}
         <div className="player-controls-section">
-          {/* Progress bar */}
-          <div className="progress-container">
-            <div className="progress-bar" onClick={handleSeek}>
-              <div 
-                className="progress-fill" 
-                style={{ width: `${progressPercentage}%` }} 
-              />
-              <div className="progress-handle" style={{ left: `${progressPercentage}%` }} />
-            </div>
-            <div className="time-display">
-              <span>{formatTime(currentTime)}</span>
-              <span>{formatTime(duration - currentTime)}</span>
-            </div>
-          </div>
+  {/* Progress bar - full width, no padding */}
+  <div className="progress-container">
+    <div className="progress-bar" onClick={handleSeek}>
+      <div 
+        className="progress-fill" 
+        style={{ width: `${progressPercentage}%` }} 
+      />
+      {/* Removed the handle button */}
+    </div>
+    <div className="time-display">
+      <span>{formatTime(currentTime)}</span>
+      <span>{formatTime(duration - currentTime)}</span>
+    </div>
+  </div>
           
           {/* Playback controls */}
           <div className="controls-container">
