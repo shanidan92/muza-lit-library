@@ -27,7 +27,6 @@ const PlaylistItem: React.FC<PlaylistItemProps> = ({ details }) => {
       </span>
       <ContextMenu>
         <ContextMenuTrigger>
-          {" "}
           <MuzaButton content="•••" />
         </ContextMenuTrigger>
         <ContextMenuContent>
