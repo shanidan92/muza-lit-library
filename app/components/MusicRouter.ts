@@ -42,4 +42,3 @@ export interface CustomRouteConfig {
   name: string;
   component: HTMLElement | (() => HTMLElement);
 }
- 
