@@ -30,6 +30,9 @@
   text-transform: uppercase;
   padding: 7px 7px;
   border-bottom: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .menu-item {
@@ -48,11 +51,12 @@
   width: 20px;
   text-align: center;
   color: #666;
-  svg,
-  path {
-    width: 20px;
-    fill: #666;
-  }
+}
+
+.menu-item i svg,
+.menu-item i path {
+  width: 20px;
+  fill: #666;
 }
 
 .menu-item:hover {
