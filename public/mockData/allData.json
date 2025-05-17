@@ -95,7 +95,7 @@
       {
         "title": "My Muza",
         "items": [
-          { "icon": "house", "text": "Home" },
+          { "svg": "home", "text": "Home" },
           { "icon": "search", "text": "Explore" }
         ]
       },
