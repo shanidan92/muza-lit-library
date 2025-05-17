@@ -90,27 +90,34 @@
       "albumsCount": "11"
     }
   ],
-  "sidebar": {
-    "sections": [
-      {
-        "title": "My Muza",
-        "items": [
-          { "svg": "home", "text": "Home" },
-          { "icon": "search", "text": "Explore" }
-        ]
-      },
-      {
-        "title": "Library",
-        "items": [
-          { "svg": "playlist", "text": "Playlists" },
-          { "svg": "albums", "text": "Albums" },
-          { "svg": "artists", "text": "Artists" },
-          { "svg": "songs", "text": "Songs" },
-          { "icon": "headphones", "text": "headphones example" }
-        ]
-      }
-    ]
-  },
+"sidebar": {
+  "sections": [
+    {
+      "items": [
+        { "svg": "home", "text": "Home" },
+        { "icon": "search", "text": "Explore" }
+      ]
+    },
+    {
+      "title": "My Muza",
+      "items": [
+        { "svg": "playlist", "text": "Playlists" },
+        { "svg": "albums", "text": "Albums" },
+        { "svg": "artists", "text": "Artists" },
+        { "svg": "songs", "text": "Songs" }
+      ]
+    },
+    {
+      "title": "Playlists",
+      "addAction": "createPlaylist",
+      "items": [
+        { "svg": "ListMusic", "text": "Chill Vibes" },
+        { "svg": "ListMusic", "text": "Morning Coffee" },
+        { "svg": "ListMusic", "text": "Cat Party Mix" }
+      ]
+    }
+  ]
+},
   "songs": [
     {
       "id": 1,

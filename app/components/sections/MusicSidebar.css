@@ -58,3 +58,16 @@
 .menu-item:hover {
   background: #eee;
 }
+
+.add-button {
+  cursor: pointer;
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.add-button:hover {
+  opacity: 0.8;
+}
