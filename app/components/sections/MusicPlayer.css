@@ -7,7 +7,7 @@
   display: flex;
   overflow: hidden;
   border-radius: 6px;
-  border: 1px solid #E5E7EB;
+  border: 1px solid var(--muza-light-border-color, #E5E7EB);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
   background-color: white;
 }
@@ -21,8 +21,8 @@
   min-height: 80px;
   min-width: 240px;
   width: 348px;
-  background-color: #F9FAFB;
-  border-right: 1px solid #E5E7EB;
+  background-color: var(--muza-player-info-background, #F9FAFB);
+  border-right: 1px solid var(--muza-light-border-color, #E5E7EB);
 }
 
 .album-art {
@@ -44,7 +44,7 @@
   margin: 0;
   font-size: 16px;
   font-weight: 500;
-  color: #111827;
+  color: var(--muza-track-title-color, #111827);
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
@@ -54,7 +54,7 @@
 .track-artist {
   margin: 6px 0 0 0;
   font-size: 14px;
-  color: #6B7280;
+  color: var(--muza-track-artist-color, #6B7280);
 }
 
 .track-details {
@@ -62,11 +62,11 @@
   gap: 8px;
   margin-top: 6px;
   font-size: 14px;
-  color: #6B7280;
+  color: var(--muza-track-artist-color, #6B7280);
 }
 
 .separator {
-  color: #9CA3AF;
+  color: var(--muza-separator-color, #9CA3AF);
 }
 
 /* Player Controls Section - remove horizontal padding */
@@ -91,7 +91,7 @@
   position: relative;
   width: 100%;
   height: 8px;
-  background-color: #F3F4F6;
+background-color: var(--muza-input-disabled-bg, #F3F4F6);
   border-radius: 0; /* Remove border radius completely */
   cursor: pointer;
 }
@@ -154,7 +154,7 @@
 }
 
 .control-button:hover {
-  color: #111827;
+  color: var(--muza-track-title-color, #111827);
 }
 
 .control-button:active {
@@ -179,12 +179,12 @@
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  background-color: #F3F4F6;
+background-color: var(--muza-input-disabled-bg, #F3F4F6);
   transition: background-color 0.2s ease;
 }
 
 .play-button:hover {
-  background-color: #E5E7EB;
+  background-color: var(--muza-light-border-color, #E5E7EB);
 }
 
 .spinner {
@@ -211,7 +211,7 @@
   .player-info {
     width: 100%;
     border-right: none;
-    border-bottom: 1px solid #E5E7EB;
+    border-bottom: 1px solid var(--muza-light-border-color, #E5E7EB);
   }
   
   .playback-controls {
