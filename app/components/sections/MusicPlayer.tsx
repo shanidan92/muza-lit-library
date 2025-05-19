@@ -42,7 +42,9 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({
 
   const formatTime = (seconds: number): string => {
     const minutes = Math.floor(seconds / 60);
-    const secs = Math.floor(seconds % 60).toString().padStart(2, '0');
+    const secs = Math.floor(seconds % 60)
+      .toString()
+      .padStart(2, "0");
     return `${minutes}:${secs}`;
   };
 
@@ -60,7 +62,7 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({
     const audio = audioRef.current;
     if (!audio || isLoading) return;
     audio.play().catch((err) => {
-      console.error('Error playing audio:', err);
+      console.error("Error playing audio:", err);
       onUpdate?.({ ...details, isPlaying: false });
     });
   };
@@ -90,14 +92,14 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({
     const onLoadStart = () => setIsLoading(true);
     const onCanPlay = () => setIsLoading(false);
 
-    audio.addEventListener('loadeddata', onLoadedData);
-    audio.addEventListener('timeupdate', onTimeUpdate);
-    audio.addEventListener('ended', onEnded);
-    audio.addEventListener('play', onPlay);
-    audio.addEventListener('pause', onPause);
-    audio.addEventListener('loadstart', onLoadStart);
-    audio.addEventListener('waiting', onLoadStart);
-    audio.addEventListener('canplay', onCanPlay);
+    audio.addEventListener("loadeddata", onLoadedData);
+    audio.addEventListener("timeupdate", onTimeUpdate);
+    audio.addEventListener("ended", onEnded);
+    audio.addEventListener("play", onPlay);
+    audio.addEventListener("pause", onPause);
+    audio.addEventListener("loadstart", onLoadStart);
+    audio.addEventListener("waiting", onLoadStart);
+    audio.addEventListener("canplay", onCanPlay);
 
     audio.src = details.audioUrl;
     audio.load();
@@ -109,14 +111,14 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({
 
     return () => {
       audio.pause();
-      audio.removeEventListener('loadeddata', onLoadedData);
-      audio.removeEventListener('timeupdate', onTimeUpdate);
-      audio.removeEventListener('ended', onEnded);
-      audio.removeEventListener('play', onPlay);
-      audio.removeEventListener('pause', onPause);
-      audio.removeEventListener('loadstart', onLoadStart);
-      audio.removeEventListener('waiting', onLoadStart);
-      audio.removeEventListener('canplay', onCanPlay);
+      audio.removeEventListener("loadeddata", onLoadedData);
+      audio.removeEventListener("timeupdate", onTimeUpdate);
+      audio.removeEventListener("ended", onEnded);
+      audio.removeEventListener("play", onPlay);
+      audio.removeEventListener("pause", onPause);
+      audio.removeEventListener("loadstart", onLoadStart);
+      audio.removeEventListener("waiting", onLoadStart);
+      audio.removeEventListener("canplay", onCanPlay);
     };
   }, [details.audioUrl]);
 
