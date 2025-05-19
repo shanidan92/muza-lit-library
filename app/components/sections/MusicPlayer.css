@@ -1,13 +1,18 @@
 .music-player {
   width: 100%;
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-family:
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    Roboto,
+    sans-serif;
 }
 
 .player-container {
   display: flex;
   overflow: hidden;
   border-radius: 6px;
-  border: 1px solid var(--muza-light-border-color, #E5E7EB);
+  border: 1px solid var(--muza-light-border-color, #e5e7eb);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
   background-color: white;
 }
@@ -21,8 +26,8 @@
   min-height: 80px;
   min-width: 240px;
   width: 348px;
-  background-color: var(--muza-player-info-background, #F9FAFB);
-  border-right: 1px solid var(--muza-light-border-color, #E5E7EB);
+  background-color: var(--muza-player-info-background, #f9fafb);
+  border-right: 1px solid var(--muza-light-border-color, #e5e7eb);
 }
 
 .album-art {
@@ -54,7 +59,7 @@
 .track-artist {
   margin: 6px 0 0 0;
   font-size: 14px;
-  color: var(--muza-track-artist-color, #6B7280);
+  color: var(--muza-track-artist-color, #6b7280);
 }
 
 .track-details {
@@ -62,11 +67,11 @@
   gap: 8px;
   margin-top: 6px;
   font-size: 14px;
-  color: var(--muza-track-artist-color, #6B7280);
+  color: var(--muza-track-artist-color, #6b7280);
 }
 
 .separator {
-  color: var(--muza-separator-color, #9CA3AF);
+  color: var(--muza-separator-color, #9ca3af);
 }
 
 /* Player Controls Section - remove horizontal padding */
@@ -91,7 +96,7 @@
   position: relative;
   width: 100%;
   height: 8px;
-background-color: var(--muza-input-disabled-bg, #F3F4F6);
+  background-color: var(--muza-input-disabled-bg, #f3f4f6);
   border-radius: 0; /* Remove border radius completely */
   cursor: pointer;
 }
@@ -100,7 +105,7 @@ background-color: var(--muza-input-disabled-bg, #F3F4F6);
 .progress-fill {
   position: absolute;
   height: 100%;
-  background-color: #3B82F6;
+  background-color: #3b82f6;
   border-radius: 0; /* Remove border radius */
   transition: width 0.1s ease; /* Optional: add smooth transition when updating */
 }
@@ -116,7 +121,7 @@ background-color: var(--muza-input-disabled-bg, #F3F4F6);
   justify-content: space-between;
   margin: 8px 12px 0; /* Keep horizontal margin for time display */
   font-size: 14px;
-  color: #4B5563;
+  color: #4b5563;
 }
 
 /* Controls */
@@ -149,8 +154,10 @@ background-color: var(--muza-input-disabled-bg, #F3F4F6);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #4B5563;
-  transition: color 0.2s ease, transform 0.1s ease;
+  color: #4b5563;
+  transition:
+    color 0.2s ease,
+    transform 0.1s ease;
 }
 
 .control-button:hover {
@@ -162,29 +169,31 @@ background-color: var(--muza-input-disabled-bg, #F3F4F6);
 }
 
 .control-button.active {
-  color: #3B82F6;
+  color: #3b82f6;
 }
 
-.shuffle-button, .repeat-button {
+.shuffle-button,
+.repeat-button {
   font-size: 18px;
 }
 
-.previous-button, .next-button {
+.previous-button,
+.next-button {
   font-size: 22px;
 }
 
 .play-button {
   font-size: 28px;
-  color: #1F2937;
+  color: #1f2937;
   width: 48px;
   height: 48px;
   border-radius: 50%;
-background-color: var(--muza-input-disabled-bg, #F3F4F6);
+  background-color: var(--muza-input-disabled-bg, #f3f4f6);
   transition: background-color 0.2s ease;
 }
 
 .play-button:hover {
-  background-color: var(--muza-light-border-color, #E5E7EB);
+  background-color: var(--muza-light-border-color, #e5e7eb);
 }
 
 .spinner {
@@ -192,8 +201,12 @@ background-color: var(--muza-input-disabled-bg, #F3F4F6);
 }
 
 @keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* Volume Control */
@@ -207,13 +220,13 @@ background-color: var(--muza-input-disabled-bg, #F3F4F6);
   .player-container {
     flex-direction: column;
   }
-  
+
   .player-info {
     width: 100%;
     border-right: none;
-    border-bottom: 1px solid var(--muza-light-border-color, #E5E7EB);
+    border-bottom: 1px solid var(--muza-light-border-color, #e5e7eb);
   }
-  
+
   .playback-controls {
     gap: 20px;
   }

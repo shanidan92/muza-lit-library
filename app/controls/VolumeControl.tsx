@@ -93,20 +93,23 @@ const VolumeControl: React.FC<VolumeControlProps> = ({
   };
 
   return (
-    <div className={`volume-control ${disabled ? 'disabled' : ''}`}>
- {!noSymbol && (
-  <>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-    />
-    <i className="fa-solid fa-speaker volume-icon" onClick={toggleMute}></i>
-    <i
-      className={`fa-solid fa-${getVolumeIcon()} volume-icon`}
-      onClick={toggleMute}
-    ></i>
-  </>
-)}
+    <div className={`volume-control ${disabled ? "disabled" : ""}`}>
+      {!noSymbol && (
+        <>
+          <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+          />
+          <i
+            className="fa-solid fa-speaker volume-icon"
+            onClick={toggleMute}
+          ></i>
+          <i
+            className={`fa-solid fa-${getVolumeIcon()} volume-icon`}
+            onClick={toggleMute}
+          ></i>
+        </>
+      )}
       <div className="slider" ref={sliderRef} onClick={handleSliderClick}>
         <svg viewBox="0 0 100 24">
           <line className="track" x1="2" y1="12" x2="98" y2="12" />
