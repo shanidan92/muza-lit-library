@@ -2,6 +2,16 @@
 
 ![Muza Library Screenshot](public/art/muza.png)
 
+1. ContextMenu and MuzaContainer and MuzaButton
+   <ContextMenu>
+   <ContextMenuTrigger>
+   <MuzaButton content="•••" />
+   </ContextMenuTrigger>
+   <ContextMenuContent>
+   <MuzaContainer>context menu </MuzaContainer>
+   </ContextMenuContent>
+   </ContextMenu>
+
 ## Overview
 
 **Muza** is a modern React component library for building music player interfaces. This library provides a comprehensive set of components to create beautiful and functional music applications with minimal effort.
