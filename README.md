@@ -18,12 +18,12 @@
 
 ## Features
 
-- **Rich Component Library**: Display songs, albums, playlists, and artists with pre-styled components  
-- **Player Controls**: Full-featured music player with progress bar and playback controls  
-- **Navigation Components**: Sidebar navigation and top search bar  
-- **Context Menus**: Right-click functionality for additional options  
-- **Customization**: Easy styling with CSS variables  
-- **Responsive Design**: Components work across different screen sizes  
+- **Rich Component Library**: Display songs, albums, playlists, and artists with pre-styled components
+- **Player Controls**: Full-featured music player with progress bar and playback controls
+- **Navigation Components**: Sidebar navigation and top search bar
+- **Context Menus**: Right-click functionality for additional options
+- **Customization**: Easy styling with CSS variables
+- **Responsive Design**: Components work across different screen sizes
 
 ## Installation
 
@@ -36,9 +36,9 @@ npm install muza-react-library
 ### Music Player
 
 ```jsx
-import { MusicPlayer } from 'muza-react-library';
+import { MusicPlayer } from "muza-react-library";
 
-<MusicPlayer 
+<MusicPlayer
   details={{
     audioUrl: "song.mp3",
     imageSrc: "album.jpg",
@@ -46,11 +46,11 @@ import { MusicPlayer } from 'muza-react-library';
     artist: "Artist Name",
     album: "Album Name",
     year: 2023,
-    isPlaying: true
+    isPlaying: true,
   }}
-  onPrevious={() => console.log('Previous')} 
-  onNext={() => console.log('Next')}
-/>
+  onPrevious={() => console.log("Previous")}
+  onNext={() => console.log("Next")}
+/>;
 ```
 
 ### Song Components
@@ -58,15 +58,15 @@ import { MusicPlayer } from 'muza-react-library';
 ```jsx
 import { SongLine, PlaylistItem } from 'muza-react-library';
 
-<SongLine 
+<SongLine
   details={{
     index: 1,
     title: "Song Title",
     time: 180,
     artist: "Artist Name",
     imageSrc: "album.jpg"
-  }} 
-  onClick={handleSongClick} 
+  }}
+  onClick={handleSongClick}
 />
 
 <PlaylistItem
@@ -113,10 +113,10 @@ import { MusicListSection, MusicPlaylist } from 'muza-react-library';
   title="Featured Albums"
   type="album"
   list={[
-    { 
-      imageSrc: "album1.jpg", 
-      title: "Album Title", 
-      subTitle: "Artist Name" 
+    {
+      imageSrc: "album1.jpg",
+      title: "Album Title",
+      subTitle: "Artist Name"
     }
   ]}
   onShowAll={() => console.log('Show all albums')}
