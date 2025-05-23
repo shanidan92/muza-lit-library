@@ -53,15 +53,6 @@ export type MusicPlaylist = {
   suggestions: SongDetails[];
 }
 
-export type MusicSuggestionsListProps = {
-  songs: SongDetails[];
-  title: string;
-}
-
-export type SuggestionsListItemProps = {
-  details: SongDetails;
-}
-
 export type PlayerDetails = {
   audioUrl: string;
   imageSrc: string;
