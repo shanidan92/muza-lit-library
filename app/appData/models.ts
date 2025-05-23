@@ -11,6 +11,17 @@ export interface SongDetails {
   isPlaying?: boolean;
 }
 
+export interface MenuItem {
+  svg?: string;
+  icon?: string;
+  text: string;
+  action?: () => void;
+}
+
+export interface Section {
+  title: string;
+  items: MenuItem[];
+}
 export interface Album {
   id: string;
   imageSrc: string;

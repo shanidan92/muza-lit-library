@@ -6,7 +6,7 @@ import MuzaButton from "~/controls/MuzaButton";
 import PlaylistItem from "../songLineDisplays/PlaylistItem";
 import MusicSuggestionsList from "./MusicSuggestionsList";
 
-const MusicPlaylist: React.FC<MusicPlaylist> = ({
+const MuzaMusicPlaylist: React.FC<MusicPlaylist> = ({
   title,
   author,
   imageSrc = "",
@@ -46,4 +46,4 @@ const MusicPlaylist: React.FC<MusicPlaylist> = ({
   );
 };
 
-export default MusicPlaylist;
+export default MuzaMusicPlaylist;
