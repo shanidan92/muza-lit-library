@@ -10,17 +10,7 @@ import {
 import { FaRepeat } from "react-icons/fa6";
 import "./MusicPlayer.css";
 import VolumeControl from "../../controls/VolumeControl";
-
-interface PlayerDetails {
-  audioUrl: string;
-  imageSrc: string;
-  title: string;
-  artist: string;
-  album: string;
-  year: number;
-  isPlaying: boolean;
-  id?: string;
-}
+import type { PlayerDetails } from "~/appData/models";
 
 type MusicPlayerProps = {
   details: PlayerDetails;
