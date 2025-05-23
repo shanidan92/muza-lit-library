@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./VolumeControl.css";
+import { FaVolumeUp, FaVolumeDown, FaVolumeMute } from "react-icons/fa";
 
 interface VolumeControlProps {
   value?: number;
@@ -96,10 +97,6 @@ const VolumeControl: React.FC<VolumeControlProps> = ({
     <div className={`volume-control ${disabled ? "disabled" : ""}`}>
       {!noSymbol && (
         <>
-          <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-          />
           <i
             className="fa-solid fa-speaker volume-icon"
             onClick={toggleMute}
