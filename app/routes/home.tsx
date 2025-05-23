@@ -18,7 +18,9 @@ export default function Home() {
 
   const getCurrentSongIndex = () => {
     if (!selectedSong || !selectedSong.id) return -1;
-    return data.songs.findIndex((song: SongDetails) => song.id === selectedSong.id);
+    return data.songs.findIndex(
+      (song: SongDetails) => song.id === selectedSong.id,
+    );
   };
 
   const handlePreviousSong = () => {
@@ -38,8 +40,6 @@ export default function Home() {
       setSelectSong(data.songs[currentIndex + 1]);
     }
   };
-  
-
 
   useEffect(() => {
     fetch("./mockData/allData.json") // or use a full URL: 'https://example.com/api/data'
@@ -76,13 +76,13 @@ export default function Home() {
         {data.songs.map((s: SongDetails) => (
           <SongLine details={s} onClick={() => setSelectSong(s)}></SongLine>
         ))}
-       <MusicPlayer 
-        details={selectedSong}
-        onUpdate={(updatedDetails) => setSelectSong(updatedDetails)}
-        onPrevious={() => handlePreviousSong()}
-        onNext={() => handleNextSong()}
-        onSongEnded={() => handleNextSong()}
-      ></MusicPlayer>
+        <MusicPlayer
+          details={selectedSong}
+          onUpdate={(updatedDetails) => setSelectSong(updatedDetails)}
+          onPrevious={() => handlePreviousSong()}
+          onNext={() => handleNextSong()}
+          onSongEnded={() => handleNextSong()}
+        ></MusicPlayer>
       </div>
 
       <MuzaMusicPlaylist
