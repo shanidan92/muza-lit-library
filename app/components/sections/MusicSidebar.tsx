@@ -2,24 +2,6 @@ import React from "react";
 import "./MusicSidebar.css";
 import MuzaIcon from "~/icons/MuzaIcon";
 
-interface MenuItem {
-  svg?: string;
-  icon?: string;
-  text: string;
-  action?: () => void;
-}
-
-interface Section {
-  title: string;
-  items: MenuItem[];
-}
-
-interface MusicSidebarProps {
-  logoSrc: string;
-  logoAlt?: string;
-  sections: Section[];
-}
-
 const MusicSidebar: React.FC<MusicSidebarProps> = ({
   logoSrc,
   logoAlt = "Logo",
