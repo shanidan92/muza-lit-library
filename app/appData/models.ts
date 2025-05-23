@@ -51,7 +51,7 @@ export type MusicPlaylist = {
   imageSrc?: string;
   songs: SongDetails[];
   suggestions: SongDetails[];
-}
+};
 
 export type PlayerDetails = {
   audioUrl: string;
@@ -62,4 +62,4 @@ export type PlayerDetails = {
   year: number;
   isPlaying: boolean;
   id?: string;
-}
+};

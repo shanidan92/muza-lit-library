@@ -6,7 +6,7 @@ import SongDetailsView from "../songLineDisplays/SongDetails";
 
 export type SuggestionsListItemProps = {
   details: SongDetails;
-}
+};
 
 const SuggestionsListItem: React.FC<SuggestionsListItemProps> = ({
   details,
