@@ -1,7 +1,12 @@
 import React from "react";
 import "./MusicSuggestionsList.css";
-import type { MusicSuggestionsListProps, SongDetails } from "../../appData/models";
+import type { SongDetails } from "../../appData/models";
 import SuggestionsListItem from "./SuggestionsListItem";
+
+interface MusicSuggestionsListProps {
+  songs: SongDetails[];
+  title: string;
+}
 
 const MusicSuggestionsList: React.FC<MusicSuggestionsListProps> = ({
   songs,
