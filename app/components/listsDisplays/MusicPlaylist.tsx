@@ -1,20 +1,12 @@
 import React from "react";
 import "./MusicPlaylist.css";
-import type { SongDetails } from "../../appData/models";
+import type { MusicPlaylist, SongDetails } from "../../appData/models";
 import SmallAlbumDetails from "../albumDisplays/SmallAlbumDetails";
 import MuzaButton from "~/controls/MuzaButton";
 import PlaylistItem from "../songLineDisplays/PlaylistItem";
 import MusicSuggestionsList from "./MusicSuggestionsList";
 
-interface MusicPlaylistProps {
-  title: string;
-  author: string;
-  imageSrc?: string;
-  songs: SongDetails[];
-  suggestions: SongDetails[];
-}
-
-const MusicPlaylist: React.FC<MusicPlaylistProps> = ({
+const MusicPlaylist: React.FC<MusicPlaylist> = ({
   title,
   author,
   imageSrc = "",

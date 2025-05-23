@@ -10,3 +10,65 @@ export interface SongDetails {
   id?: string;
   isPlaying?: boolean;
 }
+
+export interface Album {
+  id: string;
+  imageSrc: string;
+  title: string;
+  subTitle: string;
+  artist: string;
+  songs?: number[];
+  genre?: string;
+}
+
+export interface Artist {
+  id: string;
+  name: string;
+  imageUrl: string;
+  albumsCount: number;
+}
+
+interface MusicListItem {
+  imageSrc: string;
+  title: string;
+  subTitle?: string;
+  artistName?: string;
+  songsCount?: number;
+  albumsCount?: number;
+}
+
+export type MusicListSection = {
+  title: string;
+  subTitle?: string;
+  type: "album" | "artist" | "playlist";
+  list: MusicListItem[];
+  onShowAll?: (sectionTitle: string) => void;
+};
+
+export type MusicPlaylist = {
+  title: string;
+  author: string;
+  imageSrc?: string;
+  songs: SongDetails[];
+  suggestions: SongDetails[];
+}
+
+export type MusicSuggestionsListProps = {
+  songs: SongDetails[];
+  title: string;
+}
+
+export type SuggestionsListItemProps = {
+  details: SongDetails;
+}
+
+export type PlayerDetails = {
+  audioUrl: string;
+  imageSrc: string;
+  title: string;
+  artist: string;
+  album: string;
+  year: number;
+  isPlaying: boolean;
+  id?: string;
+}
