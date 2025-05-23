@@ -67,7 +67,7 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({
 
   const playAudio = () => {
     const audio = audioRef.current;
-    if (!audio || isLoading) return;
+    if (!audio) return;
     audio.play().catch((err) => {
       console.error("Error playing audio:", err);
       onUpdate?.({ ...details, isPlaying: false });
@@ -155,6 +155,11 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({
   const togglePlayPause = () => {
     if (isLoading) return;
     onUpdate?.({ ...details, isPlaying: !details.isPlaying });
+    if (!details.isPlaying) {
+      playAudio();
+    } else {
+      audioRef.current?.pause();
+    }
   };
 
   return (
