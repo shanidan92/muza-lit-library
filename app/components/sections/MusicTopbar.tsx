@@ -28,11 +28,11 @@ const MusicTopbar: React.FC<MusicTopbarProps> = ({
           />
         </div>
         <div className="controls">
+          <button className="upload-music-button">Upload Music</button>
           <div className="user-menu">
-            <i
-              className="fa-solid fa-circle-user user-icon"
-              onClick={onUserIconClick}
-            ></i>
+            <div className="user-icon" onClick={onUserIconClick}>
+              <img src="https://picsum.photos/100" alt="user" />
+            </div>
           </div>
         </div>
       </div>
