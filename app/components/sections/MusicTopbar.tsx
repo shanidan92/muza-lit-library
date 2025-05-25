@@ -13,10 +13,6 @@ const MusicTopbar: React.FC<MusicTopbarProps> = ({
 }) => {
   const [volume, setVolume] = useState(75);
 
-  const handleVolumeChange = (value: number) => {
-    setVolume(value);
-  };
-
   const handleSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     onSearchChange?.(e.target.value);
   };
@@ -25,22 +21,18 @@ const MusicTopbar: React.FC<MusicTopbarProps> = ({
     <div className="music-topbar">
       <div className="topbar">
         <div className="search-container">
-          <i className="fa-solid fa-search"></i>
           <input
             type="text"
-            placeholder="Artist / Album / Song"
+            placeholder="Search for artists, albums or songs"
             onChange={handleSearchInput}
           />
         </div>
         <div className="controls">
-          <div className="volume-control">
-            <VolumeControl value={volume} onVolumeChange={handleVolumeChange} />
-          </div>
+          <button className="upload-music-button">Upload Music</button>
           <div className="user-menu">
-            <i
-              className="fa-solid fa-circle-user user-icon"
-              onClick={onUserIconClick}
-            ></i>
+            <div className="user-icon" onClick={onUserIconClick}>
+              <img src="https://picsum.photos/100" alt="user" />
+            </div>
           </div>
         </div>
       </div>

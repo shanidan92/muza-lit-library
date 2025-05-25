@@ -21,30 +21,13 @@ const MusicSidebar: React.FC<MusicSidebarProps> = ({
   };
 
   const renderMenuItem = (item: MenuItem, index: number) => {
-    const icon = item.svg ? (
-      // Placeholder: Replace `div` with your custom SVG component if needed
-      <div
-        style={{
-          marginRight: "10px",
-          width: "20px",
-          height: "20px",
-          fill: "#666",
-        }}
-      >
-        {/* Could render actual SVG here */}
-        <MuzaIcon iconName={item.svg} />
-      </div>
-    ) : (
-      <i className={`fa-solid fa-${item.icon}`}></i>
-    );
-
     return (
       <a
         key={index}
         className="menu-item"
         onClick={() => handleItemClick(item.action)}
       >
-        {icon}
+        <MuzaIcon iconName={item.svg} />
         <span>{item.text}</span>
       </a>
     );
@@ -52,17 +35,13 @@ const MusicSidebar: React.FC<MusicSidebarProps> = ({
 
   const renderSection = (section: Section, index: number) => (
     <div key={index} className="section">
-      <div className="section-title">{section.title}</div>
+      {section.title && <div className="section-title">{section.title}</div>}
       {section.items.map(renderMenuItem)}
     </div>
   );
 
   return (
     <div className="music-sidebar">
-      <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-      />
       <div className="logo">
         <img src={logoSrc} alt={logoAlt} />
       </div>

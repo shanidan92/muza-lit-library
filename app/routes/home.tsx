@@ -7,8 +7,10 @@ import "../styles/scrollbar.css";
 import "../styles/variables.css";
 import "../styles/main.css";
 import SongLine from "~/components/songLineDisplays/SongLine";
-import type { SongDetails } from "~/appData/models";
+import type { Album, SongDetails } from "~/appData/models";
 import MuzaMusicPlaylist from "~/components/listsDisplays/MusicPlaylist";
+import AlbumDetails from "~/components/albumDisplays/AlbumDetails";
+import ArtistDetails from "~/components/artistDisplays/ArtistDetails";
 
 export default function Home() {
   const [data, setData] = useState<any>([]);
@@ -44,22 +46,41 @@ export default function Home() {
         logoSrc="app/icons/icons/muza.svg"
         logoAlt="Music Library"
         sections={data.sidebar.sections}
-      ></MusicSidebar>
+      />
 
       <div className="content">
-        <MusicTopbar></MusicTopbar>
-        {data.songs.map((s: SongDetails) => (
-          <SongLine details={s} onClick={() => setSelectSong(s)}></SongLine>
-        ))}
-        <MusicPlayer details={selectedSong}></MusicPlayer>
-      </div>
+        <MusicTopbar />
+        <main>
+          <h1>Home</h1>
+          <hr />
+          <h2>New Releases</h2>
+          <div className="album-list">
+            {data.albums.newReleases.map((a: Album) => (
+              <AlbumDetails details={a} />
+            ))}
+          </div>
+          <hr />
+          <h2>Recently Played</h2>
+          <div className="song-list">
+            {data.songs.map((s: SongDetails) => (
+              <SongLine
+                details={s}
+                onClick={() => setSelectSong(s)}
+                isPlaying={s.id === selectedSong.id}
+              />
+            ))}
+          </div>
+          <hr />
+          <h2>Artists</h2>
+          <div className="album-list">
+            {data.artists.map((artist: any) => (
+              <ArtistDetails key={artist.id} details={artist} />
+            ))}
+          </div>
 
-      <MuzaMusicPlaylist
-        songs={data.songs.slice(0, 3)}
-        suggestions={data.songs.slice(3, 7)}
-        title="playlist 3"
-        author="me"
-      />
+          <MusicPlayer details={selectedSong} />
+        </main>
+      </div>
     </div>
   );
 }

@@ -1,8 +1,6 @@
 .content {
   margin-bottom: 2rem;
   flex: 1;
-  border: 1px solid var(--gray-50, #ededed);
-  box-shadow: 1px 0px 10px 0px #0000001a;
   max-height: 100%;
   overflow: auto;
   height: 100%;
