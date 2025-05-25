@@ -53,7 +53,7 @@ export default function Home() {
           <h1>Home</h1>
           <hr />
           <h2>New Releases</h2>
-          <div className="song-list">
+          <div className="album-list">
             {data.albums.newReleases.map((a: Album) => (
               <AlbumDetails details={a} />
             ))}
