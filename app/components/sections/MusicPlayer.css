@@ -61,14 +61,10 @@
     font-weight: 500;
   }
 
+  .track-info p,
   .track-info h5 {
-    font-size: var(--muza-secondary-font-size, 12px);
-    color: var(--muza-tertiary-text-color, #aaa);
-  }
-
-  .track-info p {
-    color: var(--muza-tertiary-text-color, #aaa);
-    font-size: var(--muza-secondary-font-size, 12px);
+    color: var(--muza-secondary-text-color);
+    font-size: 14px;
   }
 }
 
