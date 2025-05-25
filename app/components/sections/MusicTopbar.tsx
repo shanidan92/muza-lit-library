@@ -25,17 +25,13 @@ const MusicTopbar: React.FC<MusicTopbarProps> = ({
     <div className="music-topbar">
       <div className="topbar">
         <div className="search-container">
-          <i className="fa-solid fa-search"></i>
           <input
             type="text"
-            placeholder="Artist / Album / Song"
+            placeholder="Search for artists, albums or songs"
             onChange={handleSearchInput}
           />
         </div>
         <div className="controls">
-          <div className="volume-control">
-            <VolumeControl value={volume} onVolumeChange={handleVolumeChange} />
-          </div>
           <div className="user-menu">
             <i
               className="fa-solid fa-circle-user user-icon"
