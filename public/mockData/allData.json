@@ -88,6 +88,20 @@
       "imageSrc": "https://picsum.photos/400",
       "artistName": "John Coltrane",
       "albumsCount": "11"
+    },
+    {
+      "id": 3,
+      "index": 5,
+      "imageSrc": "https://picsum.photos/450",
+      "artistName": "The Felines",
+      "albumsCount": "12"
+    },
+    {
+      "id": 3,
+      "index": 5,
+      "imageSrc": "https://picsum.photos/410",
+      "artistName": "The Canines",
+      "albumsCount": "12"
     }
   ],
   "sidebar": {

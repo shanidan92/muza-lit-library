@@ -5,7 +5,7 @@
   padding: var(--muza-spacing-md);
   border-radius: var(--muza-border-radius-md);
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
 }
 
 .artist-details-card .image-container {
@@ -15,7 +15,7 @@
   overflow: hidden;
   background: var(--muza-image-background-color-bg);
   box-shadow: var(--muza-box-shadow);
-  margin-right: var(--muza-spacing-lg);
+  margin: 0;
 }
 
 .artist-details-card .image-container img {
@@ -26,7 +26,6 @@
 
 .artist-details-card .info {
   margin-top: 4px;
-  margin-left: var(--muza-spacing-sm);
   flex: 1;
 }
 
