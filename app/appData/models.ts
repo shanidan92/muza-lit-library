@@ -12,8 +12,7 @@ export interface SongDetails {
 }
 
 export interface MenuItem {
-  svg?: string;
-  icon?: string;
+  svg: string;
   text: string;
   action?: () => void;
 }

@@ -3,7 +3,7 @@
   width: 240px;
   height: 100vh;
   padding: 20px 0;
-  border-right: 1px solid var(--gray-50, #ededed);
+  border-right: 1px solid #ededed;
 }
 
 .logo {
@@ -23,12 +23,10 @@
 }
 
 .section-title {
-  font-size: 12px;
+  font-size: 16px;
   font-weight: 600;
-  color: #888;
-  text-transform: uppercase;
+  color: var(--secondary-text-color);
   padding: 7px 7px;
-  border-bottom: 1px solid #eee;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -40,26 +38,19 @@
   padding: 7px 7px;
   color: #444;
   text-decoration: none;
-  border-bottom: 1px solid #eee;
   cursor: pointer;
   font-size: 14px;
+  font-weight: 500;
+  border-radius: var(--muza-border-radius-md);
 }
-
+.menu-item:hover {
+  background: #f9fafb;
+}
 .menu-item i {
   margin-right: 10px;
   width: 20px;
   text-align: center;
   color: #666;
-}
-
-.menu-item i svg,
-.menu-item i path {
-  width: 20px;
-  fill: #666;
-}
-
-.menu-item:hover {
-  background: #eee;
 }
 
 .add-button {

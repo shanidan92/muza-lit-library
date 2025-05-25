@@ -21,28 +21,13 @@ const MusicSidebar: React.FC<MusicSidebarProps> = ({
   };
 
   const renderMenuItem = (item: MenuItem, index: number) => {
-    const icon = item.svg ? (
-      <div
-        style={{
-          marginRight: "10px",
-          width: "20px",
-          height: "20px",
-          fill: "#666",
-        }}
-      >
-        <MuzaIcon iconName={item.svg} />
-      </div>
-    ) : (
-      <i className={`fa-solid fa-${item.icon}`}></i>
-    );
-
     return (
       <a
         key={index}
         className="menu-item"
         onClick={() => handleItemClick(item.action)}
       >
-        {icon}
+        <MuzaIcon iconName={item.svg} />
         <span>{item.text}</span>
       </a>
     );

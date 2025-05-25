@@ -95,25 +95,25 @@
       {
         "items": [
           { "svg": "home", "text": "Home" },
-          { "icon": "search", "text": "Explore" }
+          { "svg": "explore", "text": "Explore" }
         ]
       },
       {
         "title": "My Muza",
         "items": [
           { "svg": "playlist", "text": "Playlists" },
-          { "svg": "albums", "text": "Albums" },
-          { "svg": "artists", "text": "Artists" },
-          { "svg": "songs", "text": "Songs" }
+          { "svg": "album", "text": "Albums" },
+          { "svg": "artist", "text": "Artists" },
+          { "svg": "song", "text": "Songs" }
         ]
       },
       {
         "title": "Playlists",
         "addAction": "createPlaylist",
         "items": [
-          { "svg": "ListMusic", "text": "Chill Vibes" },
-          { "svg": "ListMusic", "text": "Morning Coffee" },
-          { "svg": "ListMusic", "text": "Cat Party Mix" }
+          { "svg": "playlist", "text": "Chill Vibes" },
+          { "svg": "playlist", "text": "Morning Coffee" },
+          { "svg": "playlist", "text": "Cat Party Mix" }
         ]
       }
     ]
