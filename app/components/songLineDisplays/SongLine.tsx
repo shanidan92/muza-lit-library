@@ -42,8 +42,9 @@ const SongLine: React.FC<SongLineProps> = ({ details, onClick }) => {
     <div className="song-line" onClick={onClick}>
       <div className="song-container">
         <div className="track-info">
-          {renderIcon()}
+          <div className="track-icon">{renderIcon()}</div>
           <span className="track-title">{details.title}</span>
+          <span className="track-artist">{details.artist}</span>
         </div>
         <span className="track-duration">
           {details.time ? formatDuration(details.time) : ""}
