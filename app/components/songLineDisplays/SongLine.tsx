@@ -2,6 +2,7 @@ import React, { type MouseEventHandler } from "react";
 import "./SongLine.css";
 import type { SongDetails } from "../../appData/models";
 import { formatSongNumber } from "../../appData/utils";
+import MuzaIcon from "~/icons/MuzaIcon";
 
 interface SongLineProps {
   details: SongDetails;
@@ -32,7 +33,7 @@ const SongLine: React.FC<SongLineProps> = ({ details, onClick }) => {
           {formatSongNumber(details.index || 1)}
         </span>
         <span className="play-icon">
-          <i className="fa-solid fa-play"></i>
+          <MuzaIcon iconName="play" />
         </span>
       </>
     );

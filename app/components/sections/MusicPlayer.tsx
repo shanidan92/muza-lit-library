@@ -170,7 +170,7 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({
               {isLoading ? (
                 <FaSpinner className="fa-spin" />
               ) : details.isPlaying ? (
-                <FaPause />
+                <MuzaIcon iconName="pause" />
               ) : (
                 <MuzaIcon iconName="play" />
               )}
