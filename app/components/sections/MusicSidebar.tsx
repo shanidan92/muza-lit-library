@@ -59,10 +59,6 @@ const MusicSidebar: React.FC<MusicSidebarProps> = ({
 
   return (
     <div className="music-sidebar">
-      <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-      />
       <div className="logo">
         <img src={logoSrc} alt={logoAlt} />
       </div>

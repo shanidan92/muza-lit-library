@@ -8,6 +8,7 @@ import {
 } from "react-icons/fa";
 import "./MusicPlayer.css";
 import type { PlayerDetails } from "~/appData/models";
+import MuzaIcon from "~/icons/MuzaIcon";
 
 type MusicPlayerProps = {
   details: PlayerDetails;
@@ -133,19 +134,19 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({
     onUpdate?.({ ...details, isPlaying: !details.isPlaying });
   };
 
-  // if (!details.src) return null;
-
   return (
-    <div className="music-player">
+    <div className="player-container">
       <audio ref={audioRef} hidden />
       <div className="player">
-        <img className="album-art" src={details.imageSrc} alt="Album Art" />
-        <div className="track-info">
-          <h4>{details.title}</h4>
-          <p>{details.artist}</p>
-          <h5>
-            {details.album} • {details.year}
-          </h5>
+        <div className="player-info">
+          <img className="album-art" src={details.imageSrc} alt="Album Art" />
+          <div className="track-info">
+            <h4>{details.title}</h4>
+            <p>{details.artist}</p>
+            <h5>
+              {details.album} • {details.year}
+            </h5>
+          </div>
         </div>
         <div className="player-controls">
           <div className="progress-bar" onClick={handleSeek}>
@@ -159,8 +160,11 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({
             <span>{formatTime(duration - currentTime)}</span>
           </div>
           <div className="controls">
+            <button>
+              <MuzaIcon iconName="shuffle" />
+            </button>
             <button className="prev-next-button" onClick={onPrevious}>
-              <FaBackward />
+              <MuzaIcon iconName="skip-back" />
             </button>
             <button className="play-pause-button" onClick={togglePlayPause}>
               {isLoading ? (
@@ -168,11 +172,14 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({
               ) : details.isPlaying ? (
                 <FaPause />
               ) : (
-                <FaPlay />
+                <MuzaIcon iconName="play" />
               )}
             </button>
             <button className="prev-next-button" onClick={onNext}>
-              <FaForward />
+              <MuzaIcon iconName="skip-forward" />
+            </button>
+            <button>
+              <MuzaIcon iconName="repeat" />
             </button>
           </div>
         </div>

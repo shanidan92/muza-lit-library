@@ -51,15 +51,8 @@ export default function Home() {
         {data.songs.map((s: SongDetails) => (
           <SongLine details={s} onClick={() => setSelectSong(s)}></SongLine>
         ))}
-        <MusicPlayer details={selectedSong}></MusicPlayer>
+        <MusicPlayer details={selectedSong} />
       </div>
-
-      <MuzaMusicPlaylist
-        songs={data.songs.slice(0, 3)}
-        suggestions={data.songs.slice(3, 7)}
-        title="playlist 3"
-        author="me"
-      />
     </div>
   );
 }

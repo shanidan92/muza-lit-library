@@ -63,7 +63,7 @@
   --muza-border-radius-sm: 4px;
   --muza-border-radius-md: 8px;
   --muza-border-radius-lg: 20px;
-  --muza-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --muza-box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
 
   /* figma */
   --colors_primary_light: #1d4ed8;
