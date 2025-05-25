@@ -1,5 +1,4 @@
 .body {
-  font-family: "Google Sans", sans-serif;
   margin: 0;
   padding: 0;
   display: flex;
@@ -18,7 +17,6 @@
 
 .content {
   flex: 1;
-  /* Top padding for topbar */
   overflow-y: auto;
   height: 100vh;
   box-sizing: border-box;

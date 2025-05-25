@@ -7,7 +7,7 @@
   opacity: 0.9;
   backdrop-filter: blur(20px);
   border-radius: var(--muza-border-radius-md, 8px);
-  background: #edededcc;
+  background: rgba(255, 255, 255, 0.5);
   overflow: hidden;
   box-shadow: var(--muza-box-shadow, 0 2px 4px rgba(0, 0, 0, 0.1));
 }

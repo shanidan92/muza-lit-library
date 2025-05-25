@@ -22,7 +22,6 @@ const MusicSidebar: React.FC<MusicSidebarProps> = ({
 
   const renderMenuItem = (item: MenuItem, index: number) => {
     const icon = item.svg ? (
-      // Placeholder: Replace `div` with your custom SVG component if needed
       <div
         style={{
           marginRight: "10px",
@@ -31,7 +30,6 @@ const MusicSidebar: React.FC<MusicSidebarProps> = ({
           fill: "#666",
         }}
       >
-        {/* Could render actual SVG here */}
         <MuzaIcon iconName={item.svg} />
       </div>
     ) : (

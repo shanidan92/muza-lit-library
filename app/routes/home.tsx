@@ -44,12 +44,12 @@ export default function Home() {
         logoSrc="app/icons/icons/muza.svg"
         logoAlt="Music Library"
         sections={data.sidebar.sections}
-      ></MusicSidebar>
+      />
 
       <div className="content">
-        <MusicTopbar></MusicTopbar>
+        <MusicTopbar />
         {data.songs.map((s: SongDetails) => (
-          <SongLine details={s} onClick={() => setSelectSong(s)}></SongLine>
+          <SongLine details={s} onClick={() => setSelectSong(s)} />
         ))}
         <MusicPlayer details={selectedSong} />
       </div>
