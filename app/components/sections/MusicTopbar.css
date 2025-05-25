@@ -37,7 +37,8 @@ input {
 }
 
 input:focus {
-  outline: 1px solid #ddd;
+  border-color: var(--muza-border-color);
+  outline: 1px solid var(--muza-border-color);
 }
 
 input:focus::placeholder {
