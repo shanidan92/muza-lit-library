@@ -13,10 +13,6 @@ const MusicTopbar: React.FC<MusicTopbarProps> = ({
 }) => {
   const [volume, setVolume] = useState(75);
 
-  const handleVolumeChange = (value: number) => {
-    setVolume(value);
-  };
-
   const handleSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     onSearchChange?.(e.target.value);
   };

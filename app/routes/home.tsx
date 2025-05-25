@@ -49,7 +49,11 @@ export default function Home() {
       <div className="content">
         <MusicTopbar />
         {data.songs.map((s: SongDetails) => (
-          <SongLine details={s} onClick={() => setSelectSong(s)} />
+          <SongLine
+            details={s}
+            onClick={() => setSelectSong(s)}
+            isPlaying={s.id === selectedSong.id}
+          />
         ))}
         <MusicPlayer details={selectedSong} />
       </div>

@@ -7,6 +7,7 @@ import MuzaIcon from "~/icons/MuzaIcon";
 interface SongLineProps {
   details: SongDetails;
   onClick: MouseEventHandler<HTMLDivElement>;
+  isPlaying: boolean;
 }
 
 const formatDuration = (seconds: number): string => {
@@ -15,9 +16,9 @@ const formatDuration = (seconds: number): string => {
   return `${String(minutes).padStart(2, "0")}:${String(remainingSeconds).padStart(2, "0")}`;
 };
 
-const SongLine: React.FC<SongLineProps> = ({ details, onClick }) => {
+const SongLine: React.FC<SongLineProps> = ({ details, onClick, isPlaying }) => {
   const renderIcon = () => {
-    if (details.isPlaying) {
+    if (isPlaying) {
       return (
         <div className="wave-container">
           <div className="bar" />
@@ -40,7 +41,10 @@ const SongLine: React.FC<SongLineProps> = ({ details, onClick }) => {
   };
 
   return (
-    <div className="song-line" onClick={onClick}>
+    <div
+      className={`song-line ${isPlaying ? "playing" : ""}`}
+      onClick={onClick}
+    >
       <div className="song-container">
         <div className="track-info">
           <div className="track-icon">{renderIcon()}</div>
