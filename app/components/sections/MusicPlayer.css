@@ -123,11 +123,9 @@
   background-color: rgba(0, 0, 0, 0.2);
 }
 
-.play-pause-button .play {
-  i {
-    margin-right: -3px;
-    margin-left: 3px;
-  }
+.play {
+  margin-right: -3px;
+  margin-left: 3px;
 }
 
 .prev-next-button {

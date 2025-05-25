@@ -170,9 +170,9 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({
               {isLoading ? (
                 <FaSpinner className="fa-spin" />
               ) : details.isPlaying ? (
-                <MuzaIcon iconName="pause" />
+                <MuzaIcon iconName="pause" className="pause" />
               ) : (
-                <MuzaIcon iconName="play" />
+                <MuzaIcon iconName="play" className="play" />
               )}
             </button>
             <button className="prev-next-button" onClick={onNext}>
