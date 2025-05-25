@@ -7,8 +7,9 @@ import "../styles/scrollbar.css";
 import "../styles/variables.css";
 import "../styles/main.css";
 import SongLine from "~/components/songLineDisplays/SongLine";
-import type { SongDetails } from "~/appData/models";
+import type { Album, SongDetails } from "~/appData/models";
 import MuzaMusicPlaylist from "~/components/listsDisplays/MusicPlaylist";
+import AlbumDetails from "~/components/albumDisplays/AlbumDetails";
 
 export default function Home() {
   const [data, setData] = useState<any>([]);
@@ -48,14 +49,40 @@ export default function Home() {
 
       <div className="content">
         <MusicTopbar />
-        {data.songs.map((s: SongDetails) => (
-          <SongLine
-            details={s}
-            onClick={() => setSelectSong(s)}
-            isPlaying={s.id === selectedSong.id}
-          />
-        ))}
-        <MusicPlayer details={selectedSong} />
+        <main>
+          <h1>Home</h1>
+          <hr />
+          <h2>New Releases</h2>
+          <div className="song-list">
+            {data.albums.newReleases.map((a: Album) => (
+              <AlbumDetails details={a} />
+            ))}
+          </div>
+          <hr />
+          <h2>Recently Played</h2>
+          <div className="song-list">
+            {data.songs.map((s: SongDetails) => (
+              <SongLine
+                details={s}
+                onClick={() => setSelectSong(s)}
+                isPlaying={s.id === selectedSong.id}
+              />
+            ))}
+          </div>
+          <hr />
+          <h2>Artists</h2>
+          <div className="song-list">
+            {data.songs.map((s: SongDetails) => (
+              <SongLine
+                details={s}
+                onClick={() => setSelectSong(s)}
+                isPlaying={s.id === selectedSong.id}
+              />
+            ))}
+          </div>
+
+          <MusicPlayer details={selectedSong} />
+        </main>
       </div>
     </div>
   );

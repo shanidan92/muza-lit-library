@@ -15,7 +15,6 @@
   padding: var(--song-line-padding);
   cursor: default;
   border-radius: var(--muza-border-radius-md);
-  margin: 0 var(--muza-spacing-lg);
 }
 
 .song-line:hover {
