@@ -1,4 +1,4 @@
-import "../components/sections/MusicSidebar"; // likely unused — can be deleted
+import "../components/sections/MusicSidebar";
 import MusicSidebar from "~/components/sections/MusicSidebar";
 import { useEffect, useState } from "react";
 import { MusicPlayer } from "~/components/sections/MusicPlayer";
@@ -11,33 +11,46 @@ import type { Album, SongDetails } from "~/appData/models";
 import MuzaMusicPlaylist from "~/components/listsDisplays/MusicPlaylist";
 import AlbumDetails from "~/components/albumDisplays/AlbumDetails";
 import ArtistDetails from "~/components/artistDisplays/ArtistDetails";
+import { useUserStore } from "~/appData/userStore";
+import { useMusicLibraryStore } from "~/appData/musicStore";
 
 export default function Home() {
-  const [data, setData] = useState<any>([]);
-  const [selectedSong, setSelectSong] = useState<any>([]);
+  const { selectedSong, setSelectedSong } = useUserStore();
+  const { 
+    newReleases, 
+    recentlyPlayed, 
+    artists,
+    setNewReleases,
+    setRecentlyPlayed,
+    setArtists 
+  } = useMusicLibraryStore();
+  
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [sidebarSections, setSidebarSections] = useState([]);
 
   const getCurrentSongIndex = () => {
     if (!selectedSong || !selectedSong.id) return -1;
-    return data.songs.findIndex((song: SongDetails) => song.id === selectedSong.id);
+    return recentlyPlayed.findIndex(
+      (song: SongDetails) => song.id === selectedSong.id,
+    );
   };
 
   const handlePreviousSong = () => {
     const currentIndex = getCurrentSongIndex();
     if (currentIndex <= 0) {
-      setSelectSong(data.songs[data.songs.length - 1]);
+      setSelectedSong(recentlyPlayed[recentlyPlayed.length - 1]);
     } else {
-      setSelectSong(data.songs[currentIndex - 1]);
+      setSelectedSong(recentlyPlayed[currentIndex - 1]);
     }
   };
 
   const handleNextSong = () => {
     const currentIndex = getCurrentSongIndex();
-    if (currentIndex === -1 || currentIndex === data.songs.length - 1) {
-      setSelectSong(data.songs[0]);
+    if (currentIndex === -1 || currentIndex === recentlyPlayed.length - 1) {
+      setSelectedSong(recentlyPlayed[0]);
     } else {
-      setSelectSong(data.songs[currentIndex + 1]);
+      setSelectedSong(recentlyPlayed[currentIndex + 1]);
     }
   };
 
@@ -48,15 +61,21 @@ export default function Home() {
         return response.json();
       })
       .then((data) => {
-        setData(data);
-        setSelectSong(data.songs[0]);
+        setNewReleases(data.albums.newReleases);
+        setRecentlyPlayed(data.songs);
+        setArtists(data.artists);
+        setSidebarSections(data.sidebar.sections);
+        
+        if (data.songs.length > 0) {
+          setSelectedSong(data.songs[0]);
+        }
         setLoading(false);
       })
       .catch((err) => {
         setError(err.message);
         setLoading(false);
       });
-  }, []);
+  }, [setNewReleases, setRecentlyPlayed, setArtists, setSelectedSong]);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
@@ -66,7 +85,7 @@ export default function Home() {
       <MusicSidebar
         logoSrc="app/icons/icons/muza.svg"
         logoAlt="Music Library"
-        sections={data.sidebar.sections}
+        sections={sidebarSections}
       />
 
       <div className="content">
@@ -77,7 +96,7 @@ export default function Home() {
           <hr />
           <h2>New Releases</h2>
           <div className="album-list">
-            {data.albums.newReleases.map((a: Album) => (
+            {newReleases.map((a: Album) => (
               <AlbumDetails key={a.id} details={a} />
             ))}
           </div>
@@ -85,12 +104,12 @@ export default function Home() {
           <hr />
           <h2>Recently Played</h2>
           <div className="song-list">
-            {data.songs.map((s: SongDetails) => (
+            {recentlyPlayed.map((s: SongDetails) => (
               <SongLine
                 key={s.id}
                 details={s}
-                onClick={() => setSelectSong(s)}
-                isPlaying={s.id === selectedSong.id}
+                onClick={() => setSelectedSong(s)}
+                isPlaying={s.id === selectedSong?.id}
               />
             ))}
           </div>
@@ -98,14 +117,14 @@ export default function Home() {
           <hr />
           <h2>Artists</h2>
           <div className="album-list">
-            {data.artists.map((artist: any) => (
+            {artists.map((artist: any) => (
               <ArtistDetails key={artist.id} details={artist} />
             ))}
           </div>
 
           <MusicPlayer
             details={selectedSong}
-            onUpdate={(updatedDetails) => setSelectSong(updatedDetails)}
+            onUpdate={(updatedDetails) => setSelectedSong(updatedDetails)}
             onPrevious={handlePreviousSong}
             onNext={handleNextSong}
             onSongEnded={handleNextSong}
