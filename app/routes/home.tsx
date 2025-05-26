@@ -16,15 +16,15 @@ import { useMusicLibraryStore } from "~/appData/musicStore";
 
 export default function Home() {
   const { selectedSong, setSelectedSong } = useUserStore();
-  const { 
-    newReleases, 
-    recentlyPlayed, 
+  const {
+    newReleases,
+    recentlyPlayed,
     artists,
     setNewReleases,
     setRecentlyPlayed,
-    setArtists 
+    setArtists,
   } = useMusicLibraryStore();
-  
+
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [sidebarSections, setSidebarSections] = useState([]);
@@ -65,7 +65,7 @@ export default function Home() {
         setRecentlyPlayed(data.songs);
         setArtists(data.artists);
         setSidebarSections(data.sidebar.sections);
-        
+
         if (data.songs.length > 0) {
           setSelectedSong(data.songs[0]);
         }
