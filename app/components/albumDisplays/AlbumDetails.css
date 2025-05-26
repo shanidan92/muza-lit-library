@@ -2,15 +2,16 @@
   display: flex;
   align-items: center;
   background: white;
-  padding: var(--muza-spacing-lg);
+  padding: var(--muza-spacing-md);
   border-radius: var(--muza-border-radius-md);
-  margin: var(--muza-spacing-lg) 0;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .image-container {
   width: 235px;
   height: 235px;
-  border-radius: var(--muza-border-radius-md);
+  border-radius: var(--muza-border-radius-sm);
   overflow: hidden;
   background: var(--muza-image-background-color-bg);
   box-shadow: var(--muza-box-shadow);
@@ -24,30 +25,33 @@
 }
 
 .info {
-  margin-left: var(--muza-spacing-lg);
+  margin-top: 4px;
+  margin-left: var(--muza-spacing-sm);
   flex: 1;
 }
 
 .title {
-  font-size: var(--muza-title-font-size);
+  font-size: var(--muza-heading-font-size);
   font-weight: var(--muza-font-weight-bold-extra);
   color: var(--muza-primary-text-color);
 }
 
 .artist {
-  font-size: var(--muza-heading-font-size);
+  font-size: 16px;
   color: var(--muza-secondary-text-color);
-  font-weight: var(--muza-font-weight-medium);
+  font-weight: 400;
+  line-height: 1.2;
 }
 
 .subtitle {
+  display: none;
   font-size: var(--muza-secondary-font-size);
   color: var(--muza-tertiary-text-color);
   margin-top: var(--muza-spacing-xs);
 }
 
 .buttons {
-  display: flex;
+  display: none;
   gap: var(--muza-spacing-sm);
   margin-top: var(--muza-spacing-md);
 }

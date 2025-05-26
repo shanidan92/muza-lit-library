@@ -15,10 +15,7 @@ const AlbumDetails: React.FC<AlbumDetailsProps> = ({ details }) => {
       <div className="info">
         <div className="title">{details.title}</div>
         <div className="artist">{details.artist}</div>
-        <div className="subtitle">
-          {details.genre && `${details.genre} • `}
-          {details.subTitle}
-        </div>
+        <div className="subtitle">{details.genre && `${details.genre} • `}</div>
         <div className="buttons">
           <button className="icon-button">
             <span className="icon icon-dots" />
