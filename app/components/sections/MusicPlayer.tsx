@@ -9,6 +9,7 @@ import {
 import "./MusicPlayer.css";
 import type { PlayerDetails } from "~/appData/models";
 import MuzaIcon from "~/icons/MuzaIcon";
+import VolumeControl from "../../controls/VolumeControl";
 
 type MusicPlayerProps = {
   details: PlayerDetails;
@@ -28,7 +29,7 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [duration, setDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
-  const [volume, setVolume] = useState(1);
+  const [volume, setVolume] = useState(75);
   const [isLoading, setIsLoading] = useState(false);
   const [isPlaying, setIsPlaying] = useState(details.isPlaying || false);
 
@@ -102,7 +103,10 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({
 
     audio.src = details.audioUrl;
     audio.load();
-    audio.volume = volume;
+
+    if (volume < 0 || volume > 100) {
+      audio.volume = volume / 100.0;
+    }
 
     if (isPlaying) {
       playAudio();
@@ -176,28 +180,43 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({
             <span>{formatTime(currentTime)}</span>
             <span>{formatTime(duration - currentTime)}</span>
           </div>
-          <div className="controls">
-            <button>
-              <MuzaIcon iconName="shuffle" />
-            </button>
-            <button className="prev-next-button" onClick={onPrevious}>
-              <MuzaIcon iconName="skip-back" />
-            </button>
-            <button className="play-pause-button" onClick={togglePlayPause}>
-              {isLoading ? (
-                <FaSpinner className="fa-spin" />
-              ) : isPlaying ? (
-                <MuzaIcon iconName="pause" className="pause" />
-              ) : (
-                <MuzaIcon iconName="play" className="play" />
-              )}
-            </button>
-            <button className="prev-next-button" onClick={onNext}>
-              <MuzaIcon iconName="skip-forward" />
-            </button>
-            <button>
-              <MuzaIcon iconName="repeat" />
-            </button>
+          <div className="controls-wrapper">
+            <div className="controls-center">
+              <div className="controls">
+                <button>
+                  <MuzaIcon iconName="shuffle" />
+                </button>
+                <button className="prev-next-button" onClick={onPrevious}>
+                  <MuzaIcon iconName="skip-back" />
+                </button>
+                <button className="play-pause-button" onClick={togglePlayPause}>
+                  {isLoading ? (
+                    <FaSpinner className="fa-spin" />
+                  ) : isPlaying ? (
+                    <MuzaIcon iconName="pause" className="pause" />
+                  ) : (
+                    <MuzaIcon iconName="play" className="play" />
+                  )}
+                </button>
+                <button className="prev-next-button" onClick={onNext}>
+                  <MuzaIcon iconName="skip-forward" />
+                </button>
+                <button>
+                  <MuzaIcon iconName="repeat" />
+                </button>
+              </div>
+            </div>
+            <div className="volume-control">
+              <VolumeControl
+                value={volume}
+                onVolumeChange={(newVolume) => {
+                  setVolume(newVolume);
+                  if (audioRef.current) {
+                    audioRef.current.volume = newVolume / 100.0;
+                  }
+                }}
+              />
+            </div>
           </div>
         </div>
       </div>

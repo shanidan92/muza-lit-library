@@ -22,19 +22,19 @@ svg {
 }
 
 .track {
-  stroke: #ddd;
+  stroke: #e1e2e3;
   stroke-width: 4;
   stroke-linecap: round;
 }
 
 .fill {
-  stroke: #666;
+  stroke: var(--foreground, #030712);
   stroke-width: 4;
   stroke-linecap: round;
 }
 
 .handle {
-  fill: #666;
+  fill: var(--foreground, #030712);
   cursor: grab;
 }
 

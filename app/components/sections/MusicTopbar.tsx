@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "./MusicTopbar.css";
-import VolumeControl from "../../controls/VolumeControl";
 
 interface MusicTopbarProps {
   onSearchChange?: (searchText: string) => void;
@@ -11,8 +10,6 @@ const MusicTopbar: React.FC<MusicTopbarProps> = ({
   onSearchChange,
   onUserIconClick,
 }) => {
-  const [volume, setVolume] = useState(75);
-
   const handleSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     onSearchChange?.(e.target.value);
   };
