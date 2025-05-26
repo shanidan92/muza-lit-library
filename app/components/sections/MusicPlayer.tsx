@@ -30,6 +30,7 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({
   const [currentTime, setCurrentTime] = useState(0);
   const [volume, setVolume] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(details.isPlaying || false);
 
   const progressPercentage =
     duration > 0 ? `${(currentTime / duration) * 100}%` : "0%";
@@ -47,9 +48,15 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({
     if (!audio || isLoading) return;
     audio.play().catch((err) => {
       console.error("Error playing audio:", err);
+      setIsPlaying(false);
       onUpdate?.({ ...details, isPlaying: false });
     });
   };
+
+  // Sync local isPlaying state with details prop
+  useEffect(() => {
+    setIsPlaying(details.isPlaying || false);
+  }, [details.isPlaying]);
 
   useEffect(() => {
     const audio = audioRef.current;
@@ -58,7 +65,7 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({
     const onLoadedData = () => {
       setDuration(audio.duration);
       setIsLoading(false);
-      if (details.isPlaying) playAudio();
+      if (isPlaying) playAudio();
     };
 
     const onTimeUpdate = () => {
@@ -66,12 +73,20 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({
     };
 
     const onEnded = () => {
+      setIsPlaying(false);
       onUpdate?.({ ...details, isPlaying: false });
       onSongEnded?.();
     };
 
-    const onPlay = () => onUpdate?.({ ...details, isPlaying: true });
-    const onPause = () => onUpdate?.({ ...details, isPlaying: false });
+    const onPlay = () => {
+      setIsPlaying(true);
+      onUpdate?.({ ...details, isPlaying: true });
+    };
+
+    const onPause = () => {
+      setIsPlaying(false);
+      onUpdate?.({ ...details, isPlaying: false });
+    };
 
     const onLoadStart = () => setIsLoading(true);
     const onCanPlay = () => setIsLoading(false);
@@ -89,7 +104,7 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({
     audio.load();
     audio.volume = volume;
 
-    if (details.isPlaying) {
+    if (isPlaying) {
       playAudio();
     }
 
@@ -110,12 +125,12 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({
     const audio = audioRef.current;
     if (!audio) return;
 
-    if (details.isPlaying && !isLoading) {
+    if (isPlaying && !isLoading) {
       playAudio();
-    } else if (!details.isPlaying) {
+    } else if (!isPlaying) {
       audio.pause();
     }
-  }, [details.isPlaying, isLoading]);
+  }, [isPlaying, isLoading]);
 
   const handleSeek = (e: React.MouseEvent<HTMLDivElement>) => {
     const audio = audioRef.current;
@@ -131,7 +146,9 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({
 
   const togglePlayPause = () => {
     if (isLoading) return;
-    onUpdate?.({ ...details, isPlaying: !details.isPlaying });
+    const newPlayingState = !isPlaying;
+    setIsPlaying(newPlayingState);
+    onUpdate?.({ ...details, isPlaying: newPlayingState });
   };
 
   return (
@@ -169,7 +186,7 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({
             <button className="play-pause-button" onClick={togglePlayPause}>
               {isLoading ? (
                 <FaSpinner className="fa-spin" />
-              ) : details.isPlaying ? (
+              ) : isPlaying ? (
                 <MuzaIcon iconName="pause" className="pause" />
               ) : (
                 <MuzaIcon iconName="play" className="play" />
