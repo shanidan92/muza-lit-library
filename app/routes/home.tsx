@@ -122,13 +122,15 @@ export default function Home() {
             ))}
           </div>
 
-          <MusicPlayer
-            details={selectedSong}
-            onUpdate={(updatedDetails) => setSelectedSong(updatedDetails)}
-            onPrevious={handlePreviousSong}
-            onNext={handleNextSong}
-            onSongEnded={handleNextSong}
-          />
+          {selectedSong && (
+            <MusicPlayer
+              details={selectedSong}
+              onUpdate={(updatedDetails) => setSelectedSong(updatedDetails)}
+              onPrevious={handlePreviousSong}
+              onNext={handleNextSong}
+              onSongEnded={handleNextSong}
+            />
+          )}
         </main>
       </div>
     </div>

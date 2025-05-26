@@ -24,6 +24,24 @@ const VolumeControl: React.FC<VolumeControlProps> = ({
   const previousVolume = useRef(value);
   const sliderRef = useRef<HTMLDivElement>(null);
 
+  const toggleMute = () => {
+    if (disabled) return;
+    if (isMuted) {
+      setIsMuted(false);
+      onVolumeChange?.(previousVolume.current);
+    } else {
+      previousVolume.current = value;
+      setIsMuted(true);
+      onVolumeChange?.(0);
+    }
+  };
+
+  const getVolumeIcon = () => {
+    if (isMuted || value === 0) return "volume-mute";
+    if (value < 50) return "volume-down";
+    return "volume-up";
+  };
+
   const handleSliderClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (disabled || !sliderRef.current) return;
     const rect = sliderRef.current.getBoundingClientRect();
