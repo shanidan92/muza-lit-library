@@ -104,7 +104,7 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({
     audio.src = details.audioUrl;
     audio.load();
 
-    if (volume < 0 || volume > 100) {
+    if (volume >= 0 && volume <= 100) {
       audio.volume = volume / 100.0;
     }
 
