@@ -124,8 +124,23 @@ export default function Home() {
 
           {selectedSong && (
             <MusicPlayer
-              details={selectedSong}
-              onUpdate={(updatedDetails) => setSelectedSong(updatedDetails)}
+              details={{
+                audioUrl: selectedSong.audioUrl || "",
+                imageSrc: selectedSong.imageSrc || "",
+                title: selectedSong.title,
+                artist: selectedSong.artist || "",
+                album: selectedSong.album || "",
+                year: selectedSong.year || new Date().getFullYear(),
+                isPlaying: selectedSong.isPlaying || false,
+                id: selectedSong.id,
+              }}
+              onUpdate={(updatedDetails) =>
+                setSelectedSong({
+                  ...selectedSong,
+                  isPlaying: updatedDetails.isPlaying,
+                  audioUrl: updatedDetails.audioUrl,
+                })
+              }
               onPrevious={handlePreviousSong}
               onNext={handleNextSong}
               onSongEnded={handleNextSong}
