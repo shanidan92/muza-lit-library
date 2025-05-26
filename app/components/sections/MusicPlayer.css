@@ -128,6 +128,12 @@
   transition: background-color 0.1s ease-out;
 }
 
+.fa-spin {
+  width: 48px;
+  height: 48px;
+  font-size: 24px;
+}
+
 .controls button:hover {
   background-color: rgba(0, 0, 0, 0.1);
 }
