@@ -1,0 +1,245 @@
+{
+  "albums": {
+    "featured": [
+      {
+        "id": "1",
+        "imageSrc": "art/imag_2.jpg",
+        "title": "Orange cat",
+        "subTitle": "1944",
+        "artist": "Meow Productions",
+        "songs": [1, 2, 3]
+      },
+      {
+        "id": "2",
+        "imageSrc": "art/imag_3.jpg",
+        "title": "Paper cat",
+        "subTitle": "2002",
+        "artist": "Origami Felines",
+        "songs": [4, 5, 6]
+      }
+    ],
+    "newReleases": [
+      {
+        "id": "3",
+        "imageSrc": "art/imag_1.jpg",
+        "title": "Two cats",
+        "subTitle": "2023",
+        "artist": "Double Trouble",
+        "songs": [7, 8, 9]
+      },
+      {
+        "id": "4",
+        "imageSrc": "art/imag_2.jpg",
+        "title": "Orange cat",
+        "subTitle": "1944",
+        "artist": "Meow Productions",
+        "songs": [1, 2, 3]
+      },
+      {
+        "id": "5",
+        "imageSrc": "art/imag_3.jpg",
+        "title": "Paper cat",
+        "subTitle": "2002",
+        "artist": "Origami Felines",
+        "songs": [4, 5, 6]
+      }
+    ],
+    "recommended": [
+      {
+        "id": "6",
+        "imageSrc": "art/imag_3.jpg",
+        "title": "Paper cat",
+        "subTitle": "2002",
+        "artist": "Origami Felines",
+        "songs": [4, 5, 6],
+        "songsCount": 3
+      },
+      {
+        "id": "7",
+        "imageSrc": "art/imag_1.jpg",
+        "title": "Two cats",
+        "subTitle": "2023",
+        "artist": "Double Trouble",
+        "songs": [7, 8, 9],
+        "songsCount": 3
+      },
+      {
+        "id": "8",
+        "imageSrc": "art/imag_2.jpg",
+        "title": "Orange cat",
+        "subTitle": "1944",
+        "artist": "Meow Productions",
+        "songs": [1, 2, 3],
+        "songsCount": 3
+      }
+    ]
+  },
+  "artists": [
+    {
+      "id": 2,
+      "index": 4,
+      "imageSrc": "https://picsum.photos/300",
+      "artistName": "Legendary Saxophone",
+      "albumsCount": "22"
+    },
+    {
+      "id": 3,
+      "index": 5,
+      "imageSrc": "https://picsum.photos/400",
+      "artistName": "John Coltrane",
+      "albumsCount": "11"
+    },
+    {
+      "id": 3,
+      "index": 5,
+      "imageSrc": "https://picsum.photos/450",
+      "artistName": "The Felines",
+      "albumsCount": "12"
+    },
+    {
+      "id": 3,
+      "index": 5,
+      "imageSrc": "https://picsum.photos/410",
+      "artistName": "The Canines",
+      "albumsCount": "12"
+    }
+  ],
+  "sidebar": {
+    "sections": [
+      {
+        "items": [
+          { "svg": "home", "text": "Home" },
+          { "svg": "explore", "text": "Explore" }
+        ]
+      },
+      {
+        "title": "My Muza",
+        "items": [
+          { "svg": "playlist", "text": "Playlists" },
+          { "svg": "album", "text": "Albums" },
+          { "svg": "artist", "text": "Artists" },
+          { "svg": "song", "text": "Songs" }
+        ]
+      },
+      {
+        "title": "Playlists",
+        "addAction": "createPlaylist",
+        "items": [
+          { "svg": "playlist", "text": "Chill Vibes" },
+          { "svg": "playlist", "text": "Morning Coffee" },
+          { "svg": "playlist", "text": "Cat Party Mix" }
+        ]
+      }
+    ]
+  },
+  "songs": [
+    {
+      "id": 1,
+      "index": 1,
+      "title": "Meow Meow",
+      "time": 185,
+      "albumId": "1",
+      "audioUrl": "https://github.com/muza-music/muza-audio-stream/raw/refs/heads/main/audio_files/09_goin_home.wav",
+      "imageSrc": "art/imag_1.jpg",
+      "artist": "The Felines",
+      "album": "Cat Tunes",
+      "year": 2018
+    },
+    {
+      "id": 2,
+      "index": 2,
+      "title": "Scratching Post",
+      "time": 212,
+      "albumId": "1",
+      "audioUrl": "https://github.com/muza-music/muza-audio-stream/raw/refs/heads/main/audio_files/10_twice.wav",
+      "imageSrc": "art/imag_2.jpg",
+      "artist": "The Felines",
+      "album": "Cat Tunes",
+      "year": 2018
+    },
+    {
+      "id": 3,
+      "index": 3,
+      "title": "Nap Time",
+      "time": 198,
+      "albumId": "1",
+      "audioUrl": "https://github.com/muza-music/muza-audio-stream/raw/refs/heads/main/audio_files/09_goin_home.wav",
+      "imageSrc": "art/imag_3.jpg",
+      "artist": "The Felines",
+      "album": "Cat Tunes",
+      "year": 2018
+    },
+    {
+      "id": 4,
+      "index": 1,
+      "title": "Origami Dreams",
+      "time": 243,
+      "albumId": "2",
+      "audioUrl": "https://github.com/muza-music/muza-audio-stream/raw/refs/heads/main/audio_files/10_twice.wav",
+      "imageSrc": "art/imag_1.jpg",
+      "artist": "Paper Cats",
+      "album": "Folded Whiskers",
+      "year": 2021
+    },
+    {
+      "id": 5,
+      "index": 2,
+      "title": "Folded Whiskers",
+      "time": 201,
+      "albumId": "2",
+      "audioUrl": "https://github.com/muza-music/muza-audio-stream/raw/refs/heads/main/audio_files/09_goin_home.wav",
+      "imageSrc": "art/imag_2.jpg",
+      "artist": "Paper Cats",
+      "album": "Folded Whiskers",
+      "year": 2021
+    },
+    {
+      "id": 6,
+      "index": 3,
+      "title": "Paper Claws",
+      "time": 176,
+      "albumId": "2",
+      "audioUrl": "https://github.com/muza-music/muza-audio-stream/raw/refs/heads/main/audio_files/10_twice.wav",
+      "imageSrc": "art/imag_3.jpg",
+      "artist": "Paper Cats",
+      "album": "Folded Whiskers",
+      "year": 2021
+    },
+    {
+      "id": 7,
+      "index": 1,
+      "title": "Double Purr",
+      "time": 225,
+      "albumId": "3",
+      "audioUrl": "https://github.com/muza-music/muza-audio-stream/raw/refs/heads/main/audio_files/09_goin_home.wav",
+      "imageSrc": "art/imag_1.jpg",
+      "artist": "Twin Kittens",
+      "album": "Twice As Nice",
+      "year": 2019
+    },
+    {
+      "id": 8,
+      "index": 2,
+      "title": "Twice As Nice",
+      "time": 190,
+      "albumId": "3",
+      "audioUrl": "https://github.com/muza-music/muza-audio-stream/raw/refs/heads/main/audio_files/10_twice.wav",
+      "imageSrc": "art/imag_2.jpg",
+      "artist": "Twin Kittens",
+      "album": "Twice As Nice",
+      "year": 2019
+    },
+    {
+      "id": 9,
+      "index": 3,
+      "title": "Dual Kittens",
+      "time": 232,
+      "albumId": "3",
+      "audioUrl": "https://github.com/muza-music/muza-audio-stream/raw/refs/heads/main/audio_files/09_goin_home.wav",
+      "imageSrc": "art/imag_3.jpg",
+      "artist": "Twin Kittens",
+      "album": "Twice As Nice",
+      "year": 2019
+    }
+  ]
+}

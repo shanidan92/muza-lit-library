@@ -19,7 +19,7 @@ export default function Home() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetch("./mockData/allData.json") // or use a full URL: 'https://example.com/api/data'
+    fetch("http://localhost:3000/getAllData") // or use a full URL: 'https://example.com/api/data'
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
