@@ -21,23 +21,6 @@ const VolumeControl: React.FC<VolumeControlProps> = ({
   const previousVolume = useRef(value);
   const sliderRef = useRef<HTMLDivElement>(null);
 
-  const getVolumeIcon = () => {
-    if (value === 0 || isMuted) return "volume-xmark";
-    if (value < 50) return "volume-low";
-    return "volume-high";
-  };
-
-  const toggleMute = () => {
-    if (disabled) return;
-    if (isMuted) {
-      onVolumeChange?.(previousVolume.current);
-    } else {
-      previousVolume.current = value;
-      onVolumeChange?.(0);
-    }
-    setIsMuted(!isMuted);
-  };
-
   const handleSliderClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (disabled || !sliderRef.current) return;
     const rect = sliderRef.current.getBoundingClientRect();
@@ -96,11 +79,6 @@ const VolumeControl: React.FC<VolumeControlProps> = ({
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
       />
-      <i className="fa-solid fa-speaker volume-icon" onClick={toggleMute}></i>
-      <i
-        className={`fa-solid fa-${getVolumeIcon()} volume-icon`}
-        onClick={toggleMute}
-      ></i>
       <div className="slider" ref={sliderRef} onClick={handleSliderClick}>
         <svg viewBox="0 0 100 24">
           <line className="track" x1="2" y1="12" x2="98" y2="12" />
