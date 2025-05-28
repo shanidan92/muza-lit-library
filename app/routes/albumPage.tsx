@@ -1,22 +1,19 @@
-import "../components/sections/MusicSidebar";
-import MusicSidebar from "~/components/sections/MusicSidebar";
 import { useEffect, useState } from "react";
-import { MusicPlayer } from "~/components/sections/MusicPlayer";
-import MusicTopbar from "~/components/sections/MusicTopbar";
-import "../styles/scrollbar.css";
-import "../styles/variables.css";
-import "../styles/main.css";
-import SongLine from "~/components/songLineDisplays/SongLine";
 import type { Album, SongDetails } from "~/appData/models";
-import MuzaMusicPlaylist from "~/components/listsDisplays/MusicPlaylist";
-import AlbumDetails from "~/components/albumDisplays/AlbumDetails";
-import ArtistDetails from "~/components/artistDisplays/ArtistDetails";
-import { useUserStore } from "~/appData/userStore";
 import { useMusicLibraryStore } from "~/appData/musicStore";
-import { useNavigate } from "react-router";
+import { useUserStore } from "~/appData/userStore";
+import AlbumHeader from "~/components/albumDisplays/AlbumHeader";
+import { MusicPlayer } from "~/components/sections/MusicPlayer";
+import MusicSidebar from "~/components/sections/MusicSidebar";
+import MusicTopbar from "~/components/sections/MusicTopbar";
+import SongLine from "~/components/songLineDisplays/SongLine";
 
-export default function Home() {
-  const { selectedSong, setSelectedSong, setSelectedPlaListOrAlbum } = useUserStore();
+export default function AlbumPage() {
+  const { 
+    selectedSong,
+    selectedPlaListOrAlbum,
+    setSelectedSong,
+  } = useUserStore();
   const {
     newReleases,
     recentlyPlayed,
@@ -26,17 +23,17 @@ export default function Home() {
     setArtists,
   } = useMusicLibraryStore();
 
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const [sidebarSections, setSidebarSections] = useState([]);
-  const navigate = useNavigate();
-  
-  const onAlbumClick = (album: Album) => {
-    setSelectedPlaListOrAlbum(album);
-    navigate("/routes/albumPage");
-  };
+const [sidebarSections, setSidebarSections] = useState([]);
+const [albumSongsDetails, setAlbumSongsDetails] = useState<SongDetails[]>([]);
 
-  const getCurrentSongIndex = () => {
+useEffect(() => {
+  const allSongsDetails = recentlyPlayed;
+  let details: SongDetails[] = [];
+  selectedPlaListOrAlbum?.songs?.map(songIndex => details.push(allSongsDetails[songIndex - 1]));
+  setAlbumSongsDetails(details);
+  }, [selectedPlaListOrAlbum]);
+
+const getCurrentSongIndex = () => {
     if (!selectedSong || !selectedSong.id) return -1;
     return recentlyPlayed.findIndex(
       (song: SongDetails) => song.id === selectedSong.id,
@@ -61,33 +58,7 @@ export default function Home() {
     }
   };
 
-  useEffect(() => {
-    fetch("./mockData/allData.json")
-      .then((response) => {
-        if (!response.ok) throw new Error("Network response was not ok");
-        return response.json();
-      })
-      .then((data) => {
-        setNewReleases(data.albums.newReleases);
-        setRecentlyPlayed(data.songs);
-        setArtists(data.artists);
-        setSidebarSections(data.sidebar.sections);
-
-        if (data.songs.length > 0) {
-          setSelectedSong(data.songs[0]);
-        }
-        setLoading(false);
-      })
-      .catch((err) => {
-        setError(err.message);
-        setLoading(false);
-      });
-  }, [setNewReleases, setRecentlyPlayed, setArtists, setSelectedSong]);
-
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error}</p>;
-
-  return (
+   return (
     <div className="body">
       <MusicSidebar
         logoSrc="app/icons/icons/muza.svg"
@@ -97,21 +68,11 @@ export default function Home() {
 
       <div className="content">
         <MusicTopbar />
-
         <main>
-          <h1>Home</h1>
+          <AlbumHeader details={selectedPlaListOrAlbum!} songs={albumSongsDetails} />
           <hr />
-          <h2>New Releases</h2>
-          <div className="album-list">
-            {newReleases.map((a: Album) => (
-              <AlbumDetails key={a.id} details={a} onAlbumClick={() => onAlbumClick(a)}/>
-            ))}
-          </div>
-
-          <hr />
-          <h2>Recently Played</h2>
-          <div className="song-list">
-            {recentlyPlayed.map((s: SongDetails) => (
+          <div className="album-song-list">
+            {albumSongsDetails.map((s: SongDetails) => (
               <SongLine
                 key={s.id}
                 details={s}
@@ -122,12 +83,6 @@ export default function Home() {
           </div>
 
           <hr />
-          <h2>Artists</h2>
-          <div className="album-list">
-            {artists.map((artist: any) => (
-              <ArtistDetails key={artist.id} details={artist} />
-            ))}
-          </div>
 
           {selectedSong && (
             <MusicPlayer
