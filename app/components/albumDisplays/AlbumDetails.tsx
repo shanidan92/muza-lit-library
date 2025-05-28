@@ -4,13 +4,21 @@ import type { Album } from "~/appData/models";
 
 interface AlbumDetailsProps {
   details: Album;
+  onAlbumClick: () => void;
 }
 
-const AlbumDetails: React.FC<AlbumDetailsProps> = ({ details }) => {
+const AlbumDetails: React.FC<AlbumDetailsProps> = ({
+  details,
+  onAlbumClick,
+}) => {
   return (
     <div className="album-details-card">
       <div className="image-container">
-        <img src={details.imageSrc} alt={details.title} />
+        <img
+          src={details.imageSrc}
+          alt={details.title}
+          onClick={onAlbumClick}
+        />
       </div>
       <div className="info">
         <div className="title">{details.title}</div>
