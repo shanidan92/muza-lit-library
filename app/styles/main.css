@@ -84,7 +84,7 @@ hr {
 }
 
 .album-song-list {
-  flex:1;
+  flex: 1;
   display: flex;
   flex-direction: column;
   grid-template-columns: 1fr 1fr 1fr;

@@ -9,11 +9,8 @@ import MusicTopbar from "~/components/sections/MusicTopbar";
 import SongLine from "~/components/songLineDisplays/SongLine";
 
 export default function AlbumPage() {
-  const { 
-    selectedSong,
-    selectedPlaListOrAlbum,
-    setSelectedSong,
-  } = useUserStore();
+  const { selectedSong, selectedPlaListOrAlbum, setSelectedSong } =
+    useUserStore();
   const {
     newReleases,
     recentlyPlayed,
@@ -23,17 +20,19 @@ export default function AlbumPage() {
     setArtists,
   } = useMusicLibraryStore();
 
-const [sidebarSections, setSidebarSections] = useState([]);
-const [albumSongsDetails, setAlbumSongsDetails] = useState<SongDetails[]>([]);
+  const [sidebarSections, setSidebarSections] = useState([]);
+  const [albumSongsDetails, setAlbumSongsDetails] = useState<SongDetails[]>([]);
 
-useEffect(() => {
-  const allSongsDetails = recentlyPlayed;
-  let details: SongDetails[] = [];
-  selectedPlaListOrAlbum?.songs?.map(songIndex => details.push(allSongsDetails[songIndex - 1]));
-  setAlbumSongsDetails(details);
+  useEffect(() => {
+    const allSongsDetails = recentlyPlayed;
+    let details: SongDetails[] = [];
+    selectedPlaListOrAlbum?.songs?.map((songIndex) =>
+      details.push(allSongsDetails[songIndex - 1]),
+    );
+    setAlbumSongsDetails(details);
   }, [selectedPlaListOrAlbum]);
 
-const getCurrentSongIndex = () => {
+  const getCurrentSongIndex = () => {
     if (!selectedSong || !selectedSong.id) return -1;
     return recentlyPlayed.findIndex(
       (song: SongDetails) => song.id === selectedSong.id,
@@ -58,7 +57,7 @@ const getCurrentSongIndex = () => {
     }
   };
 
-   return (
+  return (
     <div className="body">
       <MusicSidebar
         logoSrc="app/icons/icons/muza.svg"
@@ -69,7 +68,10 @@ const getCurrentSongIndex = () => {
       <div className="content">
         <MusicTopbar />
         <main>
-          <AlbumHeader details={selectedPlaListOrAlbum!} songs={albumSongsDetails} />
+          <AlbumHeader
+            details={selectedPlaListOrAlbum!}
+            songs={albumSongsDetails}
+          />
           <hr />
           <div className="album-song-list">
             {albumSongsDetails.map((s: SongDetails) => (

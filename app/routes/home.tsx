@@ -16,7 +16,8 @@ import { useMusicLibraryStore } from "~/appData/musicStore";
 import { useNavigate } from "react-router";
 
 export default function Home() {
-  const { selectedSong, setSelectedSong, setSelectedPlaListOrAlbum } = useUserStore();
+  const { selectedSong, setSelectedSong, setSelectedPlaListOrAlbum } =
+    useUserStore();
   const {
     newReleases,
     recentlyPlayed,
@@ -30,7 +31,7 @@ export default function Home() {
   const [error, setError] = useState<string | null>(null);
   const [sidebarSections, setSidebarSections] = useState([]);
   const navigate = useNavigate();
-  
+
   const onAlbumClick = (album: Album) => {
     setSelectedPlaListOrAlbum(album);
     navigate("/routes/albumPage");
@@ -104,7 +105,11 @@ export default function Home() {
           <h2>New Releases</h2>
           <div className="album-list">
             {newReleases.map((a: Album) => (
-              <AlbumDetails key={a.id} details={a} onAlbumClick={() => onAlbumClick(a)}/>
+              <AlbumDetails
+                key={a.id}
+                details={a}
+                onAlbumClick={() => onAlbumClick(a)}
+              />
             ))}
           </div>
 

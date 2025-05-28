@@ -7,12 +7,18 @@ interface AlbumDetailsProps {
   onAlbumClick: () => void;
 }
 
-const AlbumDetails: React.FC<AlbumDetailsProps> = ({ details, onAlbumClick }) => {
-
+const AlbumDetails: React.FC<AlbumDetailsProps> = ({
+  details,
+  onAlbumClick,
+}) => {
   return (
     <div className="album-details-card">
       <div className="image-container">
-        <img src={details.imageSrc} alt={details.title} onClick={onAlbumClick} />
+        <img
+          src={details.imageSrc}
+          alt={details.title}
+          onClick={onAlbumClick}
+        />
       </div>
       <div className="info">
         <div className="title">{details.title}</div>
