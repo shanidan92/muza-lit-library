@@ -64,12 +64,12 @@ export type MusicPlaylist = {
 };
 
 export type PlayerDetails = {
-  audioUrl: string;
-  imageSrc: string;
-  title: string;
-  artist: string;
-  album: string;
-  year: number;
-  isPlaying: boolean;
+  audioUrl?: string;
+  imageSrc?: string;
+  title?: string;
+  artist?: string;
+  album?: string;
+  year?: number;
+  isPlaying?: boolean;
   id?: string;
 };

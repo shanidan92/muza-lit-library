@@ -5,14 +5,16 @@ import { FaPause, FaPlay } from "react-icons/fa";
 import { useUserStore } from "~/appData/userStore";
 import { toast } from "react-toastify";
 import AlbumInfoModal from "./AlbumInfoModal";
+import MuzaIcon from "~/icons/MuzaIcon";
 
 interface AlbumHeaderProps {
-  details: Album;
+  album: Album;
   songs: SongDetails[];
 }
 
-const AlbumHeader: React.FC<AlbumHeaderProps> = ({ details, songs }) => {
-  const { selectedSong, setSelectedSong } = useUserStore();
+const AlbumHeader: React.FC<AlbumHeaderProps> = ({ album, songs }) => {
+  const { selectedSong, setSelectedSong, setSelectedPlaListOrAlbum } =
+    useUserStore();
   const [isModalOpen, setModalOpen] = useState(false);
 
   const GetRandomSong = () => {
@@ -26,19 +28,21 @@ const AlbumHeader: React.FC<AlbumHeaderProps> = ({ details, songs }) => {
     });
   };
 
+  const Play = () => {
+    setSelectedSong(songs[0]);
+    setSelectedPlaListOrAlbum(album);
+  };
+
   return (
     <div className="album-header-card">
       <div className="image-container">
-        <img src={details.imageSrc} />
+        <img src={album.imageSrc} />
       </div>
       <div className="info">
-        <div className="title">{details.title}</div>
-        <div className="artist">{details.artist}</div>
-        <div className="atrist">Album • {details.songs?.length} Songs</div>
-        <button
-          className="icon-button"
-          onClick={() => setSelectedSong(songs[0])}
-        >
+        <div className="title">{album.title}</div>
+        <div className="artist">{album.artist}</div>
+        <div className="atrist">Album • {album.songs?.length} Songs</div>
+        <button className="icon-button" onClick={() => Play()}>
           {selectedSong?.isPlaying ? <FaPause /> : <FaPlay />}
         </button>
         <button
@@ -46,13 +50,7 @@ const AlbumHeader: React.FC<AlbumHeaderProps> = ({ details, songs }) => {
           onClick={() => setSelectedSong(songs[GetRandomSong()])}
         >
           <span className="icon icon-shuffle">
-            <svg viewBox="0 0 24 24">
-              <path d="M16 3h5v5" />
-              <path d="M4 20l16-16" />
-              <path d="M4 4l5 5" />
-              <path d="M21 16v5h-5" />
-              <path d="M15 15l6 6" />
-            </svg>
+            <MuzaIcon iconName="shuffle" />
           </span>
         </button>
         <button className="icon-button" onClick={addToLibrary}>

@@ -33,8 +33,7 @@ export default function Home() {
   const navigate = useNavigate();
 
   const onAlbumClick = (album: Album) => {
-    setSelectedPlaListOrAlbum(album);
-    navigate("/routes/albumPage");
+    navigate("/routes/albumPage", { state: { album } });
   };
 
   const getCurrentSongIndex = () => {
