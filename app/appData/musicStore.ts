@@ -7,6 +7,11 @@ type musicLibraryStore = {
   artists: Artist[];
   labels: Artist[];
   musicSections: MusicListSection[];
+  setNewReleases: (albums: Album[]) => void;
+  setRecentlyPlayed: (songs: SongDetails[]) => void;
+  setArtists: (artists: Artist[]) => void;
+  setLabels: (labels: Artist[]) => void;
+  setMusicSections: (sections: MusicListSection[]) => void;
 };
 
 export const useMusicLibraryStore = create<musicLibraryStore>((set) => ({

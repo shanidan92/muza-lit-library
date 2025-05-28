@@ -11,31 +11,71 @@ import type { Album, SongDetails } from "~/appData/models";
 import MuzaMusicPlaylist from "~/components/listsDisplays/MusicPlaylist";
 import AlbumDetails from "~/components/albumDisplays/AlbumDetails";
 import ArtistDetails from "~/components/artistDisplays/ArtistDetails";
+import { useUserStore } from "~/appData/userStore";
+import { useMusicLibraryStore } from "~/appData/musicStore";
 
 export default function Home() {
-  const [data, setData] = useState<any>([]);
-  const [selectedSong, setSelectSong] = useState<any>([]);
+  const { selectedSong, setSelectedSong } = useUserStore();
+  const {
+    newReleases,
+    recentlyPlayed,
+    artists,
+    setNewReleases,
+    setRecentlyPlayed,
+    setArtists,
+  } = useMusicLibraryStore();
+
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [sidebarSections, setSidebarSections] = useState([]);
+
+  const getCurrentSongIndex = () => {
+    if (!selectedSong || !selectedSong.id) return -1;
+    return recentlyPlayed.findIndex(
+      (song: SongDetails) => song.id === selectedSong.id,
+    );
+  };
+
+  const handlePreviousSong = () => {
+    const currentIndex = getCurrentSongIndex();
+    if (currentIndex <= 0) {
+      setSelectedSong(recentlyPlayed[recentlyPlayed.length - 1]);
+    } else {
+      setSelectedSong(recentlyPlayed[currentIndex - 1]);
+    }
+  };
+
+  const handleNextSong = () => {
+    const currentIndex = getCurrentSongIndex();
+    if (currentIndex === -1 || currentIndex === recentlyPlayed.length - 1) {
+      setSelectedSong(recentlyPlayed[0]);
+    } else {
+      setSelectedSong(recentlyPlayed[currentIndex + 1]);
+    }
+  };
 
   useEffect(() => {
-    fetch("http://localhost:3000/getAllData") // or use a full URL: 'https://example.com/api/data'
+    fetch("http://localhost:3000/getAllData")
       .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
+        if (!response.ok) throw new Error("Network response was not ok");
         return response.json();
       })
       .then((data) => {
-        setData(data);
-        setSelectSong(data.songs[0]);
+        setNewReleases(data.albums.newReleases);
+        setRecentlyPlayed(data.songs);
+        setArtists(data.artists);
+        setSidebarSections(data.sidebar.sections);
+
+        if (data.songs.length > 0) {
+          setSelectedSong(data.songs[0]);
+        }
         setLoading(false);
       })
       .catch((err) => {
         setError(err.message);
         setLoading(false);
       });
-  }, []);
+  }, [setNewReleases, setRecentlyPlayed, setArtists, setSelectedSong]);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
@@ -45,40 +85,67 @@ export default function Home() {
       <MusicSidebar
         logoSrc="app/icons/icons/muza.svg"
         logoAlt="Music Library"
-        sections={data.sidebar.sections}
+        sections={sidebarSections}
       />
 
       <div className="content">
         <MusicTopbar />
+
         <main>
           <h1>Home</h1>
           <hr />
           <h2>New Releases</h2>
           <div className="album-list">
-            {data.albums.newReleases.map((a: Album) => (
-              <AlbumDetails details={a} />
+            {newReleases.map((a: Album) => (
+              <AlbumDetails key={a.id} details={a} />
             ))}
           </div>
+
           <hr />
           <h2>Recently Played</h2>
           <div className="song-list">
-            {data.songs.map((s: SongDetails) => (
+            {recentlyPlayed.map((s: SongDetails) => (
               <SongLine
+                key={s.id}
                 details={s}
-                onClick={() => setSelectSong(s)}
-                isPlaying={s.id === selectedSong.id}
+                onClick={() => setSelectedSong(s)}
+                isPlaying={s.id === selectedSong?.id}
               />
             ))}
           </div>
+
           <hr />
           <h2>Artists</h2>
           <div className="album-list">
-            {data.artists.map((artist: any) => (
+            {artists.map((artist: any) => (
               <ArtistDetails key={artist.id} details={artist} />
             ))}
           </div>
 
-          <MusicPlayer details={selectedSong} />
+          {selectedSong && (
+            <MusicPlayer
+              details={{
+                audioUrl: selectedSong.audioUrl || "",
+                imageSrc: selectedSong.imageSrc || "",
+                title: selectedSong.title,
+                artist: selectedSong.artist || "",
+                album: selectedSong.album || "",
+                year: selectedSong.year || new Date().getFullYear(),
+                isPlaying: selectedSong.isPlaying || false,
+                id: selectedSong.id,
+              }}
+              onUpdate={(updatedDetails) =>
+                setSelectedSong({
+                  ...selectedSong,
+                  isPlaying: updatedDetails.isPlaying,
+                  audioUrl: updatedDetails.audioUrl,
+                })
+              }
+              onPrevious={handlePreviousSong}
+              onNext={handleNextSong}
+              onSongEnded={handleNextSong}
+            />
+          )}
         </main>
       </div>
     </div>
