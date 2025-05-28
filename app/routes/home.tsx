@@ -62,7 +62,7 @@ export default function Home() {
   };
 
   useEffect(() => {
-    fetch("http://localhost:3000/getAllData")
+    fetch("/getAllData")
       .then((response) => {
         if (!response.ok) throw new Error("Network response was not ok");
         return response.json();
