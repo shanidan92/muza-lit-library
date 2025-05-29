@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev-server": "node --loader ts-node/esm server/server.ts",
+    "dev-server": "node server",
     "dev": "react-router dev",
     "start": "react-router-serve ./build/server/index.js",
     "format": "prettier . --write",
