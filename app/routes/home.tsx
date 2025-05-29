@@ -64,8 +64,14 @@ export default function Home() {
   useEffect(() => {
     fetch("/getAllData")
       .then((response) => {
-        if (!response.ok) throw new Error("Network response was not ok");
-        return response.json();
+        if (!response.ok) {
+          fetch("./mockData/allData.json").then((response) => {
+            if (!response.ok) throw new Error("Network response was not ok");
+            return response.json();
+          });
+        } else {
+          return response.json();
+        }
       })
       .then((data) => {
         setNewReleases(data.albums.newReleases);
@@ -82,7 +88,7 @@ export default function Home() {
         setError(err.message);
         setLoading(false);
       });
-  }, [setNewReleases, setRecentlyPlayed, setArtists, setSelectedSong]);
+  }, []);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
