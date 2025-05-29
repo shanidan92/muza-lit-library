@@ -69,7 +69,6 @@ export default function Home() {
             if (!response.ok) throw new Error("Network response was not ok");
             return response.json();
           });
-
         } else {
           return response.json();
         }

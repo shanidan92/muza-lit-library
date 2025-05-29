@@ -1,1 +1,654 @@
-::-webkit-scrollbar{height:var(--muza-section-scrollbar-height, 6px);width:var(--muza-section-scrollbar-height, 6px)}::-webkit-scrollbar-button{width:0px;height:0px;background:var(--muza-section-scrollbar-button-bg, #eee);border-radius:100px}::-webkit-scrollbar-album-piece{background:var(--muza-section-scrollbar-track-bg, #c2c2c2);border-radius:100px}::-webkit-scrollbar-thumb{background:var(--muza-section-scrollbar-thumb-bg, #5f5f5f);border-radius:100px}:root{--muza-primary-text-color: #333333;--muza-secondary-text-color: #5f5f5f;--muza-buttons-color: #ededed;--muza-tertiary-text-color: #aaa;--muza-border-color: #a9a9a9;--muza-light-border-color: #e5e7eb;--muza-hover-background: #eeeeee;--muza-button-background: #eeeeee;--muza-section-background: #f7f7f7;--muza-button-hover-background: #dddddd;--muza-slider-track-color: #c2c2c2;--muza-slider-fill-color: #5f5f5f;--muza-section-title-color: #5f5f5f;--muza-section-subtitle-color: #aaa;--muza-section-button-color: #333333;--muza-section-border-color: #a9a9a9;--muza-section-scrollbar-button-bg: #eeeeee;--muza-section-scrollbar-track-bg: #c2c2c2;--muza-section-scrollbar-thumb-bg: #5f5f5f;--muza-image-background-color-bg: #d9d9d9;--muza-toggle-active-color: #3b82f6;--muza-input-bg: #ffffff;--muza-input-disabled-bg: #f3f4f6;--muza-input-error-border: #e53935;--muza-input-success-border: #4caf50;--muza-player-info-background: #f9fafb;--muza-track-title-color: #111827;--muza-track-artist-color: #6b7280;--muza-separator-color: #9ca3af;--muza-play-button-color: #1f2937;--muza-time-display-color: #4b5563;--muza-primary-font-size: 14px;--muza-title-font-size: 27px;--muza-secondary-font-size: 12px;--muza-heading-font-size: 18px;--muza-font-weight-normal: 400;--muza-font-weight-medium: 500;--muza-font-weight-bold: 600;--muza-font-weight-bold-extra: 700;--muza-songline-title-font-size: 16px;--muza-songline-number-font-size: 16px;--muza-songline-duration-font-size: 15px;--muza-section-button-font-size: 12px;--muza-spacing-xs: 4px;--muza-spacing-sm: 8px;--muza-spacing-md: 12px;--muza-spacing-lg: 16px;--muza-spacing-xl: 24px;--muza-spacing-xxl: 36px;--muza-sidebar-width: 240px;--muza-song-line-height: 24px;--muza-songline-padding: 8px 18px;--muza-songline-height: 28px;--muza-section-margin-bottom: 32px;--muza-section-header-margin: 0 0 2px 16px;--muza-section-header-padding-bottom: 5px;--muza-section-header-min-height: 32px;--muza-section-header-margin-top: 32px;--muza-section-header-padding-top: 5px;--muza-section-button-padding: 6px 10px;--muza-section-scrollbar-height: 3px;--muza-border-radius-sm: 4px;--muza-border-radius-md: 8px;--muza-border-radius-lg: 20px;--muza-box-shadow: 0 3px 10px rgba(0, 0, 0, .2);--colors_primary_light: #1d4ed8;--typography_font_family_font_sans: Founders Grotesk;--typography_font_family_font_serif: Georgia;--typography_font_family_font_mono: Menlo;--border_radius_default:;--border_radius_sm:;--border_radius_lg:;--border_radius_full: 99;--colors_primary_dark: #2563eb;--colors_accent_light: #f3f4f6;--colors_accent_foreground_dark: #f9fafb;--colors_background_light: #ffffff;--colors_background_dark: #030712;--colors_border_light: #e5e7eb;--colors_border_dark: #1f2937;--colors_card_light: #ffffff;--colors_card_dark: #030712;--colors_accent_dark: #1f2937;--colors_card_foreground_light: #030712;--colors_card_foreground_dark: #f9fafb;--colors_destructive_light: #dc2626;--colors_destructive_dark: #7f1d1d;--colors_destructive_foreground_light: #fef2f2;--colors_destructive_foreground_dark: #fef2f2;--colors_accent_foreground_light: #111827;--colors_foreground_light: #030712;--colors_foreground_dark: #f9fafb;--colors_input_light: #e5e7eb;--colors_input_dark: #1f2937;--colors_muted_light: #f9fafb;--colors_muted_dark: #111827;--colors_popover_light: #ffffff;--colors_popover_dark: #030712;--colors_popover_foreground_light: #030712;--colors_popover_foreground_dark: #f9fafb;--colors_primary_foreground_light: #f9fafb;--colors_primary_foreground_dark: #111827;--colors_ring_light: #111827;--colors_ring_dark: #d1d5db;--colors_secondary_light: #f3f4f6;--colors_secondary_dark: #1f2937;--colors_secondary_foreground_light: #111827;--colors_secondary_foreground_dark: #f9fafb;--colors_muted_foreground_light: #6b7280;--colors_muted_foreground_dark: #9ca3af;--typography_base_sizes_base_font_size: ;--typography_base_sizes_base_line_height: ;--typography_base_sizes_small_font_size: ;--typography_base_sizes_small_line_height: ;--typography_base_sizes_large_font_size: ;--typography_base_sizes_large_line_height: ;--typography_base_sizes_extra_small_font_size: ;--typography_base_sizes_extra_small_line_height: ;--typography_typography_components_h_1_font_size: ;--typography_typography_components_h_1_line_height: ;--typography_typography_components_h_1_font_weight: 0;--typography_typography_components_h_1_letter_spacing: .400000005960464;--typography_typography_components_h_1_font_family: Founders Grotesk;--typography_typography_components_h_2_font_family: Founders Grotesk;--typography_typography_components_h_2_font_size: ;--typography_typography_components_h_2_line_height: ;--typography_typography_components_h_2_font_weight: 0;--typography_typography_components_h_2_letter_spacing: .400000005960464;--typography_typography_components_h_3_font_family: Founders Grotesk;--typography_typography_components_h_3_font_size: ;--typography_typography_components_h_3_line_height: ;--typography_typography_components_h_3_font_weight: 0;--typography_typography_components_h_3_letter_spacing: .400000005960464;--typography_typography_components_h_4_font_family: Founders Grotesk;--typography_typography_components_h_4_font_size: ;--typography_typography_components_h_4_line_height: ;--typography_typography_components_h_4_font_weight: 0;--typography_typography_components_h_4_letter_spacing: .400000005960464;--typography_typography_components_p_font_family: Founders Grotesk;--typography_typography_components_p_font_size: ;--typography_typography_components_p_line_height: ;--typography_typography_components_p_font_weight: 0;--typography_typography_components_p_letter_spacing:;--typography_typography_components_blockquote_font_family: Founders Grotesk;--typography_typography_components_blockquote_font_size: ;--typography_typography_components_blockquote_line_height: ;--typography_typography_components_blockquote_font_weight: 0;--typography_typography_components_blockquote_letter_spacing:;--border_radius_xl: ;--typography_typography_components_blockquote_font_style: italic;--typography_typography_components_list_font_family: Founders Grotesk;--typography_typography_components_list_font_size: ;--typography_typography_components_list_line_height: ;--typography_typography_components_list_font_weight: 0;--typography_typography_components_list_letter_spacing:;--typography_typography_components_inline_code_font_family: Menlo;--typography_typography_components_inline_code_font_size: ;--typography_typography_components_inline_code_line_height: ;--typography_typography_components_inline_code_font_weight: 0;--typography_typography_components_inline_code_letter_spacing:;--typography_typography_components_lead_font_family: Founders Grotesk;--typography_typography_components_lead_font_size: ;--typography_typography_components_lead_line_height: ;--typography_typography_components_lead_font_weight: 0;--typography_typography_components_lead_letter_spacing:;--typography_typography_components_large_font_family: Founders Grotesk;--typography_typography_components_large_font_size: ;--typography_typography_components_large_line_height: ;--typography_typography_components_large_font_weight: 0;--typography_typography_components_large_letter_spacing:;--typography_typography_components_small_font_family: Founders Grotesk;--typography_typography_components_small_font_size: ;--typography_typography_components_small_line_height: ;--typography_typography_components_small_font_weight: 0;--typography_typography_components_small_letter_spacing: ;--border_radius_md:;--typography_base_sizes_xlarge_font_size: ;--typography_base_sizes_xlarge_line_height: ;--typography_base_sizes_2x_large_font_size: ;--typography_base_sizes_2x_large_line_height: ;--typography_base_sizes_4x_large_font_size: ;--typography_base_sizes_4x_large_line_height: ;--typography_base_sizes_3x_large_font_size: ;--typography_base_sizes_3x_large_line_height: ;--colors_chart_1_light: #2a9d90;--colors_chart_1_dark: #2662d9;--colors_chart_2_light: #e76e50;--colors_chart_2_dark: #e23670;--colors_chart_3_light: #274754;--colors_chart_3_dark: #e88c30;--colors_chart_4_light: #e8c468;--colors_chart_4_dark: #af57db;--colors_chart_5_light: #f4a462;--colors_chart_5_dark: #2eb88a;--typography_typography_components_table_font_family: Founders Grotesk;--typography_typography_components_table_font_size: ;--typography_typography_components_table_font_weight: 0;--typography_typography_components_table_letter_spacing:;--typography_typography_components_table_font_weight_bold: 0;--typography_typography_components_h_1_font_size_lg: ;--colors_sidebar_foreground_light: #374151;--colors_sidebar_background_light: #f9fafb;--colors_sidebar_background_dark: #111827;--colors_sidebar_foreground_dark: #f3f4f6;--colors_sidebar_primary_light: #111827;--colors_sidebar_primary_dark: #1d4ed8;--colors_sidebar_primary_foreground_light: #f9fafb;--colors_sidebar_primary_foreground_dark: #ffffff;--colors_sidebar_accent_light: #f3f4f6;--colors_sidebar_accent_dark: #1f2937;--colors_sidebar_accent_foreground_light: #111827;--colors_sidebar_accent_foreground_dark: #f3f4f6;--colors_sidebar_border_light: #e5e7eb;--colors_sidebar_border_dark: #1f2937;--colors_sidebar_ring_light: #9ca3af;--colors_sidebar_ring_dark: #d1d5db;--typography_base_sizes_base_letter_spacing:;--typography_base_sizes_small_letter_spacing: .2;--typography_base_sizes_extra_small_letter_spacing:;--typography_base_sizes_large_letter_spacing:;--typography_base_sizes_xlarge_letter_spacing:;--typography_base_sizes_4x_large_letter_spacing:;--typography_base_sizes_2x_large_letter_spacing:;--typography_base_sizes_3x_large_letter_spacing:;--typography_typography_components_h_1_letter_spacing_2: .400000005960464;--colors_background_light_0_: #ffffff00;--colors_background_dark_0_: #03071200;--colors_muted_light_0_: #f9fafb00;--colors_muted_dark_0_: #11182700;--colors_secondary_light_0_: #f3f4f600;--colors_secondary_dark_0_: #1f293700;--colors_muted_light_50_: #f9fafb7f;--colors_muted_dark_50_: #1118277f;--colors_secondary_dark_50_: #1f29377f;--colors_secondary_light_50_: #f3f4f67f;--colors_background_light_50_: #ffffff7f;--colors_background_dark_50_: #0307127f}.body{margin:0;padding:0;display:flex;height:100vh;overflow:hidden;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.main{flex:1;display:flex;flex-direction:column;padding-left:var(--muza-sidebar-width, 240px);box-sizing:border-box;max-width:100vw}.content{flex:1;overflow-y:auto;height:100vh;box-sizing:border-box;max-width:100%}.content main{padding:var(--muza-spacing-xl);padding-bottom:160px}music-sidebar{position:fixed;left:0;top:0;height:100vh;width:var(--muza-sidebar-width, 240px)}music-playlist{position:fixed;right:0;top:0;z-index:100;background-color:#fff}h1{font-size:32px;font-weight:800;margin-bottom:16px}h2{font-size:24px;font-weight:700;margin-bottom:12px}hr{margin:8px}.song-list{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0 8px}.album-list{display:flex;width:100%;overflow-y:scroll}.album-song-list{flex:1;display:flex;flex-direction:column;grid-template-columns:1fr 1fr 1fr;gap:0 8px}.content{margin-bottom:2rem;flex:1;max-height:100%;overflow:auto;height:100%}.content.side{width:340px;max-width:340px;display:grid;grid-template-rows:1fr 2fr 2fr;grid-auto-flow:column}.content.full{width:100%;max-width:100%}.playlist{margin:26px;overflow-y:auto}.songs-list{border-top:1px solid var(--muza-border-color, #a9a9a9);display:flex;flex-direction:column}.top{display:flex;align-items:center;justify-content:center;flex-direction:column}.buttons{position:absolute;left:14px;top:14px;gap:8px;display:flex;flex-direction:column}.top small-album-details{padding-top:56px;padding-bottom:20px}music-suggestions-list{margin:26px 20px;overflow-y:auto}.small-album-details{text-align:center}.small-album-details img{border-radius:10px;background-color:var(--muza-image-background-color-bg, #d9d9d9)}.small-album-details h3{font-size:var(--muza-title-font-size, 27px);color:var(--muza-secondary-text-color, #5f5f5f);font-weight:var(--muza-font-weight-bold-extra, 700);margin:0 0 calc(var(--spacing-xs) * .75) 0;cursor:pointer}.small-album-details p{font-size:var(--muza-primary-font-size, 14px);color:var(--muza-section-border-color, #a9a9a9);font-weight:var(--muza-font-weight-medium, 500);margin:0;cursor:pointer}.muza-button{--button-background: var(--muza-hover-background, #ededed);border-radius:50%;background-color:var(--button-background);width:26px;height:26px;display:flex;justify-content:center;align-items:center;font-size:10px;font-family:FontAwesome}.playlist-item{--tertiary-text-color: var(--muza-tertiary-text-color, #888888);--button-background: var(--muza-hover-background, #ededed);--border-color: var(--muza-border-color, #a9a9a9);display:flex;justify-content:space-between;align-items:center;border-bottom:solid var(--border-color) 1px}.playlist-item .left{display:flex;justify-content:flex-start;align-items:center;gap:2px;font-size:17px;padding:10px 9px}.track-number{padding:7px;color:var(--tertiary-text-color);min-width:20px;display:inline-block;font-size:var(--song-title-font-size)}.track-number .muza-container{position:relative;top:30px;right:10px}.song-details-view{display:flex;justify-content:flex-start;align-items:center;gap:7px;font-size:14px}.song-details-view img{border-radius:3px;background-color:var(--muza-image-background-color-bg, #d9d9d9)}.song-details{display:flex;flex-direction:column}.song-title{font-weight:700;font-size:16px;color:#5f5f5f;line-height:16px}.song-artist{color:#a9a9a9;line-height:17px;font-size:15px}.muza-container{display:flex;padding:var(--spacing-6, 24px);flex-direction:column;align-items:flex-end;gap:var(--spacing-4, 16px);border-radius:var(--border-radius-lg, 8px);border:1px solid var(--base-border, #e5e7eb);background:var(--base-background, #fff);box-shadow:0 10px 15px -3px #0000001a,0 4px 6px -2px #0000000d;will-change:transform;z-index:1}.music-suggestions-content{background-color:var(--muza-section-background, #f7f7f7);border-radius:5px}.music-suggestions-header{font-size:20px;padding:0 16px;color:var(--muza-secondary-text-color, #5f5f5f);height:46px;font-weight:var(--muza-font-weight-bold, 600);display:flex;align-items:center}.music-suggestions-playlist{padding:0}.songs-list{border-top:solid var(--muza-border-color, #a9a9a9) 1px;display:flex;flex-direction:column}.suggestions-list-item{--tertiary-text-color: var(--muza-tertiary-text-color, #888888);--button-background: var(--muza-hover-background, #ededed);--border-color: var(--muza-border-color, #a9a9a9);display:flex;justify-content:space-between;align-items:center;border-bottom:solid var(--border-color) 1px;padding:10px 16px}.suggestions-list-item .left{display:flex;justify-content:flex-start;align-items:center;gap:2px;font-size:17px}.album-details-card{display:flex;align-items:center;background:#fff;padding:var(--muza-spacing-md);border-radius:var(--muza-border-radius-md);flex-direction:column;align-items:flex-start}.image-container{width:235px;height:235px;border-radius:var(--muza-border-radius-sm);overflow:hidden;background:var(--muza-image-background-color-bg);box-shadow:var(--muza-box-shadow);margin-right:var(--muza-spacing-lg)}.image-container img{width:100%;height:100%;object-fit:cover}.info{margin-top:4px;margin-left:var(--muza-spacing-sm);flex:1}.title{font-size:var(--muza-heading-font-size);font-weight:var(--muza-font-weight-bold-extra);color:var(--muza-primary-text-color)}.artist{font-size:16px;color:var(--muza-secondary-text-color);font-weight:400;line-height:1.2}.subtitle{display:none;font-size:var(--muza-secondary-font-size);color:var(--muza-tertiary-text-color);margin-top:var(--muza-spacing-xs)}.buttons{display:none;gap:var(--muza-spacing-sm);margin-top:var(--muza-spacing-md)}.icon-button{background:var(--muza-buttons-color);border:none;padding:var(--muza-spacing-sm);border-radius:var(--muza-border-radius-sm);cursor:pointer;transition:background .2s ease-in-out;border-radius:50%;align-items:center;justify-content:center;width:var(--button-size);height:var(--button-size)}.icon-button:hover{background:var(--muza-button-hover-background)}.icon{width:16px;height:16px;display:flex;align-items:center;justify-content:center;color:var(--muza-secondary-text-color)}.icon-dots:before{content:"⋮";font-size:16px;font-weight:700}.icon-info:before{content:"i";font-size:16px;font-weight:700}.icon-plus:before{content:"+";font-size:18px;font-weight:700}.icon-shuffle svg{width:18px;height:18px;fill:var(--muza-secondary-text-color);stroke:var(--muza-secondary-text-color);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}.artist-details-card{display:flex;background:#fff;padding:var(--muza-spacing-md);border-radius:var(--muza-border-radius-md);flex-direction:column;align-items:center}.artist-details-card .image-container{width:235px;height:235px;border-radius:50%;overflow:hidden;background:var(--muza-image-background-color-bg);box-shadow:var(--muza-box-shadow);margin:0}.artist-details-card .image-container img{width:100%;height:100%;object-fit:cover}.artist-details-card .info{margin-top:4px;flex:1}.artist-details-card .title{font-size:var(--muza-heading-font-size);font-weight:var(--muza-font-weight-bold-extra);color:var(--muza-primary-text-color)}.artist-details-card .subtitle{font-size:var(--muza-secondary-font-size);color:var(--muza-tertiary-text-color);margin-top:var(--muza-spacing-xs)}
+::-webkit-scrollbar {
+  height: var(--muza-section-scrollbar-height, 6px);
+  width: var(--muza-section-scrollbar-height, 6px);
+}
+::-webkit-scrollbar-button {
+  width: 0px;
+  height: 0px;
+  background: var(--muza-section-scrollbar-button-bg, #eee);
+  border-radius: 100px;
+}
+::-webkit-scrollbar-album-piece {
+  background: var(--muza-section-scrollbar-track-bg, #c2c2c2);
+  border-radius: 100px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--muza-section-scrollbar-thumb-bg, #5f5f5f);
+  border-radius: 100px;
+}
+:root {
+  --muza-primary-text-color: #333333;
+  --muza-secondary-text-color: #5f5f5f;
+  --muza-buttons-color: #ededed;
+  --muza-tertiary-text-color: #aaa;
+  --muza-border-color: #a9a9a9;
+  --muza-light-border-color: #e5e7eb;
+  --muza-hover-background: #eeeeee;
+  --muza-button-background: #eeeeee;
+  --muza-section-background: #f7f7f7;
+  --muza-button-hover-background: #dddddd;
+  --muza-slider-track-color: #c2c2c2;
+  --muza-slider-fill-color: #5f5f5f;
+  --muza-section-title-color: #5f5f5f;
+  --muza-section-subtitle-color: #aaa;
+  --muza-section-button-color: #333333;
+  --muza-section-border-color: #a9a9a9;
+  --muza-section-scrollbar-button-bg: #eeeeee;
+  --muza-section-scrollbar-track-bg: #c2c2c2;
+  --muza-section-scrollbar-thumb-bg: #5f5f5f;
+  --muza-image-background-color-bg: #d9d9d9;
+  --muza-toggle-active-color: #3b82f6;
+  --muza-input-bg: #ffffff;
+  --muza-input-disabled-bg: #f3f4f6;
+  --muza-input-error-border: #e53935;
+  --muza-input-success-border: #4caf50;
+  --muza-player-info-background: #f9fafb;
+  --muza-track-title-color: #111827;
+  --muza-track-artist-color: #6b7280;
+  --muza-separator-color: #9ca3af;
+  --muza-play-button-color: #1f2937;
+  --muza-time-display-color: #4b5563;
+  --muza-primary-font-size: 14px;
+  --muza-title-font-size: 27px;
+  --muza-secondary-font-size: 12px;
+  --muza-heading-font-size: 18px;
+  --muza-font-weight-normal: 400;
+  --muza-font-weight-medium: 500;
+  --muza-font-weight-bold: 600;
+  --muza-font-weight-bold-extra: 700;
+  --muza-songline-title-font-size: 16px;
+  --muza-songline-number-font-size: 16px;
+  --muza-songline-duration-font-size: 15px;
+  --muza-section-button-font-size: 12px;
+  --muza-spacing-xs: 4px;
+  --muza-spacing-sm: 8px;
+  --muza-spacing-md: 12px;
+  --muza-spacing-lg: 16px;
+  --muza-spacing-xl: 24px;
+  --muza-spacing-xxl: 36px;
+  --muza-sidebar-width: 240px;
+  --muza-song-line-height: 24px;
+  --muza-songline-padding: 8px 18px;
+  --muza-songline-height: 28px;
+  --muza-section-margin-bottom: 32px;
+  --muza-section-header-margin: 0 0 2px 16px;
+  --muza-section-header-padding-bottom: 5px;
+  --muza-section-header-min-height: 32px;
+  --muza-section-header-margin-top: 32px;
+  --muza-section-header-padding-top: 5px;
+  --muza-section-button-padding: 6px 10px;
+  --muza-section-scrollbar-height: 3px;
+  --muza-border-radius-sm: 4px;
+  --muza-border-radius-md: 8px;
+  --muza-border-radius-lg: 20px;
+  --muza-box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  --colors_primary_light: #1d4ed8;
+  --typography_font_family_font_sans: Founders Grotesk;
+  --typography_font_family_font_serif: Georgia;
+  --typography_font_family_font_mono: Menlo;
+  --border_radius_default:;
+  --border_radius_sm:;
+  --border_radius_lg:;
+  --border_radius_full: 99;
+  --colors_primary_dark: #2563eb;
+  --colors_accent_light: #f3f4f6;
+  --colors_accent_foreground_dark: #f9fafb;
+  --colors_background_light: #ffffff;
+  --colors_background_dark: #030712;
+  --colors_border_light: #e5e7eb;
+  --colors_border_dark: #1f2937;
+  --colors_card_light: #ffffff;
+  --colors_card_dark: #030712;
+  --colors_accent_dark: #1f2937;
+  --colors_card_foreground_light: #030712;
+  --colors_card_foreground_dark: #f9fafb;
+  --colors_destructive_light: #dc2626;
+  --colors_destructive_dark: #7f1d1d;
+  --colors_destructive_foreground_light: #fef2f2;
+  --colors_destructive_foreground_dark: #fef2f2;
+  --colors_accent_foreground_light: #111827;
+  --colors_foreground_light: #030712;
+  --colors_foreground_dark: #f9fafb;
+  --colors_input_light: #e5e7eb;
+  --colors_input_dark: #1f2937;
+  --colors_muted_light: #f9fafb;
+  --colors_muted_dark: #111827;
+  --colors_popover_light: #ffffff;
+  --colors_popover_dark: #030712;
+  --colors_popover_foreground_light: #030712;
+  --colors_popover_foreground_dark: #f9fafb;
+  --colors_primary_foreground_light: #f9fafb;
+  --colors_primary_foreground_dark: #111827;
+  --colors_ring_light: #111827;
+  --colors_ring_dark: #d1d5db;
+  --colors_secondary_light: #f3f4f6;
+  --colors_secondary_dark: #1f2937;
+  --colors_secondary_foreground_light: #111827;
+  --colors_secondary_foreground_dark: #f9fafb;
+  --colors_muted_foreground_light: #6b7280;
+  --colors_muted_foreground_dark: #9ca3af;
+  --typography_base_sizes_base_font_size: ;
+  --typography_base_sizes_base_line_height: ;
+  --typography_base_sizes_small_font_size: ;
+  --typography_base_sizes_small_line_height: ;
+  --typography_base_sizes_large_font_size: ;
+  --typography_base_sizes_large_line_height: ;
+  --typography_base_sizes_extra_small_font_size: ;
+  --typography_base_sizes_extra_small_line_height: ;
+  --typography_typography_components_h_1_font_size: ;
+  --typography_typography_components_h_1_line_height: ;
+  --typography_typography_components_h_1_font_weight: 0;
+  --typography_typography_components_h_1_letter_spacing: 0.400000005960464;
+  --typography_typography_components_h_1_font_family: Founders Grotesk;
+  --typography_typography_components_h_2_font_family: Founders Grotesk;
+  --typography_typography_components_h_2_font_size: ;
+  --typography_typography_components_h_2_line_height: ;
+  --typography_typography_components_h_2_font_weight: 0;
+  --typography_typography_components_h_2_letter_spacing: 0.400000005960464;
+  --typography_typography_components_h_3_font_family: Founders Grotesk;
+  --typography_typography_components_h_3_font_size: ;
+  --typography_typography_components_h_3_line_height: ;
+  --typography_typography_components_h_3_font_weight: 0;
+  --typography_typography_components_h_3_letter_spacing: 0.400000005960464;
+  --typography_typography_components_h_4_font_family: Founders Grotesk;
+  --typography_typography_components_h_4_font_size: ;
+  --typography_typography_components_h_4_line_height: ;
+  --typography_typography_components_h_4_font_weight: 0;
+  --typography_typography_components_h_4_letter_spacing: 0.400000005960464;
+  --typography_typography_components_p_font_family: Founders Grotesk;
+  --typography_typography_components_p_font_size: ;
+  --typography_typography_components_p_line_height: ;
+  --typography_typography_components_p_font_weight: 0;
+  --typography_typography_components_p_letter_spacing:;
+  --typography_typography_components_blockquote_font_family: Founders Grotesk;
+  --typography_typography_components_blockquote_font_size: ;
+  --typography_typography_components_blockquote_line_height: ;
+  --typography_typography_components_blockquote_font_weight: 0;
+  --typography_typography_components_blockquote_letter_spacing:;
+  --border_radius_xl: ;
+  --typography_typography_components_blockquote_font_style: italic;
+  --typography_typography_components_list_font_family: Founders Grotesk;
+  --typography_typography_components_list_font_size: ;
+  --typography_typography_components_list_line_height: ;
+  --typography_typography_components_list_font_weight: 0;
+  --typography_typography_components_list_letter_spacing:;
+  --typography_typography_components_inline_code_font_family: Menlo;
+  --typography_typography_components_inline_code_font_size: ;
+  --typography_typography_components_inline_code_line_height: ;
+  --typography_typography_components_inline_code_font_weight: 0;
+  --typography_typography_components_inline_code_letter_spacing:;
+  --typography_typography_components_lead_font_family: Founders Grotesk;
+  --typography_typography_components_lead_font_size: ;
+  --typography_typography_components_lead_line_height: ;
+  --typography_typography_components_lead_font_weight: 0;
+  --typography_typography_components_lead_letter_spacing:;
+  --typography_typography_components_large_font_family: Founders Grotesk;
+  --typography_typography_components_large_font_size: ;
+  --typography_typography_components_large_line_height: ;
+  --typography_typography_components_large_font_weight: 0;
+  --typography_typography_components_large_letter_spacing:;
+  --typography_typography_components_small_font_family: Founders Grotesk;
+  --typography_typography_components_small_font_size: ;
+  --typography_typography_components_small_line_height: ;
+  --typography_typography_components_small_font_weight: 0;
+  --typography_typography_components_small_letter_spacing: ;
+  --border_radius_md:;
+  --typography_base_sizes_xlarge_font_size: ;
+  --typography_base_sizes_xlarge_line_height: ;
+  --typography_base_sizes_2x_large_font_size: ;
+  --typography_base_sizes_2x_large_line_height: ;
+  --typography_base_sizes_4x_large_font_size: ;
+  --typography_base_sizes_4x_large_line_height: ;
+  --typography_base_sizes_3x_large_font_size: ;
+  --typography_base_sizes_3x_large_line_height: ;
+  --colors_chart_1_light: #2a9d90;
+  --colors_chart_1_dark: #2662d9;
+  --colors_chart_2_light: #e76e50;
+  --colors_chart_2_dark: #e23670;
+  --colors_chart_3_light: #274754;
+  --colors_chart_3_dark: #e88c30;
+  --colors_chart_4_light: #e8c468;
+  --colors_chart_4_dark: #af57db;
+  --colors_chart_5_light: #f4a462;
+  --colors_chart_5_dark: #2eb88a;
+  --typography_typography_components_table_font_family: Founders Grotesk;
+  --typography_typography_components_table_font_size: ;
+  --typography_typography_components_table_font_weight: 0;
+  --typography_typography_components_table_letter_spacing:;
+  --typography_typography_components_table_font_weight_bold: 0;
+  --typography_typography_components_h_1_font_size_lg: ;
+  --colors_sidebar_foreground_light: #374151;
+  --colors_sidebar_background_light: #f9fafb;
+  --colors_sidebar_background_dark: #111827;
+  --colors_sidebar_foreground_dark: #f3f4f6;
+  --colors_sidebar_primary_light: #111827;
+  --colors_sidebar_primary_dark: #1d4ed8;
+  --colors_sidebar_primary_foreground_light: #f9fafb;
+  --colors_sidebar_primary_foreground_dark: #ffffff;
+  --colors_sidebar_accent_light: #f3f4f6;
+  --colors_sidebar_accent_dark: #1f2937;
+  --colors_sidebar_accent_foreground_light: #111827;
+  --colors_sidebar_accent_foreground_dark: #f3f4f6;
+  --colors_sidebar_border_light: #e5e7eb;
+  --colors_sidebar_border_dark: #1f2937;
+  --colors_sidebar_ring_light: #9ca3af;
+  --colors_sidebar_ring_dark: #d1d5db;
+  --typography_base_sizes_base_letter_spacing:;
+  --typography_base_sizes_small_letter_spacing: 0.2;
+  --typography_base_sizes_extra_small_letter_spacing:;
+  --typography_base_sizes_large_letter_spacing:;
+  --typography_base_sizes_xlarge_letter_spacing:;
+  --typography_base_sizes_4x_large_letter_spacing:;
+  --typography_base_sizes_2x_large_letter_spacing:;
+  --typography_base_sizes_3x_large_letter_spacing:;
+  --typography_typography_components_h_1_letter_spacing_2: 0.400000005960464;
+  --colors_background_light_0_: #ffffff00;
+  --colors_background_dark_0_: #03071200;
+  --colors_muted_light_0_: #f9fafb00;
+  --colors_muted_dark_0_: #11182700;
+  --colors_secondary_light_0_: #f3f4f600;
+  --colors_secondary_dark_0_: #1f293700;
+  --colors_muted_light_50_: #f9fafb7f;
+  --colors_muted_dark_50_: #1118277f;
+  --colors_secondary_dark_50_: #1f29377f;
+  --colors_secondary_light_50_: #f3f4f67f;
+  --colors_background_light_50_: #ffffff7f;
+  --colors_background_dark_50_: #0307127f;
+}
+.body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding-left: var(--muza-sidebar-width, 240px);
+  box-sizing: border-box;
+  max-width: 100vw;
+}
+.content {
+  flex: 1;
+  overflow-y: auto;
+  height: 100vh;
+  box-sizing: border-box;
+  max-width: 100%;
+}
+.content main {
+  padding: var(--muza-spacing-xl);
+  padding-bottom: 160px;
+}
+music-sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: var(--muza-sidebar-width, 240px);
+}
+music-playlist {
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 100;
+  background-color: #fff;
+}
+h1 {
+  font-size: 32px;
+  font-weight: 800;
+  margin-bottom: 16px;
+}
+h2 {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+hr {
+  margin: 8px;
+}
+.song-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0 8px;
+}
+.album-list {
+  display: flex;
+  width: 100%;
+  overflow-y: scroll;
+}
+.album-song-list {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0 8px;
+}
+.content {
+  margin-bottom: 2rem;
+  flex: 1;
+  max-height: 100%;
+  overflow: auto;
+  height: 100%;
+}
+.content.side {
+  width: 340px;
+  max-width: 340px;
+  display: grid;
+  grid-template-rows: 1fr 2fr 2fr;
+  grid-auto-flow: column;
+}
+.content.full {
+  width: 100%;
+  max-width: 100%;
+}
+.playlist {
+  margin: 26px;
+  overflow-y: auto;
+}
+.songs-list {
+  border-top: 1px solid var(--muza-border-color, #a9a9a9);
+  display: flex;
+  flex-direction: column;
+}
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.buttons {
+  position: absolute;
+  left: 14px;
+  top: 14px;
+  gap: 8px;
+  display: flex;
+  flex-direction: column;
+}
+.top small-album-details {
+  padding-top: 56px;
+  padding-bottom: 20px;
+}
+music-suggestions-list {
+  margin: 26px 20px;
+  overflow-y: auto;
+}
+.small-album-details {
+  text-align: center;
+}
+.small-album-details img {
+  border-radius: 10px;
+  background-color: var(--muza-image-background-color-bg, #d9d9d9);
+}
+.small-album-details h3 {
+  font-size: var(--muza-title-font-size, 27px);
+  color: var(--muza-secondary-text-color, #5f5f5f);
+  font-weight: var(--muza-font-weight-bold-extra, 700);
+  margin: 0 0 calc(var(--spacing-xs) * 0.75) 0;
+  cursor: pointer;
+}
+.small-album-details p {
+  font-size: var(--muza-primary-font-size, 14px);
+  color: var(--muza-section-border-color, #a9a9a9);
+  font-weight: var(--muza-font-weight-medium, 500);
+  margin: 0;
+  cursor: pointer;
+}
+.muza-button {
+  --button-background: var(--muza-hover-background, #ededed);
+  border-radius: 50%;
+  background-color: var(--button-background);
+  width: 26px;
+  height: 26px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 10px;
+  font-family: FontAwesome;
+}
+.playlist-item {
+  --tertiary-text-color: var(--muza-tertiary-text-color, #888888);
+  --button-background: var(--muza-hover-background, #ededed);
+  --border-color: var(--muza-border-color, #a9a9a9);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: solid var(--border-color) 1px;
+}
+.playlist-item .left {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 2px;
+  font-size: 17px;
+  padding: 10px 9px;
+}
+.track-number {
+  padding: 7px;
+  color: var(--tertiary-text-color);
+  min-width: 20px;
+  display: inline-block;
+  font-size: var(--song-title-font-size);
+}
+.track-number .muza-container {
+  position: relative;
+  top: 30px;
+  right: 10px;
+}
+.song-details-view {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 7px;
+  font-size: 14px;
+}
+.song-details-view img {
+  border-radius: 3px;
+  background-color: var(--muza-image-background-color-bg, #d9d9d9);
+}
+.song-details {
+  display: flex;
+  flex-direction: column;
+}
+.song-title {
+  font-weight: 700;
+  font-size: 16px;
+  color: #5f5f5f;
+  line-height: 16px;
+}
+.song-artist {
+  color: #a9a9a9;
+  line-height: 17px;
+  font-size: 15px;
+}
+.muza-container {
+  display: flex;
+  padding: var(--spacing-6, 24px);
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--spacing-4, 16px);
+  border-radius: var(--border-radius-lg, 8px);
+  border: 1px solid var(--base-border, #e5e7eb);
+  background: var(--base-background, #fff);
+  box-shadow:
+    0 10px 15px -3px #0000001a,
+    0 4px 6px -2px #0000000d;
+  will-change: transform;
+  z-index: 1;
+}
+.music-suggestions-content {
+  background-color: var(--muza-section-background, #f7f7f7);
+  border-radius: 5px;
+}
+.music-suggestions-header {
+  font-size: 20px;
+  padding: 0 16px;
+  color: var(--muza-secondary-text-color, #5f5f5f);
+  height: 46px;
+  font-weight: var(--muza-font-weight-bold, 600);
+  display: flex;
+  align-items: center;
+}
+.music-suggestions-playlist {
+  padding: 0;
+}
+.songs-list {
+  border-top: solid var(--muza-border-color, #a9a9a9) 1px;
+  display: flex;
+  flex-direction: column;
+}
+.suggestions-list-item {
+  --tertiary-text-color: var(--muza-tertiary-text-color, #888888);
+  --button-background: var(--muza-hover-background, #ededed);
+  --border-color: var(--muza-border-color, #a9a9a9);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: solid var(--border-color) 1px;
+  padding: 10px 16px;
+}
+.suggestions-list-item .left {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 2px;
+  font-size: 17px;
+}
+.album-details-card {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  padding: var(--muza-spacing-md);
+  border-radius: var(--muza-border-radius-md);
+  flex-direction: column;
+  align-items: flex-start;
+}
+.image-container {
+  width: 235px;
+  height: 235px;
+  border-radius: var(--muza-border-radius-sm);
+  overflow: hidden;
+  background: var(--muza-image-background-color-bg);
+  box-shadow: var(--muza-box-shadow);
+  margin-right: var(--muza-spacing-lg);
+}
+.image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.info {
+  margin-top: 4px;
+  margin-left: var(--muza-spacing-sm);
+  flex: 1;
+}
+.title {
+  font-size: var(--muza-heading-font-size);
+  font-weight: var(--muza-font-weight-bold-extra);
+  color: var(--muza-primary-text-color);
+}
+.artist {
+  font-size: 16px;
+  color: var(--muza-secondary-text-color);
+  font-weight: 400;
+  line-height: 1.2;
+}
+.subtitle {
+  display: none;
+  font-size: var(--muza-secondary-font-size);
+  color: var(--muza-tertiary-text-color);
+  margin-top: var(--muza-spacing-xs);
+}
+.buttons {
+  display: none;
+  gap: var(--muza-spacing-sm);
+  margin-top: var(--muza-spacing-md);
+}
+.icon-button {
+  background: var(--muza-buttons-color);
+  border: none;
+  padding: var(--muza-spacing-sm);
+  border-radius: var(--muza-border-radius-sm);
+  cursor: pointer;
+  transition: background 0.2s ease-in-out;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  width: var(--button-size);
+  height: var(--button-size);
+}
+.icon-button:hover {
+  background: var(--muza-button-hover-background);
+}
+.icon {
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muza-secondary-text-color);
+}
+.icon-dots:before {
+  content: "⋮";
+  font-size: 16px;
+  font-weight: 700;
+}
+.icon-info:before {
+  content: "i";
+  font-size: 16px;
+  font-weight: 700;
+}
+.icon-plus:before {
+  content: "+";
+  font-size: 18px;
+  font-weight: 700;
+}
+.icon-shuffle svg {
+  width: 18px;
+  height: 18px;
+  fill: var(--muza-secondary-text-color);
+  stroke: var(--muza-secondary-text-color);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.artist-details-card {
+  display: flex;
+  background: #fff;
+  padding: var(--muza-spacing-md);
+  border-radius: var(--muza-border-radius-md);
+  flex-direction: column;
+  align-items: center;
+}
+.artist-details-card .image-container {
+  width: 235px;
+  height: 235px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--muza-image-background-color-bg);
+  box-shadow: var(--muza-box-shadow);
+  margin: 0;
+}
+.artist-details-card .image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.artist-details-card .info {
+  margin-top: 4px;
+  flex: 1;
+}
+.artist-details-card .title {
+  font-size: var(--muza-heading-font-size);
+  font-weight: var(--muza-font-weight-bold-extra);
+  color: var(--muza-primary-text-color);
+}
+.artist-details-card .subtitle {
+  font-size: var(--muza-secondary-font-size);
+  color: var(--muza-tertiary-text-color);
+  margin-top: var(--muza-spacing-xs);
+}
