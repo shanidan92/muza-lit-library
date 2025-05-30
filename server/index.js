@@ -26,7 +26,7 @@ const instance = axios.create({ httpsAgent });
 // GraphQL queries
 const ALBUMS_QUERY = `{
   allAlbums {
-    albumTitle albumCover label labelLogo bandName artistPhoto
+    id albumTitle albumCover label labelLogo bandName artistPhoto
     artistMain instrument otherArtistPlaying otherInstrument
     yearRecorded yearReleased songTitle composer songFile createdAt
   }
@@ -64,7 +64,7 @@ function getRandomItems(array, count) {
 function transformAlbumData(albums, transformedTracks) {
   return albums
     .map(album => ({
-      id: album.albumTitle,
+      id: album.ןid,
       imageSrc: transformUrl(album.albumCover || stockPhoto),
       title: album.albumTitle,
       subTitle: album.yearReleased,
@@ -79,7 +79,7 @@ function transformTrackData(tracks) {
   return tracks
     .filter(track => track.songFile)
     .map(track => ({
-      id: track.uuid,
+      id: track.id,
       index: track.id,
       title: track.songTitle,
       time: 185,
