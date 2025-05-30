@@ -11,7 +11,7 @@ const GRAPHQL_ENDPOINT = process.env.GRAPHQL_ENDPOINT ||
   "https://ec2-34-244-32-40.eu-west-1.compute.amazonaws.com/api/metadata/graphql";
 
 const FILES_ENDPOINT = process.env.FILES_ENDPOINT || 
-  "https://ec2-34-244-32-40.eu-west-1.compute.amazonaws.com/api/upload/files/";
+  "https://ec2-34-244-32-40.eu-west-1.compute.amazonaws.com/api/upload/files";
 
 const PORT = process.env.PORT ||
   3000;
@@ -67,8 +67,8 @@ function transformUrl(url) {
   const filename = url.split('/').pop();
   if (!filename) return url;
   
-  // Create new URL with FILES_ENDPOINT
-  return `${FILES_ENDPOINT}${filename}`;
+  // Create new URL with FILES_ENDPOINT (strip trailing slash)
+  return `${FILES_ENDPOINT.replace(/\/$/, '')}/${filename}`;
 }
 
 function getRandomItems(array, count) {
