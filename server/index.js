@@ -10,6 +10,7 @@ const GRAPHQL_ENDPOINT = process.env.GRAPHQL_ENDPOINT ||
   "https://ec2-34-244-32-40.eu-west-1.compute.amazonaws.com/api/metadata/graphql";
 const PORT = process.env.PORT ||
   3000;
+const stockPhoto = "https://picsum.photos/400"; // Placeholde photo URL
 
 // File paths
 const __filename = fileURLToPath(import.meta.url);
@@ -39,6 +40,14 @@ const TRACKS_QUERY = `{
   }
 }`;
 
+const ARTISTS_QUERY = `{
+  allArtists {
+    id uuid songTitle artistMain bandName albumTitle yearRecorded
+    yearReleased instrument otherArtistPlaying otherInstrument
+    songFile composer label createdAt albumCover
+  }
+}`;
+
 // Utility functions
 function transformUrl(url) {
   if (!url) return url;
@@ -47,8 +56,8 @@ function transformUrl(url) {
     .replace('http://', 'https://');
 }
 
-function transformAlbumData(albums) {
-  return albums
+function transformAlbumData(albums, transformedTracks) {
+  const transformed = albums
     .filter(album => album.albumCover)
     .map(album => ({
       id: album.albumTitle,
@@ -56,13 +65,18 @@ function transformAlbumData(albums) {
       title: album.albumTitle,
       subTitle: album.yearReleased,
       artist: album.artistMain,
-      songs: [1, 2, 3]
+      songs: transformedTracks
+        .filter(track => track.album === album.albumTitle && track.artist === album.artistMain)
+        .map(track => track.id),
     }));
+
+  console.log(transformed);
+  return transformed
 }
 
 function transformTrackData(tracks) {
   return tracks
-    .filter(track => track.songFile && track.albumCover)
+    .filter(track => track.songFile)
     .map(track => ({
       id: track.uuid,
       index: track.id,
@@ -70,7 +84,7 @@ function transformTrackData(tracks) {
       time: 185,
       albumId: track.albumTitle,
       audioUrl: transformUrl(track.songFile),
-      imageSrc: transformUrl(track.albumCover),
+      imageSrc: transformUrl(track.albumCover || stockPhoto),
       artist: track.artistMain,
       album: track.albumTitle,
       year: track.yearReleased
@@ -81,7 +95,7 @@ function transformTrackData(tracks) {
 async function fetchGraphQLData(query) {
   try {
     const response = await instance.post(GRAPHQL_ENDPOINT, { query }, { httpsAgent });
-    return response.data;
+    return response.data.data;
   } catch (error) {
     console.error("GraphQL request failed:", error.message);
     throw error;
@@ -96,6 +110,11 @@ async function fetchAlbums() {
 async function fetchTracks() {
   const data = await fetchGraphQLData(TRACKS_QUERY);
   return data.allTracks || [];
+}
+
+async function fetchArtists() {
+  const data = await fetchGraphQLData(ARTISTS_QUERY);
+  return data.allArtists || [];
 }
 
 // File operations
@@ -130,22 +149,26 @@ async function initializeApp() {
     
     console.log("Loading data from multiple sources...");
     // Load data
-    const [allData, albumsData, tracksData] = await Promise.all([
+    const [allData, albumsData, tracksData, artistsData] = await Promise.all([
       loadStaticData(),
       fetchAlbums(),
-      fetchTracks()
+      fetchTracks(),
+      fetchArtists()
     ]);
 
     console.log(`Loaded ${albumsData.length} albums from GraphQL`);
     console.log(`Loaded ${tracksData.length} tracks from GraphQL`);
+    console.log(`Loaded ${artistsData.length} artists from GraphQL`);
 
     // Transform data
     console.log("Transforming data...");
-    const transformedAlbums = transformAlbumData(albumsData);
     const transformedTracks = transformTrackData(tracksData);
+    const transformedAlbums = transformAlbumData(albumsData, transformedTracks);
+    const transformedArtists = transformTrackData(artistsData);
     
     console.log(`Transformed ${transformedAlbums.length} albums with covers`);
     console.log(`Transformed ${transformedTracks.length} tracks with files and covers`);
+    console.log(`Transformed ${transformedArtists.length} artists with files and covers`);
 
     // API endpoints
     app.get("/staticData/allData.json", (req, res) => {
