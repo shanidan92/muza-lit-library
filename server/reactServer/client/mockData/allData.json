@@ -18,6 +18,7 @@
         "songs": [4, 5, 6]
       }
     ],
+
     "newReleases": [
       {
         "id": "3",
@@ -78,56 +79,35 @@
     {
       "id": 2,
       "index": 4,
-      "imageSrc": "https://picsum.photos/300",
+      "imageSrc": "https://picsum.photos/400",
       "artistName": "Legendary Saxophone",
       "albumsCount": "22"
     },
     {
       "id": 3,
       "index": 5,
-      "imageSrc": "https://picsum.photos/400",
+      "imageSrc": "https://picsum.photos/300",
       "artistName": "John Coltrane",
       "albumsCount": "11"
-    },
-    {
-      "id": 3,
-      "index": 5,
-      "imageSrc": "https://picsum.photos/450",
-      "artistName": "The Felines",
-      "albumsCount": "12"
-    },
-    {
-      "id": 3,
-      "index": 5,
-      "imageSrc": "https://picsum.photos/410",
-      "artistName": "The Canines",
-      "albumsCount": "12"
     }
   ],
   "sidebar": {
     "sections": [
       {
-        "items": [
-          { "svg": "home", "text": "Home" },
-          { "svg": "explore", "text": "Explore" }
-        ]
-      },
-      {
         "title": "My Muza",
         "items": [
-          { "svg": "playlist", "text": "Playlists" },
-          { "svg": "album", "text": "Albums" },
-          { "svg": "artist", "text": "Artists" },
-          { "svg": "song", "text": "Songs" }
+          { "icon": "house", "text": "Home" },
+          { "icon": "search", "text": "Explore" }
         ]
       },
       {
-        "title": "Playlists",
-        "addAction": "createPlaylist",
+        "title": "Library",
         "items": [
-          { "svg": "playlist", "text": "Chill Vibes" },
-          { "svg": "playlist", "text": "Morning Coffee" },
-          { "svg": "playlist", "text": "Cat Party Mix" }
+          { "svg": "playlist", "text": "Playlists" },
+          { "svg": "albums", "text": "Albums" },
+          { "svg": "artists", "text": "Artists" },
+          { "svg": "songs", "text": "Songs" },
+          { "icon": "headphones", "text": "headphones example" }
         ]
       }
     ]
