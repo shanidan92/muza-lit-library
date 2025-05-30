@@ -116,7 +116,7 @@ function Y(e) {
   var a = (s) => {
     var { attr: t, size: c, title: l } = e,
       d = G(e, A),
-      x = c || s.size || "1em",
+      h = c || s.size || "1em",
       o;
     return (
       s.className && (o = s.className),
@@ -131,8 +131,8 @@ function Y(e) {
           {
             className: o,
             style: D(D({ color: e.color || s.color }, s.style), e.style),
-            height: x,
-            width: x,
+            height: h,
+            width: h,
             xmlns: "http://www.w3.org/2000/svg",
           },
         ),
@@ -227,7 +227,7 @@ function re(e) {
     ],
   })(e);
 }
-function ne(e) {
+function se(e) {
   return N({
     attr: { viewBox: "0 0 512 512" },
     child: [
@@ -241,7 +241,7 @@ function ne(e) {
     ],
   })(e);
 }
-const se = ({
+const ne = ({
     value: e = 75,
     muted: a = !1,
     disabled: s = !1,
@@ -249,38 +249,38 @@ const se = ({
     onVolumeChange: c,
     noSymbol: l = !1,
   }) => {
-    const [d, x] = i.useState(a),
+    const [d, h] = i.useState(a),
       [o, E] = i.useState(!1),
       L = i.useRef(e),
-      y = i.useRef(null),
-      j = () => {
+      p = i.useRef(null),
+      y = () => {
         s ||
           (d
-            ? (x(!1), c == null || c(L.current))
-            : ((L.current = e), x(!0), c == null || c(0)));
+            ? (h(!1), c == null || c(L.current))
+            : ((L.current = e), h(!0), c == null || c(0)));
       },
       O = () =>
         d || e === 0 ? "volume-mute" : e < 50 ? "volume-down" : "volume-up",
-      m = (g) => {
-        if (s || !y.current) return;
-        const b = y.current.getBoundingClientRect(),
-          p = 6,
-          v = p,
-          h = b.width - p,
+      m = (j) => {
+        if (s || !p.current) return;
+        const x = p.current.getBoundingClientRect(),
+          g = 8,
+          u = g,
+          w = x.width - g,
           S =
-            ((Math.max(v, Math.min(h, g.clientX - b.left)) - v) / (h - v)) *
+            ((Math.max(u, Math.min(w, j.clientX - x.left)) - u) / (w - u)) *
             100,
           r = Math.round(S / t) * t;
-        x(!1), c == null || c(r);
+        h(!1), c == null || c(r);
       },
-      f = (g) => {
-        if (!o || !y.current || s) return;
-        const b = y.current.getBoundingClientRect(),
-          p = 6,
-          v = p,
-          h = b.width - p,
+      f = (j) => {
+        if (!o || !p.current || s) return;
+        const x = p.current.getBoundingClientRect(),
+          g = 8,
+          u = g,
+          w = x.width - g,
           S =
-            ((Math.max(v, Math.min(h, g.clientX - b.left)) - v) / (h - v)) *
+            ((Math.max(u, Math.min(w, j.clientX - x.left)) - u) / (w - u)) *
             100,
           r = Math.round(S / t) * t;
         c == null || c(r);
@@ -305,7 +305,7 @@ const se = ({
       ),
       [o],
     );
-    const z = (g) => 6 + (g * 88) / 100;
+    const z = (j) => 8 + (j * 84) / 100;
     return n.jsxs("div", {
       className: `volume-control ${s ? "disabled" : ""}`,
       children: [
@@ -314,17 +314,17 @@ const se = ({
             children: [
               n.jsx("i", {
                 className: "fa-solid fa-speaker volume-icon",
-                onClick: j,
+                onClick: y,
               }),
               n.jsx("i", {
                 className: `fa-solid fa-${O()} volume-icon`,
-                onClick: j,
+                onClick: y,
               }),
             ],
           }),
         n.jsx("div", {
           className: "slider",
-          ref: y,
+          ref: p,
           onClick: m,
           children: n.jsxs("svg", {
             viewBox: "0 0 100 24",
@@ -347,7 +347,7 @@ const se = ({
                 className: "handle",
                 cx: z(e),
                 cy: "12",
-                r: "6",
+                r: "8",
                 onMouseDown: R,
               }),
             ],
@@ -364,45 +364,60 @@ const se = ({
     onSongEnded: c,
   }) => {
     const l = i.useRef(null),
-      [d, x] = i.useState(0),
+      [d, h] = i.useState(0),
       [o, E] = i.useState(0),
-      [L, y] = i.useState(75),
-      [j, O] = i.useState(!1),
+      [L, p] = i.useState(75),
+      [y, O] = i.useState(!1),
       [m, f] = i.useState(e.isPlaying || !1),
       [R, M] = i.useState(!1),
-      [z, g] = i.useState(!1),
-      b = d > 0 ? (o / d) * 100 : 0,
-      p = (r) => {
-        const u = Math.floor(r / 60),
-          w = Math.floor(r % 60)
+      [z, j] = i.useState(!1),
+      x = (r) => {
+        const v = Math.floor(r / 60),
+          b = Math.floor(r % 60)
             .toString()
             .padStart(2, "0");
-        return `${u}:${w}`;
+        return `${v}:${b}`;
       },
-      v = (r) => {
-        y(r);
-        const u = l.current;
-        u && (u.volume = r / 100);
-      },
-      h = () => {
+      g = d > 0 ? (o / d) * 100 : 0,
+      u = () => {
         const r = l.current;
         r &&
-          r.play().catch((u) => {
-            console.error("Error playing audio:", u),
+          r.play().catch((v) => {
+            console.error("Error playing audio:", v),
               f(!1),
               t == null || t({ ...e, isPlaying: !1 });
           });
+      },
+      w = (r) => {
+        p(r), l.current && (l.current.volume = r / 100);
+      },
+      T = (r) => {
+        const v = l.current;
+        if (!v || d === 0) return;
+        const b = r.currentTarget.getBoundingClientRect(),
+          k = ((r.clientX - b.left) / b.width) * d;
+        (v.currentTime = k), E(k);
+      },
+      S = () => {
+        if (y) return;
+        const r = !m;
+        f(r), t == null || t({ ...e, isPlaying: r });
       };
-    i.useEffect(() => {
-      f(e.isPlaying || !1);
-    }, [e.isPlaying]),
+    return (
+      i.useEffect(() => {
+        f(e.isPlaying || !1);
+      }, [e.isPlaying]),
+      i.useEffect(() => {
+        const r = l.current;
+        r && (m && !y ? u() : m || r.pause());
+      }, [m, y]),
       i.useEffect(() => {
         const r = l.current;
         if (!r || !e.audioUrl) return;
-        const u = () => {
-            x(r.duration), O(!1), m && h();
+        const v = () => {
+            h(r.duration), O(!1), m && u();
           },
-          w = () => E(r.currentTime),
+          b = () => E(r.currentTime),
           F = () => {
             f(!1), t == null || t({ ...e, isPlaying: !1 }), c == null || c();
           },
@@ -415,8 +430,8 @@ const se = ({
           B = () => O(!0),
           _ = () => O(!1);
         return (
-          r.addEventListener("loadeddata", u),
-          r.addEventListener("timeupdate", w),
+          r.addEventListener("loadeddata", v),
+          r.addEventListener("timeupdate", b),
           r.addEventListener("ended", F),
           r.addEventListener("play", k),
           r.addEventListener("pause", I),
@@ -424,13 +439,13 @@ const se = ({
           r.addEventListener("waiting", B),
           r.addEventListener("canplay", _),
           (r.src = e.audioUrl),
-          r.load(),
           (r.volume = L / 100),
-          m && h(),
+          r.load(),
+          m && u(),
           () => {
             r.pause(),
-              r.removeEventListener("loadeddata", u),
-              r.removeEventListener("timeupdate", w),
+              r.removeEventListener("loadeddata", v),
+              r.removeEventListener("timeupdate", b),
               r.removeEventListener("ended", F),
               r.removeEventListener("play", k),
               r.removeEventListener("pause", I),
@@ -440,130 +455,114 @@ const se = ({
           }
         );
       }, [e.audioUrl]),
-      i.useEffect(() => {
-        const r = l.current;
-        r && (m && !j ? h() : m || r.pause());
-      }, [m, j]);
-    const T = (r) => {
-        const u = l.current;
-        if (!u || d === 0) return;
-        const w = r.currentTarget.getBoundingClientRect(),
-          k = ((r.clientX - w.left) / w.width) * d;
-        (u.currentTime = k), E(k);
-      },
-      S = () => {
-        if (j) return;
-        const r = !m;
-        f(r), t == null || t({ ...e, isPlaying: r });
-      };
-    return n.jsxs("div", {
-      className: "player-container",
-      children: [
-        n.jsx("audio", { ref: l, hidden: !0 }),
-        n.jsxs("div", {
-          className: "player-info",
-          children: [
-            n.jsx("img", {
-              className: "album-art",
-              src: e.imageSrc,
-              alt: `${e.title} album cover`,
-            }),
-            n.jsxs("div", {
-              className: "track-info-music-player",
-              children: [
-                n.jsx("h2", { className: "track-title", children: e.title }),
-                n.jsx("p", { className: "track-artist", children: e.artist }),
-                n.jsxs("div", {
-                  className: "track-details",
-                  children: [
-                    n.jsx("span", { children: e.album }),
-                    n.jsx("span", { className: "separator", children: "•" }),
-                    n.jsx("span", { children: e.year }),
-                  ],
-                }),
-              ],
-            }),
-          ],
-        }),
-        n.jsxs("div", {
-          className: "player-controls-section",
-          children: [
-            n.jsxs("div", {
-              className: "progress-container",
-              children: [
-                n.jsx("div", {
-                  className: "progress-bar",
-                  onClick: T,
-                  children: n.jsx("div", {
-                    className: "progress-fill",
-                    style: { width: `${b}%` },
+      n.jsxs("div", {
+        className: "music-player",
+        children: [
+          n.jsx("audio", { ref: l, hidden: !0 }),
+          n.jsxs("div", {
+            className: "player-info",
+            children: [
+              n.jsx("img", {
+                className: "album-art",
+                src: e.imageSrc,
+                alt: `${e.title} album cover`,
+              }),
+              n.jsxs("div", {
+                className: "track-info",
+                children: [
+                  n.jsx("h2", { className: "track-title", children: e.title }),
+                  n.jsx("p", { className: "track-artist", children: e.artist }),
+                  n.jsxs("div", {
+                    className: "track-details",
+                    children: [
+                      n.jsx("span", { children: e.album }),
+                      n.jsx("span", { className: "separator", children: "•" }),
+                      n.jsx("span", { children: e.year }),
+                    ],
                   }),
-                }),
-                n.jsxs("div", {
-                  className: "time-display",
-                  children: [
-                    n.jsx("span", { children: p(o) }),
-                    n.jsx("span", { children: p(d - o) }),
-                  ],
-                }),
-              ],
-            }),
-            n.jsxs("div", {
-              className: "controls-container",
-              children: [
-                n.jsx("div", { className: "controls-spacer" }),
-                n.jsxs("div", {
-                  className: "playback-controls",
-                  children: [
-                    n.jsx("button", {
-                      className: `control-button shuffle-button ${R ? "active" : ""}`,
-                      onClick: () => M(!R),
-                      "aria-label": "Shuffle",
-                      children: n.jsx(te, {}),
+                ],
+              }),
+            ],
+          }),
+          n.jsxs("div", {
+            className: "player-controls",
+            children: [
+              n.jsxs("div", {
+                className: "progress-section",
+                children: [
+                  n.jsx("div", {
+                    className: "progress-bar",
+                    onClick: T,
+                    children: n.jsx("div", {
+                      className: "progress-fill",
+                      style: { width: `${g}%` },
                     }),
-                    n.jsx("button", {
-                      className: "control-button previous-button",
-                      onClick: a,
-                      "aria-label": "Previous track",
-                      children: n.jsx(Z, {}),
-                    }),
-                    n.jsx("button", {
-                      className: "control-button play-button",
-                      onClick: S,
-                      "aria-label": "Play or pause",
-                      children: j
-                        ? n.jsx(re, { className: "spinner" })
-                        : m
-                          ? n.jsx(U, {})
-                          : n.jsx(ee, {}),
-                    }),
-                    n.jsx("button", {
-                      className: "control-button next-button",
-                      onClick: s,
-                      "aria-label": "Next track",
-                      children: n.jsx(V, {}),
-                    }),
-                    n.jsx("button", {
-                      className: `control-button repeat-button ${z ? "active" : ""}`,
-                      onClick: () => g(!z),
-                      "aria-label": "Repeat",
-                      children: n.jsx(ne, {}),
-                    }),
-                  ],
-                }),
-                n.jsx("div", {
-                  className: "volume-control-container",
-                  children: n.jsx(se, {
-                    noSymbol: !0,
-                    value: L,
-                    onVolumeChange: v,
                   }),
-                }),
-              ],
-            }),
-          ],
-        }),
-      ],
-    });
+                  n.jsxs("div", {
+                    className: "time-display",
+                    children: [
+                      n.jsx("span", { children: x(o) }),
+                      n.jsx("span", { children: x(d - o) }),
+                    ],
+                  }),
+                ],
+              }),
+              n.jsxs("div", {
+                className: "controls-row",
+                children: [
+                  n.jsxs("div", {
+                    className: "playback-controls",
+                    children: [
+                      n.jsx("button", {
+                        className: `control-btn shuffle ${R ? "active" : ""}`,
+                        onClick: () => M(!R),
+                        "aria-label": "Shuffle",
+                        children: n.jsx(te, {}),
+                      }),
+                      n.jsx("button", {
+                        className: "control-btn previous",
+                        onClick: a,
+                        "aria-label": "Previous track",
+                        children: n.jsx(Z, {}),
+                      }),
+                      n.jsx("button", {
+                        className: "control-btn play",
+                        onClick: S,
+                        "aria-label": "Play or pause",
+                        children: y
+                          ? n.jsx(re, { className: "spinner" })
+                          : m
+                            ? n.jsx(U, {})
+                            : n.jsx(ee, {}),
+                      }),
+                      n.jsx("button", {
+                        className: "control-btn next",
+                        onClick: s,
+                        "aria-label": "Next track",
+                        children: n.jsx(V, {}),
+                      }),
+                      n.jsx("button", {
+                        className: `control-btn repeat ${z ? "active" : ""}`,
+                        onClick: () => j(!z),
+                        "aria-label": "Repeat",
+                        children: n.jsx(se, {}),
+                      }),
+                    ],
+                  }),
+                  n.jsx("div", {
+                    className: "volume-section",
+                    children: n.jsx(ne, {
+                      noSymbol: !0,
+                      value: L,
+                      onVolumeChange: w,
+                    }),
+                  }),
+                ],
+              }),
+            ],
+          }),
+        ],
+      })
+    );
   };
 export { U as F, ce as M, ee as a };

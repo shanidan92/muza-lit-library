@@ -28,16 +28,19 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({
   onSongEnded,
 }) => {
   const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  // Audio state
   const [duration, setDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
   const [volume, setVolume] = useState(75);
   const [isLoading, setIsLoading] = useState(false);
   const [isPlaying, setIsPlaying] = useState(details.isPlaying || false);
+
+  // Control state
   const [shuffle, setShuffle] = useState(false);
   const [repeat, setRepeat] = useState(false);
 
-  const progressPercentage = duration > 0 ? (currentTime / duration) * 100 : 0;
-
+  // Helper functions
   const formatTime = (seconds: number): string => {
     const minutes = Math.floor(seconds / 60);
     const secs = Math.floor(seconds % 60)
@@ -46,17 +49,13 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({
     return `${minutes}:${secs}`;
   };
 
-  const handleVolumeChange = (newVolume: number) => {
-    setVolume(newVolume);
-    const audio = audioRef.current;
-    if (audio) {
-      audio.volume = newVolume / 100;
-    }
-  };
+  const progressPercentage = duration > 0 ? (currentTime / duration) * 100 : 0;
 
+  // Audio control functions
   const playAudio = () => {
     const audio = audioRef.current;
     if (!audio) return;
+
     audio.play().catch((err) => {
       console.error("Error playing audio:", err);
       setIsPlaying(false);
@@ -64,79 +63,12 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({
     });
   };
 
-  useEffect(() => {
-    setIsPlaying(details.isPlaying || false);
-  }, [details.isPlaying]);
-
-  useEffect(() => {
-    const audio = audioRef.current;
-    if (!audio || !details.audioUrl) return;
-
-    const onLoadedData = () => {
-      setDuration(audio.duration);
-      setIsLoading(false);
-      if (isPlaying) playAudio();
-    };
-
-    const onTimeUpdate = () => setCurrentTime(audio.currentTime);
-    const onEnded = () => {
-      setIsPlaying(false);
-      onUpdate?.({ ...details, isPlaying: false });
-      onSongEnded?.();
-    };
-
-    const onPlay = () => {
-      setIsPlaying(true);
-      onUpdate?.({ ...details, isPlaying: true });
-    };
-
-    const onPause = () => {
-      setIsPlaying(false);
-      onUpdate?.({ ...details, isPlaying: false });
-    };
-
-    const onLoadStart = () => setIsLoading(true);
-    const onCanPlay = () => setIsLoading(false);
-
-    audio.addEventListener("loadeddata", onLoadedData);
-    audio.addEventListener("timeupdate", onTimeUpdate);
-    audio.addEventListener("ended", onEnded);
-    audio.addEventListener("play", onPlay);
-    audio.addEventListener("pause", onPause);
-    audio.addEventListener("loadstart", onLoadStart);
-    audio.addEventListener("waiting", onLoadStart);
-    audio.addEventListener("canplay", onCanPlay);
-
-    audio.src = details.audioUrl;
-    audio.load();
-
-    audio.volume = volume / 100;
-
-    if (isPlaying) playAudio();
-
-    return () => {
-      audio.pause();
-      audio.removeEventListener("loadeddata", onLoadedData);
-      audio.removeEventListener("timeupdate", onTimeUpdate);
-      audio.removeEventListener("ended", onEnded);
-      audio.removeEventListener("play", onPlay);
-      audio.removeEventListener("pause", onPause);
-      audio.removeEventListener("loadstart", onLoadStart);
-      audio.removeEventListener("waiting", onLoadStart);
-      audio.removeEventListener("canplay", onCanPlay);
-    };
-  }, [details.audioUrl]);
-
-  useEffect(() => {
-    const audio = audioRef.current;
-    if (!audio) return;
-
-    if (isPlaying && !isLoading) {
-      playAudio();
-    } else if (!isPlaying) {
-      audio.pause();
+  const handleVolumeChange = (newVolume: number) => {
+    setVolume(newVolume);
+    if (audioRef.current) {
+      audioRef.current.volume = newVolume / 100;
     }
-  }, [isPlaying, isLoading]);
+  };
 
   const handleSeek = (e: React.MouseEvent<HTMLDivElement>) => {
     const audio = audioRef.current;
@@ -157,16 +89,96 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({
     onUpdate?.({ ...details, isPlaying: newPlayingState });
   };
 
+  // Effects
+  useEffect(() => {
+    setIsPlaying(details.isPlaying || false);
+  }, [details.isPlaying]);
+
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    if (isPlaying && !isLoading) {
+      playAudio();
+    } else if (!isPlaying) {
+      audio.pause();
+    }
+  }, [isPlaying, isLoading]);
+
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio || !details.audioUrl) return;
+
+    // Audio event handlers
+    const handleLoadedData = () => {
+      setDuration(audio.duration);
+      setIsLoading(false);
+      if (isPlaying) playAudio();
+    };
+
+    const handleTimeUpdate = () => setCurrentTime(audio.currentTime);
+
+    const handleEnded = () => {
+      setIsPlaying(false);
+      onUpdate?.({ ...details, isPlaying: false });
+      onSongEnded?.();
+    };
+
+    const handlePlay = () => {
+      setIsPlaying(true);
+      onUpdate?.({ ...details, isPlaying: true });
+    };
+
+    const handlePause = () => {
+      setIsPlaying(false);
+      onUpdate?.({ ...details, isPlaying: false });
+    };
+
+    const handleLoadStart = () => setIsLoading(true);
+    const handleCanPlay = () => setIsLoading(false);
+
+    // Add event listeners
+    audio.addEventListener("loadeddata", handleLoadedData);
+    audio.addEventListener("timeupdate", handleTimeUpdate);
+    audio.addEventListener("ended", handleEnded);
+    audio.addEventListener("play", handlePlay);
+    audio.addEventListener("pause", handlePause);
+    audio.addEventListener("loadstart", handleLoadStart);
+    audio.addEventListener("waiting", handleLoadStart);
+    audio.addEventListener("canplay", handleCanPlay);
+
+    // Setup audio
+    audio.src = details.audioUrl;
+    audio.volume = volume / 100;
+    audio.load();
+
+    if (isPlaying) playAudio();
+
+    // Cleanup
+    return () => {
+      audio.pause();
+      audio.removeEventListener("loadeddata", handleLoadedData);
+      audio.removeEventListener("timeupdate", handleTimeUpdate);
+      audio.removeEventListener("ended", handleEnded);
+      audio.removeEventListener("play", handlePlay);
+      audio.removeEventListener("pause", handlePause);
+      audio.removeEventListener("loadstart", handleLoadStart);
+      audio.removeEventListener("waiting", handleLoadStart);
+      audio.removeEventListener("canplay", handleCanPlay);
+    };
+  }, [details.audioUrl]);
+
   return (
-    <div className="player-container">
+    <div className="music-player">
       <audio ref={audioRef} hidden />
+
       <div className="player-info">
         <img
           className="album-art"
           src={details.imageSrc}
           alt={`${details.title} album cover`}
         />
-        <div className="track-info-music-player">
+        <div className="track-info">
           <h2 className="track-title">{details.title}</h2>
           <p className="track-artist">{details.artist}</p>
           <div className="track-details">
@@ -177,8 +189,8 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({
         </div>
       </div>
 
-      <div className="player-controls-section">
-        <div className="progress-container">
+      <div className="player-controls">
+        <div className="progress-section">
           <div className="progress-bar" onClick={handleSeek}>
             <div
               className="progress-fill"
@@ -191,25 +203,26 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({
           </div>
         </div>
 
-        <div className="controls-container">
-          <div className="controls-spacer"></div>
+        <div className="controls-row">
           <div className="playback-controls">
             <button
-              className={`control-button shuffle-button ${shuffle ? "active" : ""}`}
+              className={`control-btn shuffle ${shuffle ? "active" : ""}`}
               onClick={() => setShuffle(!shuffle)}
               aria-label="Shuffle"
             >
               <FaRandom />
             </button>
+
             <button
-              className="control-button previous-button"
+              className="control-btn previous"
               onClick={onPrevious}
               aria-label="Previous track"
             >
               <FaBackward />
             </button>
+
             <button
-              className="control-button play-button"
+              className="control-btn play"
               onClick={togglePlayPause}
               aria-label="Play or pause"
             >
@@ -221,22 +234,25 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({
                 <FaPlay />
               )}
             </button>
+
             <button
-              className="control-button next-button"
+              className="control-btn next"
               onClick={onNext}
               aria-label="Next track"
             >
               <FaForward />
             </button>
+
             <button
-              className={`control-button repeat-button ${repeat ? "active" : ""}`}
+              className={`control-btn repeat ${repeat ? "active" : ""}`}
               onClick={() => setRepeat(!repeat)}
               aria-label="Repeat"
             >
               <FaRepeat />
             </button>
           </div>
-          <div className="volume-control-container">
+
+          <div className="volume-section">
             <VolumeControl
               noSymbol={true}
               value={volume}

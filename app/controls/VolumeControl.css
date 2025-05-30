@@ -23,19 +23,20 @@ svg {
 
 .track {
   stroke: #e1e2e3;
-  stroke-width: 4;
+  stroke-width: 6;
   stroke-linecap: round;
 }
 
 .fill {
   stroke: var(--foreground, #030712);
-  stroke-width: 4;
+  stroke-width: 6;
   stroke-linecap: round;
 }
 
 .handle {
   fill: var(--foreground, #030712);
   cursor: grab;
+  r: 8;
 }
 
 .handle:active {

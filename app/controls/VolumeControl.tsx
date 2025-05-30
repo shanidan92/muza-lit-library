@@ -45,7 +45,7 @@ const VolumeControl: React.FC<VolumeControlProps> = ({
   const handleSliderClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (disabled || !sliderRef.current) return;
     const rect = sliderRef.current.getBoundingClientRect();
-    const handleRadius = 6;
+    const handleRadius = 8;
     const minX = handleRadius;
     const maxX = rect.width - handleRadius;
     const x = Math.max(minX, Math.min(maxX, e.clientX - rect.left));
@@ -58,7 +58,7 @@ const VolumeControl: React.FC<VolumeControlProps> = ({
   const handleMouseMove = (e: MouseEvent) => {
     if (!isDragging || !sliderRef.current || disabled) return;
     const rect = sliderRef.current.getBoundingClientRect();
-    const handleRadius = 6;
+    const handleRadius = 8;
     const minX = handleRadius;
     const maxX = rect.width - handleRadius;
     const x = Math.max(minX, Math.min(maxX, e.clientX - rect.left));
@@ -91,7 +91,7 @@ const VolumeControl: React.FC<VolumeControlProps> = ({
   }, [isDragging]);
 
   const mapValueToPosition = (value: number): number => {
-    return 6 + (value * 88) / 100;
+    return 8 + (value * 84) / 100;
   };
 
   return (
@@ -122,7 +122,7 @@ const VolumeControl: React.FC<VolumeControlProps> = ({
             className="handle"
             cx={mapValueToPosition(value)}
             cy="12"
-            r="6"
+            r="8"
             onMouseDown={handleMouseDown}
           />
         </svg>

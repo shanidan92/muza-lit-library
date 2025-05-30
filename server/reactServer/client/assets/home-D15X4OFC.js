@@ -1,7 +1,7 @@
 import { w as k } from "./with-props-B2_f2fEw.js";
 import { a as r, s as D, o as e } from "./chunk-DQRVZFIR-BNfO-z-U.js";
 import { u as M, M as R, a as E } from "./main-C56J1lNH.js";
-import { M as I } from "./MusicPlayer-D3drmrpJ.js";
+import { M as I } from "./MusicPlayer-Boy5Oyzy.js";
 import { S as L } from "./SongLine-CdvDBH4t.js";
 import { A as U } from "./AlbumDetails-C3Mxf3bc.js";
 import { A as H } from "./ArtistDetails-CRcbpUNp.js";

@@ -1,7 +1,7 @@
 import { w as P } from "./with-props-B2_f2fEw.js";
 import { a as l, s as k, o as s } from "./chunk-DQRVZFIR-BNfO-z-U.js";
 import { u as R, M as E, a as M } from "./main-C56J1lNH.js";
-import { M as C } from "./MusicPlayer-D3drmrpJ.js";
+import { M as C } from "./MusicPlayer-Boy5Oyzy.js";
 import { A as a } from "./AlbumDetails-C3Mxf3bc.js";
 import { u as U } from "./userStore-Co03IV9v.js";
 const q = P(function () {
