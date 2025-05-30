@@ -50,20 +50,30 @@ export default function Home() {
 
   const handlePreviousSong = () => {
     const currentIndex = getCurrentSongIndex();
+    let prevSong;
     if (currentIndex <= 0) {
-      setSelectedSong(recentlyPlayed[recentlyPlayed.length - 1]);
+      prevSong = recentlyPlayed[recentlyPlayed.length - 1];
     } else {
-      setSelectedSong(recentlyPlayed[currentIndex - 1]);
+      prevSong = recentlyPlayed[currentIndex - 1];
     }
+    setSelectedSong({
+      ...prevSong,
+      isPlaying: selectedSong?.isPlaying || false,
+    });
   };
 
   const handleNextSong = () => {
     const currentIndex = getCurrentSongIndex();
+    let nextSong;
     if (currentIndex === -1 || currentIndex === recentlyPlayed.length - 1) {
-      setSelectedSong(recentlyPlayed[0]);
+      nextSong = recentlyPlayed[0];
     } else {
-      setSelectedSong(recentlyPlayed[currentIndex + 1]);
+      nextSong = recentlyPlayed[currentIndex + 1];
     }
+    setSelectedSong({
+      ...nextSong,
+      isPlaying: selectedSong?.isPlaying || false,
+    });
   };
 
   useEffect(() => {

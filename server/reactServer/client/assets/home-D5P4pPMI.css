@@ -1,1 +1,190 @@
-.content{margin-bottom:2rem;flex:1;max-height:100%;overflow:auto;height:100%}.content.side{width:340px;max-width:340px;display:grid;grid-template-rows:1fr 2fr 2fr;grid-auto-flow:column}.content.full{width:100%;max-width:100%}.playlist{margin:26px;overflow-y:auto}.songs-list{border-top:1px solid var(--muza-border-color, #a9a9a9);display:flex;flex-direction:column}.top{display:flex;align-items:center;justify-content:center;flex-direction:column}.buttons{position:absolute;left:14px;top:14px;gap:8px;display:flex;flex-direction:column}.top small-album-details{padding-top:56px;padding-bottom:20px}music-suggestions-list{margin:26px 20px;overflow-y:auto}.small-album-details{text-align:center}.small-album-details img{border-radius:10px;background-color:var(--muza-image-background-color-bg, #d9d9d9)}.small-album-details h3{font-size:var(--muza-title-font-size, 27px);color:var(--muza-secondary-text-color, #5f5f5f);font-weight:var(--muza-font-weight-bold-extra, 700);margin:0 0 calc(var(--spacing-xs) * .75) 0;cursor:pointer}.small-album-details p{font-size:var(--muza-primary-font-size, 14px);color:var(--muza-section-border-color, #a9a9a9);font-weight:var(--muza-font-weight-medium, 500);margin:0;cursor:pointer}.muza-button{--button-background: var(--muza-hover-background, #ededed);border-radius:50%;background-color:var(--button-background);width:26px;height:26px;display:flex;justify-content:center;align-items:center;font-size:10px;font-family:FontAwesome}.playlist-item{--tertiary-text-color: var(--muza-tertiary-text-color, #888888);--button-background: var(--muza-hover-background, #ededed);--border-color: var(--muza-border-color, #a9a9a9);display:flex;justify-content:space-between;align-items:center;border-bottom:solid var(--border-color) 1px}.playlist-item .left{display:flex;justify-content:flex-start;align-items:center;gap:2px;font-size:17px;padding:10px 9px}.track-number{padding:7px;color:var(--tertiary-text-color);min-width:20px;display:inline-block;font-size:var(--song-title-font-size)}.track-number .muza-container{position:relative;top:30px;right:10px}.song-details-view{display:flex;justify-content:flex-start;align-items:center;gap:7px;font-size:14px}.song-details-view img{border-radius:3px;background-color:var(--muza-image-background-color-bg, #d9d9d9)}.song-details{display:flex;flex-direction:column}.song-title{font-weight:700;font-size:16px;color:#5f5f5f;line-height:16px}.song-artist{color:#a9a9a9;line-height:17px;font-size:15px}.muza-container{display:flex;padding:var(--spacing-6, 24px);flex-direction:column;align-items:flex-end;gap:var(--spacing-4, 16px);border-radius:var(--border-radius-lg, 8px);border:1px solid var(--base-border, #e5e7eb);background:var(--base-background, #fff);box-shadow:0 10px 15px -3px #0000001a,0 4px 6px -2px #0000000d;will-change:transform;z-index:1}.music-suggestions-content{background-color:var(--muza-section-background, #f7f7f7);border-radius:5px}.music-suggestions-header{font-size:20px;padding:0 16px;color:var(--muza-secondary-text-color, #5f5f5f);height:46px;font-weight:var(--muza-font-weight-bold, 600);display:flex;align-items:center}.music-suggestions-playlist{padding:0}.songs-list{border-top:solid var(--muza-border-color, #a9a9a9) 1px;display:flex;flex-direction:column}.suggestions-list-item{--tertiary-text-color: var(--muza-tertiary-text-color, #888888);--button-background: var(--muza-hover-background, #ededed);--border-color: var(--muza-border-color, #a9a9a9);display:flex;justify-content:space-between;align-items:center;border-bottom:solid var(--border-color) 1px;padding:10px 16px}.suggestions-list-item .left{display:flex;justify-content:flex-start;align-items:center;gap:2px;font-size:17px}
+.content {
+  margin-bottom: 2rem;
+  flex: 1;
+  max-height: 100%;
+  overflow: auto;
+  height: 100%;
+}
+.content.side {
+  width: 340px;
+  max-width: 340px;
+  display: grid;
+  grid-template-rows: 1fr 2fr 2fr;
+  grid-auto-flow: column;
+}
+.content.full {
+  width: 100%;
+  max-width: 100%;
+}
+.playlist {
+  margin: 26px;
+  overflow-y: auto;
+}
+.songs-list {
+  border-top: 1px solid var(--muza-border-color, #a9a9a9);
+  display: flex;
+  flex-direction: column;
+}
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.buttons {
+  position: absolute;
+  left: 14px;
+  top: 14px;
+  gap: 8px;
+  display: flex;
+  flex-direction: column;
+}
+.top small-album-details {
+  padding-top: 56px;
+  padding-bottom: 20px;
+}
+music-suggestions-list {
+  margin: 26px 20px;
+  overflow-y: auto;
+}
+.small-album-details {
+  text-align: center;
+}
+.small-album-details img {
+  border-radius: 10px;
+  background-color: var(--muza-image-background-color-bg, #d9d9d9);
+}
+.small-album-details h3 {
+  font-size: var(--muza-title-font-size, 27px);
+  color: var(--muza-secondary-text-color, #5f5f5f);
+  font-weight: var(--muza-font-weight-bold-extra, 700);
+  margin: 0 0 calc(var(--spacing-xs) * 0.75) 0;
+  cursor: pointer;
+}
+.small-album-details p {
+  font-size: var(--muza-primary-font-size, 14px);
+  color: var(--muza-section-border-color, #a9a9a9);
+  font-weight: var(--muza-font-weight-medium, 500);
+  margin: 0;
+  cursor: pointer;
+}
+.muza-button {
+  --button-background: var(--muza-hover-background, #ededed);
+  border-radius: 50%;
+  background-color: var(--button-background);
+  width: 26px;
+  height: 26px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 10px;
+  font-family: FontAwesome;
+}
+.playlist-item {
+  --tertiary-text-color: var(--muza-tertiary-text-color, #888888);
+  --button-background: var(--muza-hover-background, #ededed);
+  --border-color: var(--muza-border-color, #a9a9a9);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: solid var(--border-color) 1px;
+}
+.playlist-item .left {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 2px;
+  font-size: 17px;
+  padding: 10px 9px;
+}
+.track-number {
+  padding: 7px;
+  color: var(--tertiary-text-color);
+  min-width: 20px;
+  display: inline-block;
+  font-size: var(--song-title-font-size);
+}
+.track-number .muza-container {
+  position: relative;
+  top: 30px;
+  right: 10px;
+}
+.song-details-view {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 7px;
+  font-size: 14px;
+}
+.song-details-view img {
+  border-radius: 3px;
+  background-color: var(--muza-image-background-color-bg, #d9d9d9);
+}
+.song-details {
+  display: flex;
+  flex-direction: column;
+}
+.song-title {
+  font-weight: 700;
+  font-size: 16px;
+  color: #5f5f5f;
+  line-height: 16px;
+}
+.song-artist {
+  color: #a9a9a9;
+  line-height: 17px;
+  font-size: 15px;
+}
+.muza-container {
+  display: flex;
+  padding: var(--spacing-6, 24px);
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--spacing-4, 16px);
+  border-radius: var(--border-radius-lg, 8px);
+  border: 1px solid var(--base-border, #e5e7eb);
+  background: var(--base-background, #fff);
+  box-shadow:
+    0 10px 15px -3px #0000001a,
+    0 4px 6px -2px #0000000d;
+  will-change: transform;
+  z-index: 1;
+}
+.music-suggestions-content {
+  background-color: var(--muza-section-background, #f7f7f7);
+  border-radius: 5px;
+}
+.music-suggestions-header {
+  font-size: 20px;
+  padding: 0 16px;
+  color: var(--muza-secondary-text-color, #5f5f5f);
+  height: 46px;
+  font-weight: var(--muza-font-weight-bold, 600);
+  display: flex;
+  align-items: center;
+}
+.music-suggestions-playlist {
+  padding: 0;
+}
+.songs-list {
+  border-top: solid var(--muza-border-color, #a9a9a9) 1px;
+  display: flex;
+  flex-direction: column;
+}
+.suggestions-list-item {
+  --tertiary-text-color: var(--muza-tertiary-text-color, #888888);
+  --button-background: var(--muza-hover-background, #ededed);
+  --border-color: var(--muza-border-color, #a9a9a9);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: solid var(--border-color) 1px;
+  padding: 10px 16px;
+}
+.suggestions-list-item .left {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 2px;
+  font-size: 17px;
+}
