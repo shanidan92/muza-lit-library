@@ -2,7 +2,7 @@ import { w as b } from "./with-props-B2_f2fEw.js";
 import { o as s, a as x, t as g } from "./chunk-DQRVZFIR-BNfO-z-U.js";
 import { b as p, u as y, M as S, a as P } from "./main-C56J1lNH.js";
 import { u as f } from "./userStore-Co03IV9v.js";
-import { F as M, a as C, M as L } from "./MusicPlayer-D3drmrpJ.js";
+import { F as M, a as C, M as L } from "./MusicPlayer-Boy5Oyzy.js";
 import { y as A } from "./index-Bs9qsKfp.js";
 import { S as R } from "./SongLine-CdvDBH4t.js";
 const I = ({ isOpen: n, onClose: e }) =>
