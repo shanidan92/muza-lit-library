@@ -9,6 +9,10 @@ import * as fs from "fs";
 // Configuration constants
 const GRAPHQL_ENDPOINT = process.env.GRAPHQL_ENDPOINT || 
   "https://ec2-34-244-32-40.eu-west-1.compute.amazonaws.com/api/metadata/graphql";
+
+const FILES_ENDPOINT = process.env.FILES_ENDPOINT || 
+  "https://ec2-34-244-32-40.eu-west-1.compute.amazonaws.com/api/upload/files/";
+
 const PORT = process.env.PORT ||
   3000;
 const stockPhoto = "https://picsum.photos/400"; // Placeholde photo URL
@@ -57,10 +61,14 @@ const ARTISTS_QUERY = `{
 
 // Utility functions
 function transformUrl(url) {
-  if (!url || !url.includes('amazonaws')) return url;
-  return url
-    .replace('.com/files', '.com/api/upload/files')
-    .replace('http://', 'https://');
+  if (!url) return url;
+  
+  // Extract filename from URL
+  const filename = url.split('/').pop();
+  if (!filename) return url;
+  
+  // Create new URL with FILES_ENDPOINT
+  return `${FILES_ENDPOINT}${filename}`;
 }
 
 function getRandomItems(array, count) {
@@ -247,6 +255,7 @@ async function initializeApp() {
       console.log(`✅ Server running at http://localhost:${PORT}`);
       console.log(`📁 Serving static files from: ${clientDir}`);
       console.log(`📊 GraphQL endpoint: ${GRAPHQL_ENDPOINT}`);
+      console.log(`📂 Files endpoint: ${FILES_ENDPOINT}`);
     });
 
   } catch (error) {
