@@ -15,7 +15,7 @@ const FILES_ENDPOINT = process.env.FILES_ENDPOINT ||
 
 const PORT = process.env.PORT ||
   3000;
-const stockPhoto = "https://picsum.photos/400"; // Placeholde photo URL
+const STOCK_PHOTO = "https://picsum.photos/400"; // Placeholde photo URL
 
 // File paths
 const __filename = fileURLToPath(import.meta.url);
@@ -64,7 +64,7 @@ function transformUrl(url) {
   if (!url) return url;
   
   if (url === STOCK_PHOTO) return url; // Return stock photo URL as is
-  
+
   // Extract filename from URL
   const filename = url.split('/').pop();
   if (!filename) return url;
@@ -86,7 +86,7 @@ function transformAlbumData(albums, transformedTracks) {
   return albums
     .map(album => ({
       id: album.id,
-      imageSrc: transformUrl(album.albumCover || stockPhoto),
+      imageSrc: transformUrl(album.albumCover || STOCK_PHOTO),
       title: album.albumTitle,
       subTitle: album.yearReleased,
       artist: album.artistMain,
@@ -106,7 +106,7 @@ function transformTrackData(tracks) {
       time: 185,
       albumId: track.albumTitle,
       audioUrl: transformUrl(track.songFile),
-      imageSrc: transformUrl(track.albumCover || stockPhoto),
+      imageSrc: transformUrl(track.albumCover || STOCK_PHOTO),
       artist: track.artistMain,
       album: track.albumTitle,
       year: track.yearReleased
@@ -124,7 +124,7 @@ function transformArtistData(artists, transformedAlbums) {
     .map((artist, index) => ({
       id: artist.id || index + 1,
       index: index + 1,
-      imageSrc: transformUrl(artist.albumCover) || stockPhoto,
+      imageSrc: transformUrl(artist.albumCover) || STOCK_PHOTO,
       artistName: artist.artistMain,
       albumsCount: String(albumsByArtist[artist.artistMain] || 0)
     }));
