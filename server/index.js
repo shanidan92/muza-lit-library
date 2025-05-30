@@ -56,12 +56,16 @@ function transformUrl(url) {
     .replace('http://', 'https://');
 }
 
+function getRandomItems(array, count) {
+  const shuffled = [...array].sort(() => 0.5 - Math.random());
+  return shuffled.slice(0, count + 1);
+}
+
 function transformAlbumData(albums, transformedTracks) {
   return albums
-    .filter(album => album.albumCover)
     .map(album => ({
       id: album.albumTitle,
-      imageSrc: transformUrl(album.albumCover),
+      imageSrc: transformUrl(album.albumCover || stockPhoto),
       title: album.albumTitle,
       subTitle: album.yearReleased,
       artist: album.artistMain,
@@ -187,14 +191,16 @@ async function initializeApp() {
     // API endpoints
     app.get("/staticData/allData.json", (req, res) => {
       console.log("GET /staticData/allData.json - Request received");
+            
       const response = {
-        ...allData,
         albums: {
-          ...transformedAlbums,
-          newReleases: [...transformedAlbums]
+          featured: getRandomItems(transformedAlbums, 3),
+          newReleases: getRandomItems(transformedAlbums, 3),
+          recommended: getRandomItems(transformedAlbums, 3)
         },
-        artists: [...transformedArtists],
-        songs: [...transformedTracks, ...(allData.songs || [])]
+        artists: transformedArtists,
+        songs: transformedTracks,
+        sidebar: allData.sidebar
       };
 
       console.log(`Sending response with ${response.albums?.newReleases?.length || 0} albums, ${response.artists?.length || 0} artists and ${response.songs?.length || 0} songs`);
