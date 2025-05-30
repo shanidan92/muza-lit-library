@@ -1,98 +1,197 @@
 import express from "express";
-// import cors from 'cors'
 import { fileURLToPath } from "url";
 import axios from "axios";
 import path from "path";
 import https from "https";
 import * as fs from "fs";
-import { replace } from "react-router";
-try{
+
+// Configuration constants
+const GRAPHQL_ENDPOINT = process.env.GRAPHQL_ENDPOINT || 
+  "https://ec2-34-244-32-40.eu-west-1.compute.amazonaws.com/api/metadata/graphql";
+const PORT = process.env.PORT ||
+  3000;
+
+// File paths
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-
 const clientDir = path.resolve("./server/reactServer/client");
 const publicDir = path.resolve("./public");
+const staticDataFilePath = path.join(publicDir, "/staticData/allData.json");
 
-const app = express();
-const port = process.env.PORT || 3000;
-
+// HTTP client setup
 const httpsAgent = new https.Agent({ rejectUnauthorized: false });
-
 const instance = axios.create({ httpsAgent });
 
-const filePath = path.join(publicDir, "/mockData/allData.json"); // Path to your JSON file
-let allData = {};
-fs.readFile(filePath, "utf-8", (err, data) => {
-  if (err) {
-    console.error("Error reading file:", err);
-    return;
+// GraphQL queries
+const ALBUMS_QUERY = `{
+  allAlbums {
+    albumTitle albumCover label labelLogo bandName artistPhoto
+    artistMain instrument otherArtistPlaying otherInstrument
+    yearRecorded yearReleased songTitle composer songFile createdAt
   }
-  try {
-    allData = JSON.parse(data);
-  } catch (parseError) {
-    console.error("Error parsing JSON:", parseError);
+}`;
+
+const TRACKS_QUERY = `{
+  allTracks {
+    id uuid songTitle artistMain bandName albumTitle yearRecorded
+    yearReleased instrument otherArtistPlaying otherInstrument
+    songFile composer label createdAt albumCover
   }
-});
-  
-const albums = await instance
-  .post(
-    "https://ec2-34-244-32-40.eu-west-1.compute.amazonaws.com/api/metadata/graphql",
-    {
-      query:
-        "{ allAlbums { albumTitle albumCover label labelLogo bandName artistPhoto artistMain instrument otherArtistPlaying otherInstrument yearRecorded yearReleased songTitle composer songFile createdAt } }"
-    },
-    { httpsAgent },
-  )
-  .then(function (response) {
-    return response.data;
-  })
-  .catch(function (error) {
-    console.error(error);
-  });
+}`;
 
-const tracks = await instance
-  .post(
-    "https://ec2-34-244-32-40.eu-west-1.compute.amazonaws.com/api/metadata/graphql",
-    {
-      query:
-        "{ allTracks { id uuid songTitle artistMain bandName albumTitle yearRecorded yearReleased instrument otherArtistPlaying otherInstrument songFile composer label createdAt albumCover}}",
-    },
-    { httpsAgent },
-  )
-  .then(function (response) {
-    return response.data;
-  })
-  .catch(function (error) {
-    console.error(error);
-  });
-
-app.get("/getAllData", (req, res) => {
-  const response = { ...allData , albums:{...allData.albums , newReleases:[...albums.data.allAlbums.filter(i=>i.albumCover).map(i=>({"id": i.albumTitle,
-        "imageSrc":i.albumCover?.replace('.com/files' , '.com/api/upload/files').replace('http://' , 'https://'),
-        "title": i.albumTitle,
-        "subTitle":i.yearReleased,
-        "artist": i.artistMain,
-        "songs": [1, 2, 3]})) ,...allData.albums.newReleases  ]}, songs:[ ...tracks.data.allTracks.filter(i=>i.songFile && i.albumCover).map(i=>({ "id": i.uuid,
-      "index": i.id,
-      "title": i.songTitle,
-      "time": 185,
-      "albumId": i.albumTitle,
-      "audioUrl": i.songFile?.replace('.com/files' , '.com/api/upload/files').replace('http://' , 'https://'),
-      "imageSrc": i.albumCover?.replace('.com/files' , '.com/api/upload/files').replace('http://' , 'https://'),
-      "artist": i.artistMain,
-      "album": i.albumTitle,
-      "year": i.yearReleased})),...allData.songs ] };
-  res.send(response);
-});
-app.use(express.static(clientDir));
-
-app.get("/", (req, res) => {
-  res.sendFile(path.join(clientDir, "index.html"));
-});
-
-app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}`);
-});
-}catch(err){
-  console.error(err);
+// Utility functions
+function transformUrl(url) {
+  if (!url) return url;
+  return url
+    .replace('.com/files', '.com/api/upload/files')
+    .replace('http://', 'https://');
 }
+
+function transformAlbumData(albums) {
+  return albums
+    .filter(album => album.albumCover)
+    .map(album => ({
+      id: album.albumTitle,
+      imageSrc: transformUrl(album.albumCover),
+      title: album.albumTitle,
+      subTitle: album.yearReleased,
+      artist: album.artistMain,
+      songs: [1, 2, 3]
+    }));
+}
+
+function transformTrackData(tracks) {
+  return tracks
+    .filter(track => track.songFile && track.albumCover)
+    .map(track => ({
+      id: track.uuid,
+      index: track.id,
+      title: track.songTitle,
+      time: 185,
+      albumId: track.albumTitle,
+      audioUrl: transformUrl(track.songFile),
+      imageSrc: transformUrl(track.albumCover),
+      artist: track.artistMain,
+      album: track.albumTitle,
+      year: track.yearReleased
+    }));
+}
+
+// GraphQL API functions
+async function fetchGraphQLData(query) {
+  try {
+    const response = await instance.post(GRAPHQL_ENDPOINT, { query }, { httpsAgent });
+    return response.data;
+  } catch (error) {
+    console.error("GraphQL request failed:", error.message);
+    throw error;
+  }
+}
+
+async function fetchAlbums() {
+  const data = await fetchGraphQLData(ALBUMS_QUERY);
+  return data.allAlbums || [];
+}
+
+async function fetchTracks() {
+  const data = await fetchGraphQLData(TRACKS_QUERY);
+  return data.allTracks || [];
+}
+
+// File operations
+function loadStaticData() {
+  console.log("Loading mock data from:", staticDataFilePath);
+  return new Promise((resolve, reject) => {
+    fs.readFile(staticDataFilePath, "utf-8", (err, data) => {
+      if (err) {
+        console.error("Error reading mock data file:", err);
+        console.log("Proceeding without mock data");
+        resolve({});
+        return;
+      }
+      try {
+        const parsedData = JSON.parse(data);
+        console.log("Mock data loaded successfully");
+        resolve(parsedData);
+      } catch (parseError) {
+        console.error("Error parsing JSON:", parseError);
+        console.log("Proceeding with empty mock data");
+        resolve({});
+      }
+    });
+  });
+}
+
+// Main application logic
+async function initializeApp() {
+  try {
+    console.log("Initializing application...");
+    const app = express();
+    
+    console.log("Loading data from multiple sources...");
+    // Load data
+    const [allData, albumsData, tracksData] = await Promise.all([
+      loadStaticData(),
+      fetchAlbums(),
+      fetchTracks()
+    ]);
+
+    console.log(`Loaded ${albumsData.length} albums from GraphQL`);
+    console.log(`Loaded ${tracksData.length} tracks from GraphQL`);
+
+    // Transform data
+    console.log("Transforming data...");
+    const transformedAlbums = transformAlbumData(albumsData);
+    const transformedTracks = transformTrackData(tracksData);
+    
+    console.log(`Transformed ${transformedAlbums.length} albums with covers`);
+    console.log(`Transformed ${transformedTracks.length} tracks with files and covers`);
+
+    // API endpoints
+    app.get("/staticData/allData.json", (req, res) => {
+      console.log("GET /staticData/allData.json - Request received");
+      const response = {
+        ...allData,
+        albums: {
+          ...allData.albums,
+          newReleases: [...transformedAlbums, ...(allData.albums?.newReleases || [])]
+        },
+        songs: [...transformedTracks, ...(allData.songs || [])]
+      };
+      console.log(`Sending response with ${response.albums?.newReleases?.length || 0} albums and ${response.songs?.length || 0} songs`);
+      res.json(response);
+    });
+
+    // Static file serving
+    console.log("Setting up static file serving from:", clientDir);
+    app.use(express.static(clientDir));
+    
+    // Serve static assets from app directory
+    const appDir = path.resolve("./app");
+    console.log("Setting up app static file serving from:", appDir);
+    app.use("/app", express.static(appDir));
+    
+    // Serve public directory for other static assets
+    console.log("Setting up public file serving from:", publicDir);
+    app.use(express.static(publicDir));
+
+    app.get("/", (req, res) => {
+      console.log("GET / - Serving index.html");
+      res.sendFile(path.join(clientDir, "index.html"));
+    });
+
+    // Start server
+    app.listen(PORT, () => {
+      console.log(`✅ Server running at http://localhost:${PORT}`);
+      console.log(`📁 Serving static files from: ${clientDir}`);
+      console.log(`📊 GraphQL endpoint: ${GRAPHQL_ENDPOINT}`);
+    });
+
+  } catch (error) {
+    console.error("❌ Failed to initialize application:", error);
+    process.exit(1);
+  }
+}
+
+// Start the application
+initializeApp();

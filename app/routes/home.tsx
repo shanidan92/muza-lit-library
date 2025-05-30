@@ -3,9 +3,6 @@ import MusicSidebar from "~/components/sections/MusicSidebar";
 import { useEffect, useState } from "react";
 import { MusicPlayer } from "~/components/sections/MusicPlayer";
 import MusicTopbar from "~/components/sections/MusicTopbar";
-import "../styles/scrollbar.css";
-import "../styles/variables.css";
-import "../styles/main.css";
 import SongLine from "~/components/songLineDisplays/SongLine";
 import type { Album, SongDetails } from "~/appData/models";
 import MuzaMusicPlaylist from "~/components/listsDisplays/MusicPlaylist";
@@ -14,6 +11,10 @@ import ArtistDetails from "~/components/artistDisplays/ArtistDetails";
 import { useUserStore } from "~/appData/userStore";
 import { useMusicLibraryStore } from "~/appData/musicStore";
 import { useNavigate } from "react-router";
+
+import "../styles/scrollbar.css";
+import "../styles/variables.css";
+import "../styles/main.css";
 
 export default function Home() {
   const { selectedSong, setSelectedSong, setSelectedPlaListOrAlbum } =
@@ -62,10 +63,10 @@ export default function Home() {
   };
 
   useEffect(() => {
-    fetch("/getAllData")
+    fetch("/staticData/allData.json")
       .then((response) => {
         if (!response.ok) {
-          fetch("./mockData/allData.json").then((response) => {
+          fetch("./staticData/allData.json").then((response) => {
             if (!response.ok) throw new Error("Network response was not ok");
             return response.json();
           });
@@ -96,7 +97,7 @@ export default function Home() {
   return (
     <div className="body">
       <MusicSidebar
-        logoSrc="app/icons/icons/muza.svg"
+        logoSrc="/app/icons/icons/muza.svg"
         logoAlt="Music Library"
         sections={sidebarSections}
       />
