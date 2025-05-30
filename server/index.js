@@ -57,7 +57,7 @@ function transformUrl(url) {
 }
 
 function transformAlbumData(albums, transformedTracks) {
-  const transformed = albums
+  return albums
     .filter(album => album.albumCover)
     .map(album => ({
       id: album.albumTitle,
@@ -69,9 +69,6 @@ function transformAlbumData(albums, transformedTracks) {
         .filter(track => track.album === album.albumTitle && track.artist === album.artistMain)
         .map(track => track.id),
     }));
-
-  console.log(transformed);
-  return transformed
 }
 
 function transformTrackData(tracks) {
@@ -88,6 +85,23 @@ function transformTrackData(tracks) {
       artist: track.artistMain,
       album: track.albumTitle,
       year: track.yearReleased
+    }));
+}
+
+function transformArtistData(artists, transformedAlbums) {
+  const albumsByArtist = transformedAlbums.reduce((acc, album) => {
+    acc[album.artist] = (acc[album.artist] || 0) + 1;
+    return acc;
+  }, {});
+  
+  return artists
+    .filter(artist => artist.artistMain)
+    .map((artist, index) => ({
+      id: artist.id || index + 1,
+      index: index + 1,
+      imageSrc: transformUrl(artist.albumCover) || stockPhoto,
+      artistName: artist.artistMain,
+      albumsCount: String(albumsByArtist[artist.artistMain] || 0)
     }));
 }
 
@@ -164,11 +178,11 @@ async function initializeApp() {
     console.log("Transforming data...");
     const transformedTracks = transformTrackData(tracksData);
     const transformedAlbums = transformAlbumData(albumsData, transformedTracks);
-    const transformedArtists = transformTrackData(artistsData);
+    const transformedArtists = transformArtistData(albumsData, transformedAlbums);
     
     console.log(`Transformed ${transformedAlbums.length} albums with covers`);
     console.log(`Transformed ${transformedTracks.length} tracks with files and covers`);
-    console.log(`Transformed ${transformedArtists.length} artists with files and covers`);
+    console.log(`Transformed ${transformedArtists.length} artists with photos`);
 
     // API endpoints
     app.get("/staticData/allData.json", (req, res) => {
@@ -176,12 +190,14 @@ async function initializeApp() {
       const response = {
         ...allData,
         albums: {
-          ...allData.albums,
-          newReleases: [...transformedAlbums, ...(allData.albums?.newReleases || [])]
+          ...transformedAlbums,
+          newReleases: [...transformedAlbums]
         },
+        artists: [...transformedArtists],
         songs: [...transformedTracks, ...(allData.songs || [])]
       };
-      console.log(`Sending response with ${response.albums?.newReleases?.length || 0} albums and ${response.songs?.length || 0} songs`);
+
+      console.log(`Sending response with ${response.albums?.newReleases?.length || 0} albums, ${response.artists?.length || 0} artists and ${response.songs?.length || 0} songs`);
       res.json(response);
     });
 
