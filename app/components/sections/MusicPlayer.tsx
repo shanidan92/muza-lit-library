@@ -47,11 +47,10 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({
   };
 
   const handleVolumeChange = (newVolume: number) => {
-    const normalizedVolume = newVolume / 100;
-    setVolume(normalizedVolume);
+    setVolume(newVolume);
     const audio = audioRef.current;
     if (audio) {
-      audio.volume = normalizedVolume;
+      audio.volume = newVolume / 100;
     }
   };
 
@@ -111,9 +110,7 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({
     audio.src = details.audioUrl;
     audio.load();
 
-    if (volume >= 0 && volume <= 100) {
-      audio.volume = volume / 100.0;
-    }
+    audio.volume = volume / 100;
 
     if (isPlaying) playAudio();
 
@@ -242,7 +239,7 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({
           <div className="volume-control-container">
             <VolumeControl
               noSymbol={true}
-              value={volume * 100}
+              value={volume}
               onVolumeChange={handleVolumeChange}
             />
           </div>
