@@ -63,7 +63,7 @@ window.__reactRouterManifest = {
       hasClientLoader: false,
       hasClientMiddleware: false,
       hasErrorBoundary: false,
-      module: "/assets/album-DATEBTop.js",
+      module: "/assets/album-BC_nHamw.js",
       imports: [
         "/assets/with-props-B2_f2fEw.js",
         "/assets/chunk-DQRVZFIR-BNfO-z-U.js",
@@ -145,6 +145,6 @@ window.__reactRouterManifest = {
       css: ["/assets/main-DTfgAOKm.css", "/assets/SongLine-ACjKb_mD.css"],
     },
   },
-  url: "/assets/manifest-ce325582.js",
-  version: "ce325582",
+  url: "/assets/manifest-7d141cd4.js",
+  version: "7d141cd4",
 };
