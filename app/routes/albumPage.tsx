@@ -9,6 +9,10 @@ import MusicTopbar from "~/components/sections/MusicTopbar";
 import SongLine from "~/components/songLineDisplays/SongLine";
 import { useLocation } from "react-router";
 
+import "../styles/scrollbar.css";
+import "../styles/variables.css";
+import "../styles/main.css";
+
 interface AlbumPageState {
   album: Album;
 }
@@ -59,7 +63,7 @@ export default function AlbumPage() {
   return (
     <div className="body">
       <MusicSidebar
-        logoSrc="app/icons/icons/muza.svg"
+        logoSrc="/app/icons/icons/muza.svg"
         logoAlt="Music Library"
         sections={sidebarSections}
       />
