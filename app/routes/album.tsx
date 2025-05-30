@@ -36,27 +36,37 @@ export default function AlbumPage() {
 
   const getCurrentSongIndex = () => {
     if (!selectedSong || !selectedSong.id) return -1;
-    return recentlyPlayed.findIndex(
+    return albumSongsDetails.findIndex(
       (song: SongDetails) => song.id === selectedSong.id,
     );
   };
 
   const handlePreviousSong = () => {
     const currentIndex = getCurrentSongIndex();
+    let prevSong;
     if (currentIndex <= 0) {
-      setSelectedSong(recentlyPlayed[recentlyPlayed.length - 1]);
+      prevSong = albumSongsDetails[albumSongsDetails.length - 1];
     } else {
-      setSelectedSong(recentlyPlayed[currentIndex - 1]);
+      prevSong = albumSongsDetails[currentIndex - 1];
     }
+    setSelectedSong({
+      ...prevSong,
+      isPlaying: selectedSong?.isPlaying || false,
+    });
   };
 
   const handleNextSong = () => {
     const currentIndex = getCurrentSongIndex();
-    if (currentIndex === -1 || currentIndex === recentlyPlayed.length - 1) {
-      setSelectedSong(recentlyPlayed[0]);
+    let nextSong;
+    if (currentIndex === -1 || currentIndex === albumSongsDetails.length - 1) {
+      nextSong = albumSongsDetails[0];
     } else {
-      setSelectedSong(recentlyPlayed[currentIndex + 1]);
+      nextSong = albumSongsDetails[currentIndex + 1];
     }
+    setSelectedSong({
+      ...nextSong,
+      isPlaying: selectedSong?.isPlaying || false,
+    });
   };
 
   return (
