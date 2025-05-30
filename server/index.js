@@ -3,6 +3,7 @@ import { fileURLToPath } from "url";
 import axios from "axios";
 import path from "path";
 import https from "https";
+import http from "http";
 import * as fs from "fs";
 
 // Configuration constants
@@ -20,8 +21,14 @@ const publicDir = path.resolve("./public");
 const staticDataFilePath = path.join(publicDir, "/staticData/allData.json");
 
 // HTTP client setup
-const httpsAgent = new https.Agent({ rejectUnauthorized: false });
-const instance = axios.create({ httpsAgent });
+const isHttps = GRAPHQL_ENDPOINT.startsWith('https://');
+const agent = isHttps 
+  ? new https.Agent({ rejectUnauthorized: false })
+  : new http.Agent();
+const instance = axios.create({ 
+  httpsAgent: isHttps ? agent : undefined,
+  httpAgent: !isHttps ? agent : undefined
+});
 
 // GraphQL queries
 const ALBUMS_QUERY = `{
@@ -50,15 +57,19 @@ const ARTISTS_QUERY = `{
 
 // Utility functions
 function transformUrl(url) {
-  if (!url) return url;
+  if (!url || !url.includes('amazonaws')) return url;
   return url
     .replace('.com/files', '.com/api/upload/files')
     .replace('http://', 'https://');
 }
 
 function getRandomItems(array, count) {
+  if (array.length <= count) {
+    return array;
+  }
+  
   const shuffled = [...array].sort(() => 0.5 - Math.random());
-  return shuffled.slice(0, count + 1);
+  return shuffled.slice(0, count);
 }
 
 function transformAlbumData(albums, transformedTracks) {
@@ -112,7 +123,7 @@ function transformArtistData(artists, transformedAlbums) {
 // GraphQL API functions
 async function fetchGraphQLData(query) {
   try {
-    const response = await instance.post(GRAPHQL_ENDPOINT, { query }, { httpsAgent });
+    const response = await instance.post(GRAPHQL_ENDPOINT, { query });
     return response.data.data;
   } catch (error) {
     console.error("GraphQL request failed:", error.message);
@@ -165,46 +176,52 @@ async function initializeApp() {
     console.log("Initializing application...");
     const app = express();
     
-    console.log("Loading data from multiple sources...");
-    // Load data
-    const [allData, albumsData, tracksData, artistsData] = await Promise.all([
-      loadStaticData(),
-      fetchAlbums(),
-      fetchTracks(),
-      fetchArtists()
-    ]);
-
-    console.log(`Loaded ${albumsData.length} albums from GraphQL`);
-    console.log(`Loaded ${tracksData.length} tracks from GraphQL`);
-    console.log(`Loaded ${artistsData.length} artists from GraphQL`);
-
-    // Transform data
-    console.log("Transforming data...");
-    const transformedTracks = transformTrackData(tracksData);
-    const transformedAlbums = transformAlbumData(albumsData, transformedTracks);
-    const transformedArtists = transformArtistData(albumsData, transformedAlbums);
-    
-    console.log(`Transformed ${transformedAlbums.length} albums with covers`);
-    console.log(`Transformed ${transformedTracks.length} tracks with files and covers`);
-    console.log(`Transformed ${transformedArtists.length} artists with photos`);
-
     // API endpoints
-    app.get("/staticData/allData.json", (req, res) => {
-      console.log("GET /staticData/allData.json - Request received");
-            
-      const response = {
-        albums: {
-          featured: getRandomItems(transformedAlbums, 3),
-          newReleases: getRandomItems(transformedAlbums, 3),
-          recommended: getRandomItems(transformedAlbums, 3)
-        },
-        artists: transformedArtists,
-        songs: transformedTracks,
-        sidebar: allData.sidebar
-      };
+    app.get("/staticData/allData.json", async (req, res) => {
+      try {
+        console.log("GET /staticData/allData.json - Request received");
+          
+        console.log("Loading data from multiple sources...");
+        
+        // Load data
+        const [allData, albumsData, tracksData, artistsData] = await Promise.all([
+          loadStaticData(),
+          fetchAlbums(),
+          fetchTracks(),
+          fetchArtists()
+        ]);
 
-      console.log(`Sending response with ${response.albums?.newReleases?.length || 0} albums, ${response.artists?.length || 0} artists and ${response.songs?.length || 0} songs`);
-      res.json(response);
+        console.log(`Loaded ${albumsData.length} albums from GraphQL`);
+        console.log(`Loaded ${tracksData.length} tracks from GraphQL`);
+        console.log(`Loaded ${artistsData.length} artists from GraphQL`);
+
+        // Transform data
+        console.log("Transforming data...");
+        const transformedTracks = transformTrackData(tracksData);
+        const transformedAlbums = transformAlbumData(albumsData, transformedTracks);
+        const transformedArtists = transformArtistData(albumsData, transformedAlbums);
+        
+        console.log(`Transformed ${transformedAlbums.length} albums with covers`);
+        console.log(`Transformed ${transformedTracks.length} tracks with files and covers`);
+        console.log(`Transformed ${transformedArtists.length} artists with photos`);
+
+        const response = {
+          albums: {
+            featured: getRandomItems(transformedAlbums, 5),
+            newReleases: getRandomItems(transformedAlbums, 5),
+            recommended: getRandomItems(transformedAlbums, 5)
+          },
+          artists: getRandomItems(transformedArtists, 5),
+          songs: getRandomItems(transformedTracks, 27),
+          sidebar: allData.sidebar
+        };
+
+        console.log(`Sending response with ${response.albums?.newReleases?.length || 0} albums, ${response.artists?.length || 0} artists and ${response.songs?.length || 0} songs`);
+        res.json(response);
+      } catch (error) {
+        console.error("Error handling /staticData/allData.json request:", error);
+        res.status(500).json({ error: "Internal server error" });
+      }
     });
 
     // Static file serving
