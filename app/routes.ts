@@ -12,11 +12,29 @@ const home = {
   index: true,
 } as RouteConfigEntry;
 
-const albumPage = {
-  file: "routes/albumPage.tsx",
-  path: "routes/albumPage",
+const album = {
+  file: "routes/album.tsx",
+  path: "routes/album",
   id: "album",
   index: true,
 } as RouteConfigEntry;
 
-export default [home, albumPage] satisfies RouteConfig;
+const albums = {
+  file: "routes/albums.tsx",
+  path: "routes/albums",
+  id: "albums",
+} as RouteConfigEntry;
+
+const artists = {
+  file: "routes/artists.tsx",
+  path: "routes/artists",
+  id: "artists",
+} as RouteConfigEntry;
+
+const songs = {
+  file: "routes/songs.tsx",
+  path: "routes/songs",
+  id: "songs",
+} as RouteConfigEntry;
+
+export default [home, album, albums, artists, songs] satisfies RouteConfig;

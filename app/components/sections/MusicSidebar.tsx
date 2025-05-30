@@ -2,6 +2,7 @@ import React from "react";
 import "./MusicSidebar.css";
 import MuzaIcon from "~/icons/MuzaIcon";
 import type { MenuItem, Section } from "~/appData/models";
+import { useNavigate } from "react-router";
 
 interface MusicSidebarProps {
   logoSrc: string;
@@ -14,9 +15,11 @@ const MusicSidebar: React.FC<MusicSidebarProps> = ({
   logoAlt = "Logo",
   sections,
 }) => {
-  const handleItemClick = (action?: () => void) => {
-    if (action) {
-      action();
+  const navigate = useNavigate();
+
+  const handleItemClick = (item: MenuItem) => {
+    if (item.action) {
+      navigate(item.action);
     }
   };
 
@@ -25,7 +28,7 @@ const MusicSidebar: React.FC<MusicSidebarProps> = ({
       <a
         key={index}
         className="menu-item"
-        onClick={() => handleItemClick(item.action)}
+        onClick={() => handleItemClick(item)}
       >
         <MuzaIcon iconName={item.svg} />
         <span>{item.text}</span>

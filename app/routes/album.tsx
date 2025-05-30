@@ -19,9 +19,8 @@ interface AlbumPageState {
 
 export default function AlbumPage() {
   const { selectedSong, setSelectedSong } = useUserStore();
-  const { recentlyPlayed } = useMusicLibraryStore();
+  const { recentlyPlayed, sidebarSections } = useMusicLibraryStore();
 
-  const [sidebarSections, setSidebarSections] = useState([]);
   const [albumSongsDetails, setAlbumSongsDetails] = useState<SongDetails[]>([]);
   const location = useLocation();
   const { album }: AlbumPageState = location.state;
