@@ -9,8 +9,8 @@
 }
 
 .image-container {
-  width: 235px;
-  height: 235px;
+  width: 180px;
+  height: 180px;
   border-radius: var(--muza-border-radius-sm);
   overflow: hidden;
   background: var(--muza-image-background-color-bg);

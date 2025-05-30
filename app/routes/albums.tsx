@@ -3,11 +3,8 @@ import MusicSidebar from "~/components/sections/MusicSidebar";
 import { useEffect, useState } from "react";
 import { MusicPlayer } from "~/components/sections/MusicPlayer";
 import MusicTopbar from "~/components/sections/MusicTopbar";
-import SongLine from "~/components/songLineDisplays/SongLine";
 import type { Album, SongDetails } from "~/appData/models";
-import MuzaMusicPlaylist from "~/components/listsDisplays/MusicPlaylist";
 import AlbumDetails from "~/components/albumDisplays/AlbumDetails";
-import ArtistDetails from "~/components/artistDisplays/ArtistDetails";
 import { useUserStore } from "~/appData/userStore";
 import { useMusicLibraryStore } from "~/appData/musicStore";
 import { useNavigate } from "react-router";
@@ -16,25 +13,23 @@ import "../styles/scrollbar.css";
 import "../styles/variables.css";
 import "../styles/main.css";
 
-export default function Home() {
-  const { selectedSong, setSelectedSong, setSelectedPlaListOrAlbum } =
-    useUserStore();
+export default function Albums() {
+  const { selectedSong, setSelectedSong } = useUserStore();
   const {
     newReleases,
+    featured,
+    recommended,
     recentlyPlayed,
-    artists,
     sidebarSections,
     setNewReleases,
+    setFeatured,
+    setRecommended,
     setRecentlyPlayed,
-    setArtists,
     setSidebarSections,
   } = useMusicLibraryStore();
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [displayedAlbums, setDisplayedAlbums] = useState<Album[]>([]);
-  const [displayedArtists, setDisplayedArtists] = useState<any[]>([]);
-  const [displayedSongs, setDisplayedSongs] = useState<SongDetails[]>([]);
   const navigate = useNavigate();
 
   const onAlbumClick = (album: Album) => {
@@ -79,27 +74,13 @@ export default function Home() {
         }
       })
       .then((data) => {
-        setNewReleases(data.albums.newReleases);
+        setFeatured(data.albums.featured || []);
+        setNewReleases(data.albums.newReleases || []);
+        setRecommended(data.albums.recommended || []);
         setRecentlyPlayed(data.songs);
-        setArtists(data.artists);
         setSidebarSections(data.sidebar.sections);
 
-        // Get random 5 albums for display
-        const shuffled = [...data.albums.newReleases].sort(
-          () => 0.5 - Math.random(),
-        );
-        setDisplayedAlbums(shuffled.slice(0, 5));
-
-        // Get random 5 artists for display
-        const shuffledArtists = [...data.artists].sort(
-          () => 0.5 - Math.random(),
-        );
-        setDisplayedArtists(shuffledArtists.slice(0, 5));
-
-        // Get first 30 songs for display
-        setDisplayedSongs(data.songs.slice(0, 30));
-
-        if (data.songs.length > 0) {
+        if (data.songs.length > 0 && !selectedSong) {
           setSelectedSong(data.songs[0]);
         }
         setLoading(false);
@@ -125,25 +106,12 @@ export default function Home() {
         <MusicTopbar />
 
         <main>
-          <h1>Home</h1>
+          <h1>Albums</h1>
+
           <hr />
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-            }}
-          >
-            <h2>New Releases</h2>
-            <button
-              onClick={() => navigate("/routes/albums")}
-              className="show-more-btn"
-            >
-              Show more
-            </button>
-          </div>
+          <h2>Featured Albums</h2>
           <div className="album-list">
-            {displayedAlbums.map((a: Album) => (
+            {featured.map((a: Album) => (
               <AlbumDetails
                 key={a.id}
                 details={a}
@@ -153,51 +121,26 @@ export default function Home() {
           </div>
 
           <hr />
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-            }}
-          >
-            <h2>Recently Played</h2>
-            <button
-              onClick={() => navigate("/routes/songs")}
-              className="show-more-btn"
-            >
-              Show more
-            </button>
-          </div>
-          <div className="song-list">
-            {displayedSongs.map((s: SongDetails) => (
-              <SongLine
-                key={s.id}
-                details={s}
-                onClick={() => setSelectedSong(s)}
-                isPlaying={s.id === selectedSong?.id}
+          <h2>New Releases</h2>
+          <div className="album-list">
+            {newReleases.map((a: Album) => (
+              <AlbumDetails
+                key={a.id}
+                details={a}
+                onAlbumClick={() => onAlbumClick(a)}
               />
             ))}
           </div>
 
           <hr />
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-            }}
-          >
-            <h2>Artists</h2>
-            <button
-              onClick={() => navigate("/routes/artists")}
-              className="show-more-btn"
-            >
-              Show more
-            </button>
-          </div>
-          <div className="artist-list">
-            {displayedArtists.map((artist: any) => (
-              <ArtistDetails key={artist.id} details={artist} />
+          <h2>Recommended Albums</h2>
+          <div className="album-list">
+            {recommended.map((a: Album) => (
+              <AlbumDetails
+                key={a.id}
+                details={a}
+                onAlbumClick={() => onAlbumClick(a)}
+              />
             ))}
           </div>
 

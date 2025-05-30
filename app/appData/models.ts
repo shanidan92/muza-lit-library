@@ -14,7 +14,7 @@ export interface SongDetails {
 export interface MenuItem {
   svg: string;
   text: string;
-  action?: () => void;
+  action?: string;
 }
 
 export interface Section {

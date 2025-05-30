@@ -96,7 +96,7 @@
       {
         "title": "My Muza",
         "items": [
-          { "icon": "house", "text": "Home" },
+          { "icon": "house", "text": "Home", "action": "/" },
           { "icon": "search", "text": "Explore" }
         ]
       },
@@ -104,10 +104,9 @@
         "title": "Library",
         "items": [
           { "svg": "playlist", "text": "Playlists" },
-          { "svg": "albums", "text": "Albums" },
-          { "svg": "artists", "text": "Artists" },
-          { "svg": "songs", "text": "Songs" },
-          { "icon": "headphones", "text": "headphones example" }
+          { "svg": "album", "text": "Albums", "action": "/routes/albums" },
+          { "svg": "artists", "text": "Artists", "action": "/routes/artists" },
+          { "svg": "songs", "text": "Songs", "action": "/routes/songs" }
         ]
       }
     ]

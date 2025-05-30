@@ -9,8 +9,8 @@
 }
 
 .artist-details-card .image-container {
-  width: 235px;
-  height: 235px;
+  width: 150px;
+  height: 150px;
   border-radius: 50%;
   overflow: hidden;
   background: var(--muza-image-background-color-bg);

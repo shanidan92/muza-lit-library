@@ -1,5 +1,11 @@
 import { create } from "zustand";
-import type { Album, Artist, MusicListSection, SongDetails } from "./models";
+import type {
+  Album,
+  Artist,
+  MusicListSection,
+  SongDetails,
+  Section,
+} from "./models";
 
 type musicLibraryStore = {
   newReleases: Album[];
@@ -7,11 +13,17 @@ type musicLibraryStore = {
   artists: Artist[];
   labels: Artist[];
   musicSections: MusicListSection[];
+  featured: Album[];
+  recommended: Album[];
+  sidebarSections: Section[];
   setNewReleases: (albums: Album[]) => void;
   setRecentlyPlayed: (songs: SongDetails[]) => void;
   setArtists: (artists: Artist[]) => void;
   setLabels: (labels: Artist[]) => void;
   setMusicSections: (sections: MusicListSection[]) => void;
+  setFeatured: (albums: Album[]) => void;
+  setRecommended: (albums: Album[]) => void;
+  setSidebarSections: (sections: Section[]) => void;
 };
 
 export const useMusicLibraryStore = create<musicLibraryStore>((set) => ({
@@ -20,6 +32,9 @@ export const useMusicLibraryStore = create<musicLibraryStore>((set) => ({
   artists: [],
   labels: [],
   musicSections: [],
+  featured: [],
+  recommended: [],
+  sidebarSections: [],
 
   setNewReleases: (albums: Album[]) => set({ newReleases: albums }),
 
@@ -31,4 +46,11 @@ export const useMusicLibraryStore = create<musicLibraryStore>((set) => ({
 
   setMusicSections: (sections: MusicListSection[]) =>
     set({ musicSections: sections }),
+
+  setFeatured: (albums: Album[]) => set({ featured: albums }),
+
+  setRecommended: (albums: Album[]) => set({ recommended: albums }),
+
+  setSidebarSections: (sections: Section[]) =>
+    set({ sidebarSections: sections }),
 }));
