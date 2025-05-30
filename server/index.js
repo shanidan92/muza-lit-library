@@ -64,7 +64,7 @@ function getRandomItems(array, count) {
 function transformAlbumData(albums, transformedTracks) {
   return albums
     .map(album => ({
-      id: album.ןid,
+      id: album.id,
       imageSrc: transformUrl(album.albumCover || stockPhoto),
       title: album.albumTitle,
       subTitle: album.yearReleased,
