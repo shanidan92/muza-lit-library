@@ -63,6 +63,8 @@ const ARTISTS_QUERY = `{
 function transformUrl(url) {
   if (!url) return url;
   
+  if (url === STOCK_PHOTO) return url; // Return stock photo URL as is
+  
   // Extract filename from URL
   const filename = url.split('/').pop();
   if (!filename) return url;
