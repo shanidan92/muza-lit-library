@@ -22,20 +22,6 @@ interface ExtendedSongDetails extends SongDetails {
   id?: string;
 }
 
-// Player interface
-interface MusicPlayer {
-  details: {
-    src: string;
-    imageSrc: string;
-    title: string;
-    artist: string;
-    album: string;
-    year: number;
-    isPlaying: boolean;
-  };
-  updateVolume?: (volume: number) => void;
-}
-
 // Route configuration interface
 export interface CustomRouteConfig {
   path: string;

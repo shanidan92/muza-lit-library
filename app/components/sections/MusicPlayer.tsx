@@ -18,6 +18,7 @@ type MusicPlayerProps = {
   onNext?: () => void;
   onUpdate?: (details: PlayerDetails) => void;
   onSongEnded?: () => void;
+  setIsPlaying: (b: Boolean) => void;
 };
 
 export const MusicPlayer: React.FC<MusicPlayerProps> = ({
@@ -26,6 +27,7 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({
   onNext,
   onUpdate,
   onSongEnded,
+  setIsPlaying,
 }) => {
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
@@ -34,7 +36,6 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({
   const [currentTime, setCurrentTime] = useState(0);
   const [volume, setVolume] = useState(75);
   const [isLoading, setIsLoading] = useState(false);
-  const [isPlaying, setIsPlaying] = useState(details.isPlaying || false);
 
   // Control state
   const [shuffle, setShuffle] = useState(false);
@@ -59,7 +60,7 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({
     audio.play().catch((err) => {
       console.error("Error playing audio:", err);
       setIsPlaying(false);
-      onUpdate?.({ ...details, isPlaying: false });
+      onUpdate?.({ ...details });
     });
   };
 
@@ -84,9 +85,9 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({
 
   const togglePlayPause = () => {
     if (isLoading) return;
-    const newPlayingState = !isPlaying;
+    const newPlayingState = !details.isPlaying;
     setIsPlaying(newPlayingState);
-    onUpdate?.({ ...details, isPlaying: newPlayingState });
+    onUpdate?.({ ...details });
   };
 
   // Effects
@@ -98,12 +99,12 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({
     const audio = audioRef.current;
     if (!audio) return;
 
-    if (isPlaying && !isLoading) {
+    if (details.isPlaying && !isLoading) {
       playAudio();
-    } else if (!isPlaying) {
+    } else if (!details.isPlaying) {
       audio.pause();
     }
-  }, [isPlaying, isLoading]);
+  }, [details.isPlaying, isLoading]);
 
   useEffect(() => {
     const audio = audioRef.current;
@@ -113,25 +114,25 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({
     const handleLoadedData = () => {
       setDuration(audio.duration);
       setIsLoading(false);
-      if (isPlaying) playAudio();
+      if (details.isPlaying) playAudio();
     };
 
     const handleTimeUpdate = () => setCurrentTime(audio.currentTime);
 
     const handleEnded = () => {
       setIsPlaying(false);
-      onUpdate?.({ ...details, isPlaying: false });
+      onUpdate?.({ ...details });
       onSongEnded?.();
     };
 
     const handlePlay = () => {
       setIsPlaying(true);
-      onUpdate?.({ ...details, isPlaying: true });
+      onUpdate?.({ ...details });
     };
 
     const handlePause = () => {
       setIsPlaying(false);
-      onUpdate?.({ ...details, isPlaying: false });
+      onUpdate?.({ ...details });
     };
 
     const handleLoadStart = () => setIsLoading(true);
@@ -152,7 +153,7 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({
     audio.volume = volume / 100;
     audio.load();
 
-    if (isPlaying) playAudio();
+    if (details.isPlaying) playAudio();
 
     // Cleanup
     return () => {
@@ -228,7 +229,7 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({
             >
               {isLoading ? (
                 <FaSpinner className="spinner" />
-              ) : isPlaying ? (
+              ) : details.isPlaying ? (
                 <FaPause />
               ) : (
                 <FaPlay />

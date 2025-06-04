@@ -1,10 +1,7 @@
 import {
   type RouteConfig,
   type RouteConfigEntry,
-  index,
 } from "@react-router/dev/routes";
-import { createBrowserRouter } from "react-router";
-import App from "./root";
 
 const home = {
   file: "routes/home.tsx",

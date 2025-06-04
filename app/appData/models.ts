@@ -8,7 +8,6 @@ export interface SongDetails {
   album?: string;
   year?: number;
   id?: string;
-  isPlaying?: boolean;
 }
 
 export interface MenuItem {
@@ -66,10 +65,10 @@ export type MusicPlaylist = {
 export type PlayerDetails = {
   audioUrl?: string;
   imageSrc?: string;
+  isPlaying: Boolean;
   title?: string;
   artist?: string;
   album?: string;
   year?: number;
-  isPlaying?: boolean;
   id?: string;
 };

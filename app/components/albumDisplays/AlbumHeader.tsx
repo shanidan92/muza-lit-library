@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./AlbumHeader.css";
 import type { Album, SongDetails } from "~/appData/models";
 import { FaPause, FaPlay } from "react-icons/fa";
-import { useUserStore } from "~/appData/userStore";
+import { useCurrentPlayerStore } from "~/appData/currentPlayerStore";
 import { toast } from "react-toastify";
 import AlbumInfoModal from "./AlbumInfoModal";
 import MuzaIcon from "~/icons/MuzaIcon";
@@ -13,8 +13,8 @@ interface AlbumHeaderProps {
 }
 
 const AlbumHeader: React.FC<AlbumHeaderProps> = ({ album, songs }) => {
-  const { selectedSong, setSelectedSong, setSelectedPlaListOrAlbum } =
-    useUserStore();
+  const { selectedSong, setSelectedSong, setSelectedPlaListOrAlbum, isPlaying  , setIsPlaying} =
+    useCurrentPlayerStore();
   const [isModalOpen, setModalOpen] = useState(false);
 
   const GetRandomSong = () => {
@@ -31,6 +31,7 @@ const AlbumHeader: React.FC<AlbumHeaderProps> = ({ album, songs }) => {
   const Play = () => {
     setSelectedSong(songs[0]);
     setSelectedPlaListOrAlbum(album);
+    setIsPlaying(!isPlaying);
   };
 
   return (
@@ -43,7 +44,7 @@ const AlbumHeader: React.FC<AlbumHeaderProps> = ({ album, songs }) => {
         <div className="artist">{album.artist}</div>
         <div className="atrist">Album • {album.songs?.length} Songs</div>
         <button className="icon-button" onClick={() => Play()}>
-          {selectedSong?.isPlaying ? <FaPause /> : <FaPlay />}
+          {isPlaying ? <FaPause /> : <FaPlay />}
         </button>
         <button
           className="icon-button"
