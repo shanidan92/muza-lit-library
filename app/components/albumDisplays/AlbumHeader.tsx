@@ -31,7 +31,7 @@ const AlbumHeader: React.FC<AlbumHeaderProps> = ({ album, songs }) => {
   const Play = () => {
     setSelectedSong(songs[0]);
     setSelectedPlaListOrAlbum(album);
-    setIsPlaying(!isPlaying);
+    setIsPlaying(true);
   };
 
   return (
